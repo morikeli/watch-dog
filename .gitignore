@@ -1,0 +1,9 @@
+*venv
+*env
+*.txt
+
+*__pycache__
+
+*migrations
+
+*.sqlite3
