@@ -12,7 +12,7 @@ class User(AbstractUser):
     mobile_no = PhoneNumberField(blank=False, db_column='Mobile No.')
     dob = models.DateField(null=True, blank=False, db_column='DoB')
     age = models.PositiveIntegerField(default=0, editable=False)
-    national_id = models.PositiveBigIntegerField(max_length=8, blank=False)
+    national_id = models.PositiveBigIntegerField(max_length=8, blank=False, db_column='ID no.')
     county = models.CharField(max_length=30, blank=False)
     sub_county = models.CharField(max_length=30, blank=False)
     profile_pic = models.ImageField(upload_to='Users/imgs/dps/', default='default.png')
