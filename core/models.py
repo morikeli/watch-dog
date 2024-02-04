@@ -36,7 +36,7 @@ class Location(models.Model):
     longitude = models.FloatField()
     county = models.CharField(max_length=30, blank=False)
     sub_county = models.CharField(max_length=30, blank=False)
-    city = models.CharField(max_length=30, blank=False)
+    city = models.CharField(max_length=30, blank=False, db_column='City/Estate/Village')
     landmark = models.CharField(max_length=100, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
