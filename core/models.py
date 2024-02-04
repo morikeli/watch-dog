@@ -2,6 +2,12 @@ from django.db import models
 
 
 class Incident(models.Model):
+    """
+        This models map the structure of incidents table. Incidents can be classified into:
+        - Crimes
+        - Fire incidents
+        - Road accidents
+    """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     incident_type = models.CharField(max_length=20, blank=False)
     incident_date = models.DateField(blank=False)
@@ -23,6 +29,7 @@ class Incident(models.Model):
     
 
 class Location(models.Model):
+    """ Location of the reported incidents are stored here. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     incident_id = models.ForeignKey(Incident, on_delete=models.CASCADE, editable=False)
     latitude = models.FloatField()
@@ -44,6 +51,7 @@ class Location(models.Model):
 
 
 class RoadAccident(models.Model):
+    """ This table stores details of the reported road accidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
     road = models.CharField(max_length=30, blank=False)
@@ -67,6 +75,7 @@ class RoadAccident(models.Model):
     
 
 class FireIncident(models.Model):
+    """ This table stores details about reported fire incidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
     fire_type = models.CharField(max_length=20, blank=False)
@@ -85,6 +94,7 @@ class FireIncident(models.Model):
     
 
 class ReportedCrime(models.Model):
+    """ This table stores details about reported crimes. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
     crime_type = models.CharField(max_length=30, blank=False)
