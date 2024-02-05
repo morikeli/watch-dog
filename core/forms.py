@@ -194,7 +194,10 @@ class ReportRoadAccidentForm(forms.ModelForm):
 
     class Meta:
         model = RoadAccident
-        fields = ('road', 'vehicles_count', 'injuries_count', 'fatalities_count', 'road_conditions', 'road_hazards', 'traffic_conditions', 'weather_conditions')
+        fields = (
+            'road', 'road_user', 'vehicle_type', 'vehicles_count', 'injuries_count', 'fatalities_count', 
+            'road_conditions',  'road_hazards', 'traffic_conditions', 'weather_conditions'
+        )
 
 
 class ReportFireIncidentForm(forms.ModelForm):
