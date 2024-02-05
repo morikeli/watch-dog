@@ -94,6 +94,27 @@ class ReportRoadAccidentForm(forms.ModelForm):
         ('Debris', 'Debris'),
         ('Potholes', 'Potholes')
     )
+    
+    ROAD_USER = (
+        (None, '-- Select road user'),
+        ('Cyclist', 'Cyclist'),
+        ('Driver', 'Driver'),
+        ('Motorcyclist', 'Motorcyclist'),
+        ('Passenger', 'Passenger'),
+        ('Pedestrian', 'Pedestrian'),
+    )
+
+    VEHICLE_TYPE = (
+        (None, '-- Select type of vehicle --'),
+        ('Bicycle', 'Bicycle'),
+        ('Bus', 'Bus'),
+        ('Lorry', 'Lorry/Truck'),
+        ('Motorcycle', 'Motorcycle'),
+        ('Motor vehicle', 'Motor vehicle'),
+        ('Truck', 'Trailer'),
+        ('Tuktuk', 'Tuktuk'),
+        ('Van', 'Van')
+    )
 
     TRAFFIC_CONDITIONS = (
         (None, '-- Select road surface conditions --'),
