@@ -10,9 +10,11 @@ def check_username_exists(request):
     username_exists = get_user_model().objects.filter(username=_username).exists()
 
     if _username != '' and username_exists:
-        return HttpResponse('<div class="error">Username exists!</div>')
+        return HttpResponse('<div class="error">This username exists!</div>')
+    elif _username == '' or str(_username).isspace():
+        return HttpResponse('<div class="error">Invalid username!</div>')
     else:
-        return HttpResponse('<div class="success">Username available.</div>')
+        return HttpResponse(f'<div class="success">"{_username}" is available.</div>')
 
 
 def check_email_exists(request):
