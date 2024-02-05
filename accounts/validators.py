@@ -93,18 +93,42 @@ def date_and_users_age_validation(request):
     return HttpResponse('')
 
 
+def validate_password_with_django_validators(password):
+    """ This function uses in-built django password validators to validate passwords. """
+    validators = [
+        MinimumLengthValidator(),
+        CommonPasswordValidator(),
+        NumericPasswordValidator(),
+        UserAttributeSimilarityValidator(),
+    ]
+
+    errors = []
+    for validator in validators:
+        try:
+            # Validate the password using each validator
+            validator.validate(password)
+        except ValidationError as e:
+            # If validation fails, collect the error message
+            errors.extend(e.messages)
+
+    return errors
+
+
 def password_match_and_length_validation(request):
-    """ This function checks if the password is too short or the passwords provided don't match. """
+    """ This function checks performs password validation on the passwords input by the user. """
 
-    _password1 = request.POST.get('password1', False)
-    _password2 = request.POST.get('password2', False)
+    _password1 = request.POST.get('password1', None)
+    _password2 = request.POST.get('password2', None)
 
-    if _password1:
-        if len(_password1) < 8:
-            return HttpResponse('<div class="error">Password too short!')
-
+    
+    errors = validate_password_with_django_validators(_password1)
+    if errors:
+        # Construct error message HTML
+        error_message = "<br>".join(errors)
+        return HttpResponse(f'<div class="error">{error_message}</div>')
+    
     if _password1 and _password2:
         if _password1 != _password2:
             return HttpResponse('<div class="error">Passwords didn\'t match</div>')
-    
+
     return HttpResponse('<div class="success">You\'re good to go!</div>')
