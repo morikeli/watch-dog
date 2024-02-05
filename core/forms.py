@@ -138,6 +138,21 @@ class ReportRoadAccidentForm(forms.ModelForm):
         help_text='Enter highway/road where the accident occurred',
         label='Road/Highway'
     )
+
+    road_user = forms.ChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
+            'type': 'select',
+        }, choices=ROAD_USER),
+        help_text='Enter highway/road where the accident occurred',
+        label='Road/Highway',
+    )
+
+    vehicle_type = forms.ChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
+            'type': 'select',
+        }, choices=VEHICLE_TYPE),
+        help_text='Enter highway/road where the accident occurred',
+        label='Road/Highway'
+    )
+    
     vehicles_count = forms.CharField(widget=forms.NumberInput(attrs={
             'type': 'number', 'min': 0,
         }),
