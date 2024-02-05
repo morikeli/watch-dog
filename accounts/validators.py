@@ -30,8 +30,44 @@ def email_address_validation(request):
     
     if email_exists:
         return HttpResponse('<div class="error">Email address provided exists!</div>')
+    
+    try:
+        validate_email(_email)      # validate email address
+    
+    except ValidationError as error:
+        return HttpResponse('<div class="error">Invalid email address!</div>')
 
     return HttpResponse('')
+
+
+def validate_phone_number(phone_number):
+    """ This is a function used to parse a mobile number and check if it is a valid. """
+    try:
+        # parse the number
+        parsed_number = PhoneNumber.from_string(phone_number)
+        
+        # Check if the phone number is valid
+        if not parsed_number.is_valid():
+            raise ValidationError('Invalid phone number!')
+    
+    except Exception as e:
+        # If parsing fails, raise a validation error
+        raise ValidationError("Invalid mobile number!")
+
+    return None     # if validation is successful, return None
+
+
+def mobile_number_validation(request):
+    """ Validate the mobile number provided by the user. """
+    _mobile_no = request.POST.get('mobile_no', '')
+
+    try:
+        validate_phone_number(_mobile_no)   # validate the mobile number
+    
+    except ValidationError as error:
+        return HttpResponse(f'<div class="error">{"".join(error)}</div>')
+
+    return HttpResponse('<div class="success">Phone number is valid.</div>')
 
 
 def date_and_users_age_validation(request):
