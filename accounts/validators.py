@@ -21,8 +21,8 @@ def check_username_exists(request):
         return HttpResponse(f'<div class="success">"{_username}" is available.</div>')
 
 
-def check_email_exists(request):
-    """ This function validates if the typed email address exists. """
+def email_address_validation(request):
+    """ This function validates if the typed email address exists or is valid. """
 
     _email = request.POST.get('email')
 
