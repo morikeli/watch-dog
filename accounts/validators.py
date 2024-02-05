@@ -94,7 +94,8 @@ def date_and_users_age_validation(request):
 
 
 def validate_password_with_django_validators(password):
-    """ This function uses in-built django password validators to validate passwords. """
+    """ This function validates passwords using in-built django password validators. """
+    
     validators = [
         MinimumLengthValidator(),
         CommonPasswordValidator(),
