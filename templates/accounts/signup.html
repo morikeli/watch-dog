@@ -1,0 +1,79 @@
+{% extends 'accounts/base.html' %}{% block title %}Login{% endblock %}
+	{% load static %}
+	{% load crispy_forms_tags %}
+    {% load widget_tweaks %}
+	{% block content %}
+	<main class="main p-3">
+		<div class="container">
+			<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-md-7 col-lg-7 d-flex flex-column align-items-center justify-content-center">
+							{% include 'toasts.html' %}
+							<div class="card mb-3">
+								<div class="card-body">
+									<div class="pt-4 pb-2">
+										<h5 class="card-title text-center pb-0 fs-4">Create an account</h5>
+									</div>
+									<form action="" method="post" class="row g-3" autocomplete="off">
+										{% csrf_token %}
+										<div class="col-12">
+											<label>{{ SignupForm.username.label_tag }}&ast;</label>
+											{{ SignupForm.username.errors }}
+											{% render_field SignupForm.username class="form-control" hx-post="/auth/validate-username/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#username-error" %}
+                                            {{ SignupForm.username.help_text }}
+											<div id="username-error"></div>
+
+											<label>{{ SignupForm.email.label_tag }}&ast;</label>
+											{{ SignupForm.email.errors }}
+											{% render_field SignupForm.email class="form-control" hx-post="/auth/validate-email/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#email-error" %}
+											<div id="email-error"></div>
+
+											<label>{{ SignupForm.mobile_no.label_tag }}&ast;</label>
+											{{ SignupForm.mobile_no.errors }}
+											{% render_field SignupForm.mobile_no class="form-control" hx-post="/auth/validate-mobile/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#mobile-number-error" %}
+                                            <p class="small text-muted">{{ SignupForm.mobile_no.help_text }}</p>
+                                            <div id="mobile-number-error"></div>
+
+											<label>{{ SignupForm.dob.label_tag }}&ast;</label>
+											{{ SignupForm.dob.errors }}
+											{% render_field SignupForm.dob class="form-control" hx-post="/auth/validate-age/" hx-swap="outerhtml" hx-trigger="keyup delay:.2s" hx-target="#age-error" %}
+                                            <p class="small text-muted">{{ SignupForm.dob.help_text }}</p>
+											<div id="age-error"></div>
+
+											<label>{{ SignupForm.password1.label_tag }}&ast;</label>
+											{{ SignupForm.password1.errors }}
+											{% render_field SignupForm.password1 class="form-control" hx-post="/auth/check-password/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#password-1-error" %}
+                                            <p class="small text-muted">
+                                                <ul class="text-muted">
+                                                    <li class="list-group-item">Your password can’t be too similar to your other personal information.</li>
+                                                    <li class="list-group-item">Your password must contain at least 8 characters.</li>
+                                                    <li class="list-group-item">Your password can’t be a commonly used password.</li>
+                                                    <li class="list-group-item">Your password can’t be entirely numeric.</li>
+                                                </ul>
+                                            </p>
+                                            <div id="password-1-error"></div>
+
+											<label>{{ SignupForm.password2.label_tag }}&ast;</label>
+											{{ SignupForm.password2.errors }}
+											{% render_field SignupForm.password2 class="form-control" hx-post="/auth/check-password/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#password-2-error"  %}
+                                            <p class="small text-muted">{{ SignupForm.password2.help_text }}</p>
+											<div id="password-2-error"></div>
+											<hr class="mb-0">
+										</div>
+										<div class="col-12">
+											<button class="btn btn-outline-success w-100" type="submit">Signup</button>
+										</div>
+										<div class="col-12 text-center">
+											<p class="small mb-0">Already registered? <a href="{% url 'login' %}">Login</a></p>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
+	{% endblock %}
