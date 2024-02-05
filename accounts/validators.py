@@ -1,3 +1,7 @@
+from django.contrib.auth.password_validation import MinimumLengthValidator, CommonPasswordValidator, NumericPasswordValidator, UserAttributeSimilarityValidator
+from phonenumber_field.phonenumber import PhoneNumber
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.contrib.auth import get_user_model
 from django.http import HttpResponse
 from django.utils import timezone
