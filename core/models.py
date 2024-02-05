@@ -55,6 +55,8 @@ class RoadAccident(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
     road = models.CharField(max_length=30, blank=False)
+    road_user = models.CharField(max_length=15, blank=False)
+    vehicle_type = models.CharField(max_length=10, blank=False)
     vehicles_count = models.PositiveIntegerField(default=0, blank=False, db_column='Total vehicles')
     injuries_count = models.PositiveIntegerField(default=0, blank=False, db_column='Injuries')
     fatalities_count = models.PositiveIntegerField(default=0, blank=False, db_column='Fatalities')
