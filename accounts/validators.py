@@ -25,7 +25,7 @@ def check_email_exists(request):
     email_exists = get_user_model().objects.filter(email=_email).exists()
     
     if email_exists:
-        return HttpResponse('<div class="error">Email addres provided exists!</div>')
+        return HttpResponse('<div class="error">Email address provided exists!</div>')
 
     return HttpResponse('')
 
