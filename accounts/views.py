@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.views import LoginView, LogoutView
 from django.utils.decorators import method_decorator
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views import View
 from .forms import SignupForm, EditProfileForm
+from .models import User
 
 
 class UserLoginView(LoginView):
@@ -59,7 +60,7 @@ class UserProfileView(View):
         if form_class.is_valid():
             form_class.save()
 
-            messages.info(request, 'User profile updated successfully')
+            messages.info(request, 'User profile updated successfully!')
             return redirect('user_profile')
         
         context = {
