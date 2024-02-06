@@ -35,6 +35,9 @@
                                             <p class="small text-muted">{{ SignupForm.mobile_no.help_text }}</p>
                                             <div id="mobile-number-error"></div>
 
+											<label>{{ SignupForm.gender.label_tag }}&ast;</label>
+											{% render_field SignupForm.gender class="form-control" %}
+
 											<label>{{ SignupForm.dob.label_tag }}&ast;</label>
 											{{ SignupForm.dob.errors }}
 											{% render_field SignupForm.dob class="form-control" hx-post="/auth/validate-age/" hx-swap="outerhtml" hx-trigger="keyup delay:.2s" hx-target="#age-error" %}
