@@ -90,7 +90,7 @@ class ReportRoadAccidentForm(forms.ModelForm):
 
     ROAD_HAZARDS = (
         (None, '-- Select road surface hazards --'),
-        ('Construction', 'Construction')
+        ('Construction', 'Construction'),
         ('Debris', 'Debris'),
         ('Potholes', 'Potholes')
     )
@@ -223,7 +223,7 @@ class ReportFireIncidentForm(forms.ModelForm):
         ('Accidental', 'Accidental'),
         ('Appliance malfunction', 'Appliance malfunction'),
         ('Arson', 'Arson'),
-        ('Chemical', 'Chemical')
+        ('Chemical', 'Chemical'),
         ('Electrical', 'Electrical'),
         ('Heating equipment', 'Heating equipment'),
         ('Human error', 'Human error'),
