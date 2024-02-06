@@ -55,13 +55,13 @@ class EditProfileForm(forms.ModelForm):
     first_name = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text', 'class': 'mb-2', 'autofocus': True
         }),
-        required=True,
+        required=False,
         disabled=True,
     )
     last_name = forms.CharField(widget=forms.TextInput(attrs={
            'type': 'text', 'class': 'mb-2',
         }),
-        required=True,
+        required=False,
         disabled=True,
     )
     email = forms.EmailField(widget=forms.EmailInput(attrs={
