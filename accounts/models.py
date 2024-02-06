@@ -22,11 +22,14 @@ class User(AbstractUser):
     REQUIRED_FIELDS = ['username']
     USERNAME_FIELD = 'email'
 
+
     class Meta:
         ordering = ['username']
 
+
     def __str__(self):
         return self.username
+
 
     def save(self, *args, **kwargs):
         super(User, self).save(*args, **kwargs)
@@ -37,7 +40,8 @@ class User(AbstractUser):
             output_size = (320, 320)
             img.thumbnail(output_size)
             img.save(self.profile_pic.path)
-    
+
+
     def delete(self, *args, **kwargs):
         self.profile_pic.delete()
         super(User, self).delete(*args, **kwargs)
