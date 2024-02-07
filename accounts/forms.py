@@ -56,13 +56,13 @@ class EditProfileForm(forms.ModelForm):
             'type': 'text', 'class': 'mb-2', 'autofocus': True
         }),
         required=False,
-        disabled=True,
+        disabled=False,
     )
     last_name = forms.CharField(widget=forms.TextInput(attrs={
            'type': 'text', 'class': 'mb-2',
         }),
         required=False,
-        disabled=True,
+        disabled=False,
     )
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'type': 'email', 'class': 'mb-2',
@@ -86,6 +86,16 @@ class EditProfileForm(forms.ModelForm):
         }),
         help_text='Enter your phone number and include your country code, e.g. +254112345678'
     )
+    county = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text', 'class': 'mb-2',
+        }),
+        help_text='Enter your county of origin/residence'
+    )
+    sub_county = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text', 'class': 'mb-2',
+        }),
+        help_text='Enter your sub county of origin/residence'
+    )
     profile_pic = forms.FileField(
         widget=forms.FileInput(attrs={
             'type': 'file', 'class': 'form-control mb-2', 'accept': '.jpg, .jpeg, .png',
@@ -96,4 +106,4 @@ class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'gender', 'dob', 'mobile_no', 'profile_pic']
+        fields = ['first_name', 'last_name', 'email', 'gender', 'dob', 'mobile_no', 'county', 'sub_county', 'profile_pic']
