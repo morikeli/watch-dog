@@ -35,7 +35,7 @@
 									<h5 class="card-title">Profile Details</h5>
 									<div class="row">
 										<div class="col-xl-3 col-lg-4 label">Full Name</div>
-										<div class="col-xl-9 col-lg-8">{{ request.user.first_name|title }} {{ request.user.last_name|title }}</div>
+										<div class="col-xl-9 col-lg-8">{{ request.user.first_name|title|default:" -- " }} {{ request.user.last_name|title }}</div>
 									</div>
 									<div class="row">
 										<div class="col-xl-3 col-lg-4 label">Gender</div>
