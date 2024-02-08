@@ -58,7 +58,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{% url 'user_profile' %}" class="sidebar-link">
+                    <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" class="sidebar-link">
                         <i class="bi-gear-fill"></i>
                         <span>Settings</span>
                     </a>
