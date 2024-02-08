@@ -55,3 +55,20 @@ class IncidentsStatisticsView(View):
         context = {}
         return render(request, self.template_name, context)
 
+
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
+class ReportIncidentsView(View):
+    template_name = 'core/report-incident.html'
+
+    
+    def get(self, request, *args, **kwargs):
+
+        context = {}
+        return render(request, self.template_name, context)
+    
+
+    def post(self, request, *args, **kwargs):
+
+        context = {}
+        return render(request, self.template_name, context)
