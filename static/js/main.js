@@ -51,9 +51,20 @@
 	// Preloader
 	let preloader = select('#preloader');
 	if (preloader) {
-		window.addEventListener('load', () => {
-			preloader.remove()
-		});
+		setTimeout(() => {
+			preloader.remove();
+		}, 1000)	// preloader timeout: 1s
+		
+		const showPreloader = () => {
+            preloader.style.display = 'block';
+        };
+        const hidePreloader = () => {
+            preloader.style.display = 'none';
+        };
+
+        document.body.addEventListener('htmx:configRequest', showPreloader);
+        document.body.addEventListener('htmx:responseEnd', hidePreloader);
+        document.body.addEventListener('htmx:afterRequest', hidePreloader);
 	}
 
 })();
