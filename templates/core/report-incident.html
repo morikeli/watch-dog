@@ -1,0 +1,32 @@
+{% extends 'core/base.html' %}{% block title %}Report incident{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-8 col-lg-8">
+                <div class="card info-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi-mic-fill"></i> Report incident</h5>
+                        <form hx-post="{% url 'report_incident' %}" hx-indicator="#indicator" hx-trigger="submit" hx-target="#wrapper" hx-swap="outerHTML">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                </div>
+                            </div>
+                            <span id="indicator" class="htmx-indicator text-end mb-4">
+                                <img src="{% static 'img/spinners/rounded-blocks.gif' %}" height="28px" alt="" id="indicator">
+                            </span>
+                            <div class="d-grid gap-2 mt-2">
+                                <button type="submit" class="btn btn-outline-primary">Report incident</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
