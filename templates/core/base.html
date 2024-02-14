@@ -19,7 +19,7 @@
     <div id="wrapper" class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
-                <button class="toggle-sidebar-btn" type="button">
+                <button class="toggle-sidebar-btn" type="button" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Click to toggle side menu">
                     <img src="{% static 'img/logo.png' %}" height="30px" alt="logo">
                 </button>
                 <div class="sidebar-logo">
@@ -28,50 +28,50 @@
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'homepage' %}" hx-trigger="click" hx-push-url="{% url 'homepage' %}" hx-swap="outerHTML" hx-target="#wrapper" class="sidebar-link">
+                    <a hx-get="{% url 'homepage' %}" hx-trigger="click" hx-push-url="{% url 'homepage' %}" hx-swap="outerHTML" hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Homepage" class="sidebar-link">
                         <i class="bi-house-fill"></i>
                         <span>Homepage</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'report_incident' %}" hx-trigger="click" hx-push-url="{% url 'report_incident' %}" hx-swap="outerHTML" hx-target="#wrapper" class="sidebar-link">
+                    <a hx-get="{% url 'report_incident' %}" hx-trigger="click" hx-push-url="{% url 'report_incident' %}" hx-swap="outerHTML" hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Report incident" class="sidebar-link">
                         <i class="bi-mic-fill"></i>
                         <span>Report incident</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'reported_incidents' %}" hx-trigger="click" hx-push-url="{% url 'reported_incidents' %}" hx-swap="outerHTML" hx-target="#wrapper" class="sidebar-link">
+                    <a hx-get="{% url 'reported_incidents' %}" hx-trigger="click" hx-push-url="{% url 'reported_incidents' %}" hx-swap="outerHTML" hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Incident reports" class="sidebar-link">
                         <i class="bi-clipboard-data-fill"></i>
                         <span>Incident reports</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a  hx-get="{% url 'geo_map' %}" hx-trigger="click" hx-push-url="{% url 'geo_map' %}" hx-target="#wrapper"  hx-swap="outerHTML"  class="sidebar-link">
+                    <a  hx-get="{% url 'geo_map' %}" hx-trigger="click" hx-push-url="{% url 'geo_map' %}" hx-target="#wrapper"  hx-swap="outerHTML"  data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Map" class="sidebar-link">
                         <i class="bi-geo-alt-fill"></i>
                         <span>Map</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Notifications" class="sidebar-link">
                         <i class="bi-bell-fill"><span class="badge">12</span></i>
                         <span>Notifications</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" class="sidebar-link">
+                    <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Settings" class="sidebar-link">
                         <i class="bi-gear-fill"></i>
                         <span>Settings</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" class="sidebar-link">
+                    <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile" class="sidebar-link">
                         <img src="{{ request.user.profile_pic.url }}" height="30px" width="30px" alt="profile" class="rounded-circle">
                         <span>Profile</span>
                     </a>
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a hx-post="{% url 'logout_user' %}" hx-trigger="click" hx-swap="outerHTML" hx-push-url="{% url 'login' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#wrapper" class="sidebar-link">
+                <a hx-post="{% url 'logout_user' %}" hx-trigger="click" hx-swap="outerHTML" hx-push-url="{% url 'login' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Logout" class="sidebar-link">
                     <i class="bi-door-open-fill"></i>
                     <span>Logout</span>
                 </a>
