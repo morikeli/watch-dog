@@ -13,20 +13,26 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <title>City watch &centerdot; {% block title %}{% endblock %}</title>
+    <title>Watchdog &centerdot; {% block title %}{% endblock %}</title>
 </head>
 <body>
     <div id="wrapper" class="wrapper">
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-sidebar-btn" type="button">
-                    <i class="bi-grid-1x2-fill"></i>
+                    <img src="{% static 'img/logo.png' %}" height="30px" alt="logo">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="{% url 'homepage' %}">City watch</a>
+                    <a href="{% url 'homepage' %}">Watchdog</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a hx-get="{% url 'homepage' %}" hx-trigger="click" hx-push-url="{% url 'homepage' %}" hx-swap="outerHTML" hx-target="#wrapper" class="sidebar-link">
+                        <i class="bi-house-fill"></i>
+                        <span>Homepage</span>
+                    </a>
+                </li>
                 <li class="sidebar-item">
                     <a hx-get="{% url 'report_incident' %}" hx-trigger="click" hx-push-url="{% url 'report_incident' %}" hx-swap="outerHTML" hx-target="#wrapper" class="sidebar-link">
                         <i class="bi-mic-fill"></i>
@@ -40,13 +46,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a 
-                    hx-get="{% url 'geo_map' %}"
-                    hx-trigger="click"
-                    hx-push-url="{% url 'geo_map' %}"
-                    hx-target="#wrapper" 
-                    hx-swap="outerHTML" 
-                    class="sidebar-link">
+                    <a  hx-get="{% url 'geo_map' %}" hx-trigger="click" hx-push-url="{% url 'geo_map' %}" hx-target="#wrapper"  hx-swap="outerHTML"  class="sidebar-link">
                         <i class="bi-geo-alt-fill"></i>
                         <span>Map</span>
                     </a>
@@ -71,7 +71,7 @@
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a href="{% url 'logout_user' %}" class="sidebar-link">
+                <a hx-post="{% url 'logout_user' %}" hx-trigger="click" hx-swap="outerHTML" hx-push-url="{% url 'logout_user' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#wrapper" class="sidebar-link">
                     <i class="bi-door-open-fill"></i>
                     <span>Logout</span>
                 </a>
