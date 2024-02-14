@@ -15,7 +15,7 @@ The users of the website include:
   - Users mentioned above get a real time location of all reported incidents. This is displayed on a geographical map that pin points the exact location of a map.
 
 ## Developer instructions
-### Developer instructions
+Installation guide to run the project remotely.
 ```(bash)
   $ cd Desktop
   $ git clone https://github.com/morikeli/watch-dog.git
@@ -24,7 +24,7 @@ The users of the website include:
   $ pip install -r requirements.txt
 ```
 
-### Contributor expectations
+## Contributor expectations
 Incase of a bug or you wish to make an update create a new branch using git command `git checkout -b <name of your branch>` and create a pull request. Wait for review.
 
 Don't forget to star the repo 🌟😉
