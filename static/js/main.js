@@ -68,6 +68,17 @@
 	}
 
 	// tootlips
-	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-	const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+	const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+
+	// Convert NodeList to an array and initialize tooltips for each element
+	const tooltipList = Array.from(tooltipTriggerList).map(tooltipTriggerEl => {
+		const tooltip = new bootstrap.Tooltip(tooltipTriggerEl);
+
+		// Add click event listener to hide tooltip when link is clicked
+		tooltipTriggerEl.addEventListener('click', () => {
+			tooltip.hide(); // Hide the tooltip
+		});
+
+	});
+	
 })();
