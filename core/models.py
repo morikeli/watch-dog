@@ -31,7 +31,7 @@ class Incident(models.Model):
 class Location(models.Model):
     """ Location of the reported incidents are stored here. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    incident_id = models.ForeignKey(Incident, on_delete=models.CASCADE, editable=False)
+    incident_id = models.ForeignKey(Incident, on_delete=models.CASCADE, editable=False, db_column='incident_id')
     latitude = models.FloatField()
     longitude = models.FloatField()
     county = models.CharField(max_length=30, blank=False)
@@ -53,7 +53,7 @@ class Location(models.Model):
 class RoadAccident(models.Model):
     """ This table stores details of the reported road accidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
+    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
     road = models.CharField(max_length=30, blank=False)
     road_user = models.CharField(max_length=15, blank=False)
     vehicle_type = models.CharField(max_length=10, blank=False)
@@ -79,7 +79,7 @@ class RoadAccident(models.Model):
 class FireIncident(models.Model):
     """ This table stores details about reported fire incidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
+    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
     fire_type = models.CharField(max_length=20, blank=False)
     property_damage = models.CharField(max_length=20, blank=False)
     cause = models.CharField(max_length=20, blank=False)
@@ -98,7 +98,7 @@ class FireIncident(models.Model):
 class ReportedCrime(models.Model):
     """ This table stores details about reported crimes. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False)
+    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
     crime_type = models.CharField(max_length=30, blank=False)
     suspect_description = models.TextField()
     reported_by = models.CharField(max_length=30, blank=False)
