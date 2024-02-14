@@ -71,7 +71,7 @@
                 </li>
             </ul>
             <div class="sidebar-footer">
-                <a hx-post="{% url 'logout_user' %}" hx-trigger="click" hx-swap="outerHTML" hx-push-url="{% url 'logout_user' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#wrapper" class="sidebar-link">
+                <a hx-post="{% url 'logout_user' %}" hx-trigger="click" hx-swap="outerHTML" hx-push-url="{% url 'login' %}" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-target="#wrapper" class="sidebar-link">
                     <i class="bi-door-open-fill"></i>
                     <span>Logout</span>
                 </a>
