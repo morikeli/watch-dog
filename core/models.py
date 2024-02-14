@@ -10,8 +10,8 @@ class Incident(models.Model):
     """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     incident_type = models.CharField(max_length=20, blank=False)
-    incident_date = models.DateField(blank=False)
-    incident_time = models.TimeField(null=True)
+    incident_date = models.DateField(null=True, blank=False)
+    incident_time = models.TimeField(null=True, blank=False)
     description = models.TextField()
     additional_details = models.TextField()
     media_file = models.FileField(upload_to='incidents/media/files/', blank=True)
