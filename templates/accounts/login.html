@@ -17,40 +17,43 @@
 	<title>City watch &centerdot; Login</title>
 </head>
 <body>
-	<main id="auth-main">
-		<div class="container">
-			<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-md-7 col-lg-7 d-flex flex-column align-items-center justify-content-center">
-							{% include 'toasts.html' %}    
-							<div class="card mb-3">
-								<div class="card-body">
-									<div class="pt-4 pb-2">
-										<h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+	<div id="wrapper">
+		<main id="auth-main">
+			<div class="container">
+				<section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+					<div class="container">
+						<div class="row justify-content-center">
+							<div class="col-md-7 col-lg-7 d-flex flex-column align-items-center justify-content-center">
+								{% include 'toasts.html' %}    
+								<div class="card mb-3">
+									<div class="card-body">
+										<div class="pt-4 pb-2">
+											<h5 class="card-title text-center pb-0 fs-4">Login to Your Account</h5>
+										</div>
+										<form action="" method="post" class="row g-3" autocomplete="off">
+											{% csrf_token %}
+											<div class="col-12">
+												{{ form|crispy }}
+												<hr class="mb-0">
+											</div>
+											<div class="col-12">
+												<button class="btn btn-outline-primary w-100" type="submit">Login</button>
+											</div>
+											<div class="col-12 text-center">
+												<p class="small mb-0"><a href="">Forgot password?</a></p>
+												<p class="small mb-0">Don't have account? <a href="{% url 'signup' %}">Create an account</a></p>
+											</div>
+										</form>
 									</div>
-									<form action="" method="post" class="row g-3" autocomplete="off">
-										{% csrf_token %}
-										<div class="col-12">
-											{{ form|crispy }}
-											<hr class="mb-0">
-										</div>
-										<div class="col-12">
-											<button class="btn btn-outline-primary w-100" type="submit">Login</button>
-										</div>
-										<div class="col-12 text-center">
-											<p class="small mb-0"><a href="">Forgot password?</a></p>
-											<p class="small mb-0">Don't have account? <a href="{% url 'signup' %}">Create an account</a></p>
-										</div>
-									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-		</div>
-	</main>
+				</section>
+			</div>
+		</main>
+	</div>
+	
 	<div id="preloader"></div>
     <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
