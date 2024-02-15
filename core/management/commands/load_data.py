@@ -90,7 +90,7 @@ class Command(BaseCommand):
                 road=row['ROAD'],
                 road_user=row['VICTIM'],
                 vehicle_type=row['MV INVOLVED'],
-                injuries_count=row['NO.'] if str(row['NO.']).isdigit() else 0
+                injuries_count=int(row['NO.']) if not str(row['NO.']).isnumeric() else 0
             )
 
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
