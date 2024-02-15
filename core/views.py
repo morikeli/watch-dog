@@ -53,7 +53,7 @@ class GeoMapView(View):
                             <tr><td class="fw-bold">Coordinates</td><td>{ spot.location_id.latitude }&deg; {lat_coord}, { spot.location_id.longitude }&deg; E</td></tr>
                             <tr><td class="fw-bold">County</td><td>{ spot.location_id.county }</td></tr>
                             <tr><td class="fw-bold">Sub county</td><td>{ spot.location_id.sub_county }</td></tr>
-                            <tr><td class="fw-bold">City</td><td>{ spot.location_id.city }</td></tr>
+                            <tr><td class="fw-bold">City/Place</td><td>{ spot.location_id.city }</td></tr>
                             <tr><td class="fw-bold">Road/Highway</td><td>{ spot.road }</td></tr>
                             <tr><td class="fw-bold">Road user/Victim</td><td>{ spot.road_user }</td></tr>
                             <tr><td class="fw-bold">Total injuries</td><td>{ spot.injuries_count }</td></tr>
