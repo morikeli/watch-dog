@@ -39,6 +39,7 @@ class GeoMapView(View):
             zoom_start=7, 
             min_zoom=7,
             max_zoom=14,
+            control_scale=True,
         ).add_to(map_figure)
         marker_cluster = MarkerCluster(name='Blackspots clusters').add_to(geo_map)
 
@@ -66,7 +67,7 @@ class GeoMapView(View):
                 location=[spot.location_id.latitude, spot.location_id.longitude],
                 tooltip='Click marker for more info.',
                 popup=popup_text,
-                icon=folium.Icon(icon='exclamation-triangle', color='red', prefix='fa', icon_color='#ffa500'),
+                icon=folium.Icon(icon='exclamation-triangle', color='red', prefix='fa', icon_color='#fffb00'),
             ).add_to(marker_cluster)
         
         folium.LayerControl().add_to(geo_map)
