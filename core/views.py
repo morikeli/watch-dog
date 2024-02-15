@@ -26,6 +26,9 @@ class GeoMapView(View):
     template_name = 'core/map.html'
 
     def get(self, request, *args, **kwargs):
+        accident_spots = RoadAccident.objects.filter()
+
+        # map config.
         map_figure = folium.Figure(height="800px")
         geo_map = folium.Map(
             location=[0.0236, 37.9062],     
