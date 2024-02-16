@@ -19,8 +19,8 @@ Installation guide to run the project remotely.
 ```(bash)
   $ cd Desktop
   $ git clone https://github.com/morikeli/watch-dog.git
-  $ python3 -m venv .weather-app-venv
-  $ source .weather-app-venv/bin/activate
+  $ python3 -m venv .watch-dog-venv
+  $ source .watch-dog-venv/bin/activate
   $ pip install -r requirements.txt
 ```
 
