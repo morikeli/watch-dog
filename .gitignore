@@ -1,6 +1,13 @@
+# virtual environment
 *venv
+
+# files
 *env
-*.txt
+*txt
+
+# dataset file
+*.csv
+*xlsx
 
 *__pycache__
 
