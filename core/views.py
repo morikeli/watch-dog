@@ -5,7 +5,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
 from .models import Incident, Location, RoadAccident, ReportedCrime
-from folium.plugins import MarkerCluster
+from folium.plugins import MarkerCluster, HeatMap
+from sklearn.cluster import KMeans
+import pandas as pd
 import folium
 
 
@@ -70,6 +72,8 @@ class GeoMapView(View):
                 icon=folium.Icon(icon='exclamation-triangle', color='red', prefix='fa', icon_color='#fffb00'),
             ).add_to(marker_cluster)
         
+        heatmap_data = [[spot.location_id.latitude, spot.location_id.longitude] for spot in accident_spots]
+        HeatMap(heatmap_data, name='Heat map', radius=20, ).add_to(geo_map)
         folium.LayerControl().add_to(geo_map)
 
         
