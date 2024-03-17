@@ -48,7 +48,6 @@ class GeoMapView(View):
         for spot in accident_spots:     # get each record in the queryset
             lat_coord = 'S' if spot.location_id.latitude < 0 else 'N'
             popup_text = f"""
-                <div></div>
                 <div class="table-responsive mt-3">
                     <table class="table table-sm table-hover table-striped table-condensed table-bordered">
                         <tbody>
