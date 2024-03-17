@@ -72,7 +72,7 @@ class GeoMapView(View):
             ).add_to(marker_cluster)
         
         heatmap_data = [[spot.location_id.latitude, spot.location_id.longitude] for spot in accident_spots]
-        HeatMap(heatmap_data, name='Heat map', radius=20, ).add_to(geo_map)
+        HeatMap(heatmap_data, name='Heat map', radius=20, show=False).add_to(geo_map)
         folium.LayerControl().add_to(geo_map)
 
         
