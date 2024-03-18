@@ -90,7 +90,7 @@ class Command(BaseCommand):
                 road=row['ROAD'],
                 road_user=row['VICTIM'],
                 vehicle_type=row['MV INVOLVED'],
-                injuries_count=int(row['NO.']) if not str(row['NO.']).isnumeric() else 0
+                injuries_count=0 if str(row['NO.']) == 'NaN' or  str(row['NO.']) == 'nan' else row['NO.']
             )
 
         self.stdout.write(self.style.SUCCESS('Data imported successfully'))
