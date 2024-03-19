@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}{% block title %}Profile page{% endblock %}
 {% load static %}
-{% load crispy_forms_tags %}
+{% load crispy_forms_tags %}{% load widget_tweaks %}
 	{% block content %}
 	<main id="main" class="main">
 		<section class="section profile">
@@ -89,7 +89,19 @@
 										{% csrf_token %}
 										<div class="row mb-3">
 											<div class="col-md-12 col-lg-12">
-												{{ ChangePasswordForm|crispy }}
+												<label>{{ ChangePasswordForm.old_password.label }}&ast;</label>
+												{% render_field ChangePasswordForm.old_password class="form-control" hx-post="/auth/validate-password/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#old-password-error" %}
+												<div class="text-danger fw-bold">{{ ChangePasswordForm.old_password.errors }}</div>
+												<div id="old-password-error"></div>
+												<label>{{ ChangePasswordForm.new_password1.label }}&ast;</label>
+												{% render_field ChangePasswordForm.new_password1 class="form-control" hx-post="/auth/check-password/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#new-password-error" %}
+												{{ ChangePasswordForm.new_password1.help_text }}
+												<div class="text-danger fw-bold">{{ ChangePasswordForm.new_password1.errors }}</div>
+												<div id="new-password-error"></div>
+												<label>{{ ChangePasswordForm.new_password2.label }}&ast;</label>
+												{% render_field ChangePasswordForm.new_password2 class="form-control" hx-post="/auth/check-password/" hx-swap="outerhtml" hx-trigger="keyup delay:.5s" hx-target="#confirm-password-error" %}
+												<div class="text-danger fw-bold">{{ ChangePasswordForm.new_password2.errors }}</div>
+												<div id="confirm-password-error"></div>
 											</div>
 										</div>
 
