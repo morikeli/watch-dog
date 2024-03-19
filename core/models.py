@@ -1,4 +1,31 @@
+from phonenumber_field.modelfields import PhoneNumberField
 from django.db import models
+
+
+def police_station_img_directory(instance, filename):
+    """ Images will be uploaded to MEDIA_ROOT/station_{post_name}/imgs/filename. """
+    return f'station_{instance.post_name}/imgs/{filename}'
+
+
+class PoliceStation(models.Model):
+    id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
+    post_name = models.CharField(max_length=60, blank=False)
+    county = models.CharField(max_length=50, blank=False)
+    sub_county = models.CharField(max_length=50, blank=False)
+    address = models.CharField(max_length=50, blank=False)
+    mobile_1 = PhoneNumberField(blank=False, db_column='Mobile no. 1')
+    mobile_2 = PhoneNumberField(db_column='Mobile no. 2')
+    img = models.ImageField(upload_to=police_station_img_directory, default='station.png')
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['post_name', 'county', 'sub_county']
+    
+
+    def __str__(self):
+        return self.post_name
 
 
 class Incident(models.Model):
