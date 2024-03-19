@@ -1,4 +1,4 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime
+from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, PoliceStation, WantedSuspect
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import uuid
@@ -30,5 +30,17 @@ def generate_fire_incidentID(sender, instance, **kwargs):
 
 @receiver(pre_save, sender=ReportedCrime)
 def generate_reported_crimesID(sender, instance, **kwargs):
+    if instance.id == '':
+        instance.id = str(uuid.uuid4().hex)[:30]
+
+
+@receiver(pre_save, sender=PoliceStation)
+def generate_police_stationID(sender, instance, **kwargs):
+    if instance.id == '':
+        instance.id = str(uuid.uuid4().hex)[:30]
+
+
+@receiver(pre_save, sender=WantedSuspect)
+def generate_wanted_suspectID(sender, instance, **kwargs):
     if instance.id == '':
         instance.id = str(uuid.uuid4().hex)[:30]
