@@ -12,6 +12,11 @@ def wanted_suspect_img_directory(instance, filename):
     return f'suspect_{instance.name}/imgs/{filename}'
 
 
+def reported_incidents_media_directory(instance, filename):
+    """ Images will be uploaded to MEDIA_ROOT/incident_{id}/media/filename. """
+    return f'incident_{str(instance.id)[16:23]}/media/{filename}'
+
+
 class PoliceStation(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     post_name = models.CharField(max_length=60, blank=False)
