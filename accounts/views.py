@@ -71,7 +71,7 @@ class UserProfileView(View):
         if password_change_form.is_valid():
             user = password_change_form.save()
             update_session_auth_hash(request, user)
-            messages.warning(request, 'Your password was successfully updated!')
+            messages.warning(request, 'Your have reset your password!')
             return redirect('user_profile')
         
         else:
