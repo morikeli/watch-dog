@@ -51,3 +51,21 @@ class User(AbstractUser):
     def delete(self, *args, **kwargs):
         self.profile_pic.delete()
         super(User, self).delete(*args, **kwargs)
+
+
+class Officer(models.Model):
+    id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
+    name = models.OneToOneField(User, on_delete=models.CASCADE, editable=False)
+    police_post = models.OneToOneField(on_delete=models.CASCADE)
+    bio = models.TextField()
+    rank = models.CharField(max_length=10, blank=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['name', 'police_post']
+    
+
+    def __str__(self):
+        return f'{self.name}'
