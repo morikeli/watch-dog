@@ -68,8 +68,22 @@ class UserProfileView(View):
             messages.info(request, 'User profile updated successfully!')
             return redirect('user_profile')
         
+        if password_change_form.is_valid():
+            user = password_change_form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('user_profile')
+        
+        else:
+            if password_change_form.error_messages["password_mismatch"] or password_change_form.error_messages["password_incorrect"]:
+                messages.error(request, f'{password_change_form.error_messages["password_mismatch"]}')
+                messages.error(request, f'{password_change_form.error_messages["password_incorrect"]}')
+            
+            messages.error(request, f'{password_change_form.errors}')
+        
         context = {
             'EditProfileForm': form_class,
+            'ChangePasswordForm': password_change_form,
         }
         return render(request, self.template_name, context)
 
