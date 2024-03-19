@@ -4,6 +4,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
+from .forms import AddWantedSuspectsForm
 from .models import Incident, Location, RoadAccident, ReportedCrime
 from folium.plugins import MarkerCluster, HeatMap
 from sklearn.cluster import KMeans
@@ -111,3 +112,31 @@ class ReportIncidentsView(View):
 
         context = {}
         return render(request, self.template_name, context)
+
+
+# officers views
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_officer is True and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
+class WantedSuspectsCreateView(View):
+    form_class = AddWantedSuspectsForm
+    template_name = 'core/wanted-suspects.html'
+
+
+    def get(self, request, officer_id, *args, **kwargs):
+        form = self.form_class()
+
+        context = {'WantedSuspectsForm': form}
+        return render(request, self.template_name, context)
+    
+
+    def post(self, request, officer_id, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Suspect details successfully saved!')
+            return redirect('wanted_suspects')
+
+        context = {'WantedSuspectsForm': form}
+        return render(request, self.template_name, context)
+
