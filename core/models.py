@@ -51,7 +51,7 @@ class Incident(models.Model):
     incident_time = models.TimeField(null=True, blank=False)
     description = models.TextField()
     additional_details = models.TextField()
-    media_file = models.FileField(upload_to='incidents/media/files/', blank=True)
+    media_file = models.FileField(upload_to=reported_incidents_media_directory, blank=True)
     severity_level = models.CharField(max_length=20, blank=False)
     date_reported = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
