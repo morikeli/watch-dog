@@ -16,6 +16,7 @@ htmx_urlpatterns = [
     path('validate-mobile/', validators.mobile_number_validation, name='validate_mobile_number'),
     path('validate-age/', validators.date_and_users_age_validation, name='validate_age'),
     path('check-password/', validators.password_match_and_length_validation, name='check_password'),
+    path('validate-password/', validators.validate_old_password, name='validate_old_password'),
 ]
 
 urlpatterns += htmx_urlpatterns
