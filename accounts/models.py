@@ -2,7 +2,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
-from core.models import PolicePost
+from core.models import PoliceStation
 
 
 def users_img_directory(instance, filename):
