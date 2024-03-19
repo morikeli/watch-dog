@@ -22,7 +22,7 @@ class User(AbstractUser):
     national_id = models.PositiveBigIntegerField(blank=False, default=0,db_column='ID no.')
     county = models.CharField(max_length=30, blank=False)
     sub_county = models.CharField(max_length=30, blank=False)
-    profile_pic = models.ImageField(upload_to='Users/imgs/dps/', default='default.png')
+    profile_pic = models.ImageField(upload_to=users_img_directory, default='default.png')
     date_updated = models.DateTimeField(auto_now=True)
 
     REQUIRED_FIELDS = ['username']
