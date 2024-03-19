@@ -64,7 +64,7 @@ class Officer(models.Model):
 
 
     class Meta:
-        ordering = ['name', 'police_post']
+        ordering = ['name', 'station']
     
 
     def __str__(self):

@@ -23,4 +23,4 @@ admin.site.register(User, UserLayout)
 
 @admin.register(Officer)
 class OfficersTable(admin.ModelAdmin):
-    list_display = ['name', 'police_post', 'rank']
+    list_display = ['name', 'station', 'rank']
