@@ -56,7 +56,7 @@ class User(AbstractUser):
 class Officer(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     name = models.OneToOneField(User, on_delete=models.CASCADE, editable=False)
-    police_post = models.OneToOneField(on_delete=models.CASCADE)
+    station = models.OneToOneField(PoliceStation, on_delete=models.CASCADE)
     bio = models.TextField()
     rank = models.CharField(max_length=10, blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
