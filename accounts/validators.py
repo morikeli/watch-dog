@@ -134,3 +134,15 @@ def password_match_and_length_validation(request):
         return HttpResponse('<div class="error">Passwords didn\'t match</div>')
 
     return HttpResponse('<div class="success">You\'re good to go!</div>')
+
+
+def validate_old_password(request):
+    """ This function checks if the old password entered in `PasswordChangeForm` matches the current user password. """
+
+    _old_password = request.POST.get('old_password')
+    user_password = get_user_model().objects.get(username=request.user)
+    
+    if _old_password and (user_password.password != _old_password):
+        return HttpResponse('<div class="error">Your old password was entered incorrectly. Please enter it again.</div>')
+    
+    return HttpResponse('<div class="success">Good to go!</div>')
