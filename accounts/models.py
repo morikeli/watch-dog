@@ -23,6 +23,8 @@ class User(AbstractUser):
     county = models.CharField(max_length=30, blank=False)
     sub_county = models.CharField(max_length=30, blank=False)
     profile_pic = models.ImageField(upload_to=users_img_directory, default='default.png')
+    is_officer = models.BooleanField(default=False)
+    is_roadsafetystaff = models.BooleanField(default=False)
     date_updated = models.DateTimeField(auto_now=True)
 
     REQUIRED_FIELDS = ['username']
