@@ -120,16 +120,17 @@ def password_match_and_length_validation(request):
 
     _password1 = request.POST.get('password1', None)
     _password2 = request.POST.get('password2', None)
+    new_password1 = request.POST.get('new_password1', None)
+    new_password2 = request.POST.get('new_password2', None)
 
+    errors = validate_password_with_django_validators(_password1 if not _password1 is None else new_password1)
     
-    errors = validate_password_with_django_validators(_password1)
     if errors:
-        # Construct error message HTML
+        # Separate error messages with the <br> - HTML break tag
         error_message = "<br>".join(errors)
         return HttpResponse(f'<div class="error">{error_message}</div>')
     
-    if _password1 and _password2:
-        if _password1 != _password2:
-            return HttpResponse('<div class="error">Passwords didn\'t match</div>')
+    if (_password1 and _password2 and _password1 != _password2) or (new_password1 and new_password2 and new_password1 != new_password2):
+        return HttpResponse('<div class="error">Passwords didn\'t match</div>')
 
     return HttpResponse('<div class="success">You\'re good to go!</div>')
