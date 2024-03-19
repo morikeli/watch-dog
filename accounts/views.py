@@ -50,14 +50,17 @@ class UserProfileView(View):
 
     def get(self, request, *args, **kwargs):
         form_class = self.form_class(instance=request.user)
+        password_change_form = PasswordChangeForm(request.user)
 
         context = {
             'EditProfileForm': form_class,
+            'ChangePasswordForm': password_change_form,
         }
         return render(request, self.template_name, context)
 
     def post(self, request, *args, **kwargs):
         form_class = self.form_class(request.POST, request.FILES, instance=request.user)
+        password_change_form = PasswordChangeForm(user=request.user, data=request.POST)
 
         if form_class.is_valid():
             form_class.save()
