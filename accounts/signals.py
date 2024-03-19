@@ -27,3 +27,9 @@ def generate_userID(sender, instance, **kwargs):
     
     except AttributeError:
         return
+
+
+@receiver(pre_save, sender=Officer)
+def generate_officerID(sender, instance, **kwargs):
+    if instance.id == '':
+        instance.id = str(uuid.uuid4().hex)[:30]
