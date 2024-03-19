@@ -7,6 +7,11 @@ def police_station_img_directory(instance, filename):
     return f'station_{instance.post_name}/imgs/{filename}'
 
 
+def wanted_suspect_img_directory(instance, filename):
+    """ Images will be uploaded to MEDIA_ROOT/suspect_{suspect_name}/imgs/filename. """
+    return f'suspect_{instance.name}/imgs/{filename}'
+
+
 class PoliceStation(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     post_name = models.CharField(max_length=60, blank=False)
@@ -141,3 +146,24 @@ class ReportedCrime(models.Model):
     def __str__(self):
         return self.crime_type
     
+
+class WantedSuspect(models.Model):
+    id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
+    name = models.CharField(max_length=50, blank=False)
+    nickname = models.CharField(max_length=30, blank=False)
+    gender = models.CharField(max_length=7, blank=False)
+    bounty = models.PositiveIntegerField(default=0)
+    crime = models.CharField(max_length=30, blank=False)
+    status = models.CharField(max_length=30, blank=False)
+    suspect_img = models.ImageField(upload_to=wanted_suspect_img_directory, default='default.png')
+    last_seen_location = models.CharField(max_length=30, blank=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['name', 'gender']
+
+    
+    def __str__(self):
+        return self.name
