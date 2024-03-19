@@ -78,8 +78,6 @@ class UserProfileView(View):
             if password_change_form.error_messages["password_mismatch"] or password_change_form.error_messages["password_incorrect"]:
                 messages.error(request, f'{password_change_form.error_messages["password_mismatch"]}')
                 messages.error(request, f'{password_change_form.error_messages["password_incorrect"]}')
-            
-            messages.error(request, f'{password_change_form.errors}')
         
         context = {
             'EditProfileForm': form_class,
