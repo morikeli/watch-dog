@@ -2,6 +2,12 @@ from phonenumber_field.modelfields import PhoneNumberField
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from PIL import Image
+from core.models import PolicePost
+
+
+def users_img_directory(instance, filename):
+    """ Images will be uploaded to MEDIA_ROOT/user_{id}/dps/filename. """
+    return f'user_{str(instance.id)[7:13]}/dps/{filename}'
 
 
 class User(AbstractUser):
