@@ -305,7 +305,7 @@ class AddWantedSuspectsForm(forms.ModelForm):
     )
     SELECT_STATUS = (
         (None, '-- Select suspect status --'),
-        ('on loose', 'on loose'),
+        ('hiding', 'hiding'),
         ('apprehended', 'apprehended'),
     )
 
