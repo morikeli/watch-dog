@@ -58,7 +58,7 @@ class Incident(models.Model):
 
 
     class Meta:
-        ordering = ['-incident_date', '-incident_time']
+        ordering = ['-date_reported', '-incident_date', '-incident_time']
     
 
     def __str__(self):
