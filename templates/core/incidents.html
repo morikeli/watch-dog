@@ -1,0 +1,57 @@
+{% extends 'core/base.html' %}{% block title %}Reported incidents{% endblock %}
+{% load static %}
+{% block content %}
+<main id="main" class="main">
+	<section class="section dashboard">
+		<div class="row">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+					<div class="col-12">
+						<div class="card recent-sales overflow-auto">
+							<div class="filter">
+								<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+									<li class="dropdown-header text-start"><h6>Filter</h6></li>
+									<li><a class="dropdown-item" href="">Today</a></li>
+									<li><a class="dropdown-item" href="">This Month</a></li>
+									<li><a class="dropdown-item" href="">This Year</a></li>
+								</ul>
+							</div>
+			
+							<div class="card-body">
+								<h5 class="card-title">Reported incidents <span>| Today</span></h5>
+								<div class="table-responsive">
+									<table class="table table-bordered table-striped datatable">
+										<thead>
+											<tr class="table-active py-0">
+												<th scope="col">#</th>
+												<th scope="col">Incident type</th>
+												<th scope="col">Incident date</th>
+												<th scope="col">Description</th>
+												<th scope="col">Severity level</th>
+												<th scope="col">Reported</th>
+											</tr>
+										</thead>
+										<tbody>
+											{% for incident in reported_incidents %}
+											<tr>
+												<td>{{ forloop.counter }}</td>
+												<td>{{ incident.incident_type }}</td>
+												<td>{{ incident.incident_date|default:"--" }} {{ incident.incident_time|default:"--" }}</td>
+												<td>{{ incident.description }}</td>
+												<td>{{ incident.severity_level }}</td>
+												<td>{{ incident.date_reported }}</td>
+											</tr>
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+  </main>
+{% endblock %}
