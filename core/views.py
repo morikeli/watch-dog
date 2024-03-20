@@ -126,7 +126,7 @@ class ReportIncidentsView(View):
 
 # officers views
 @method_decorator(login_required(login_url='login'), name='get')
-@method_decorator(user_passes_test(lambda user: user.is_officer is False and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_officer is True and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
 class WantedSuspectsCreateView(View):
     form_class = AddWantedSuspectsForm
     template_name = 'core/wanted-suspects.html'
