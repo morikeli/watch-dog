@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+    <link href="{% static 'vendor/simple-datatables/style.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>Watchdog &centerdot; {% block title %}{% endblock %}</title>
 </head>
@@ -39,6 +40,14 @@
                         <span>Report incident</span>
                     </a>
                 </li>
+                {% if request.user.is_officer is True %}
+                <li class="sidebar-item">
+                    <a hx-get="{% url 'wanted_suspects' %}" hx-trigger="click" hx-push-url="{% url 'wanted_suspects' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Wanted suspects" class="sidebar-link">
+                        <i class="bi-person-fill-exclamation"></i>
+                        <span>Wanted suspects</span>
+                    </a>
+                </li>
+                {% endif %}
                 <li class="sidebar-item">
                     <a hx-get="{% url 'reported_incidents' %}" hx-trigger="click" hx-push-url="{% url 'reported_incidents' %}" hx-swap="outerHTML" hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Incident reports" class="sidebar-link">
                         <i class="bi-clipboard-data-fill"></i>
@@ -84,6 +93,7 @@
     <a href="" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <script src="{% static 'vendor/simple-datatables/simple-datatables.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
     <script src="{% static 'js/toasts.js' %}"></script>
 </body>
