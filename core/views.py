@@ -90,9 +90,9 @@ class IncidentsDetailView(View):
     template_name = 'core/incidents.html'
 
     def get(self, request, *args, **kwargs):
+        incidents_qs = Incident.objects.all()
         
-
-        context = {}
+        context = {'reported_incidents': incidents_qs}
         return render(request, self.template_name, context)
 
 
