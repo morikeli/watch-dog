@@ -34,12 +34,14 @@
                         <span>Homepage</span>
                     </a>
                 </li>
+                {% if request.user.is_officer is False %}
                 <li class="sidebar-item">
                     <a hx-get="{% url 'report_incident' %}" hx-trigger="click" hx-push-url="{% url 'report_incident' %}" hx-swap="outerHTML" hx-target="#wrapper" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Report incident" class="sidebar-link">
                         <i class="bi-mic-fill"></i>
                         <span>Report incident</span>
                     </a>
                 </li>
+                {% endif %}
                 {% if request.user.is_officer is True %}
                 <li class="sidebar-item">
                     <a hx-get="{% url 'wanted_suspects' %}" hx-trigger="click" hx-push-url="{% url 'wanted_suspects' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Wanted suspects" class="sidebar-link">
