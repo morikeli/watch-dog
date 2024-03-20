@@ -291,12 +291,12 @@ class ReportCrimesForm(forms.ModelForm):
 class AddWantedSuspectsForm(forms.ModelForm):
     SELECT_CRIME = (
         (None, '-- Select crime committed --'),
-        ('child trafficking', 'child trafficking'),
-        ('drug trafficking', 'drug trafficking'),
-        ('fraud', 'fraud'),
-        ('murder', 'murder'),
-        ('robbery', 'robbery'),
-        ('sexual assault', 'sexual assault'),
+        ('Child trafficking', 'Child trafficking'),
+        ('Drug trafficking', 'Drug trafficking'),
+        ('Fraud', 'Fraud'),
+        ('Murder', 'Murder'),
+        ('Robbery', 'Robbery'),
+        ('Sexual assault', 'Sexual assault'),
     )
     SELECT_GENDER = (
         (None, "-- Select suspect's gender --"),
@@ -305,8 +305,8 @@ class AddWantedSuspectsForm(forms.ModelForm):
     )
     SELECT_STATUS = (
         (None, '-- Select suspect status --'),
-        ('hiding', 'hiding'),
-        ('apprehended', 'apprehended'),
+        ('Hiding', 'Hiding'),
+        ('Apprehended', 'Apprehended'),
     )
 
     name = forms.CharField(widget=forms.TextInput(attrs={
