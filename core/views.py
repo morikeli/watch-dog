@@ -18,8 +18,18 @@ class HomepageView(View):
     template_name = 'core/homepage.html'
 
     def get(self, request, *args, **kwargs):
+        total_accidents = Incident.objects.filter(incident_type='Road accident').count()
+        total_crimes = Incident.objects.filter(incident_type='Crime').count()
+        incidents_qs = Incident.objects.all()[:15]
+        suspect_qs = WantedSuspect.objects.all()
 
-        context = {}
+
+        context = {
+            'TotalRoadAccidents': total_accidents,
+            'TotalReportedCrimes': total_crimes,
+            'reported_incidents': incidents_qs,
+            'wanted_suspects': suspect_qs,
+        }
         return render(request, self.template_name, context)
 
 
