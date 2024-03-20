@@ -17,7 +17,6 @@ class ReportIncidentForm(forms.ModelForm):
         ('Moderate', 'Moderate'),
         ('High', 'High'),
         ('Critical', 'Critical'),
-        ('Non-critical', 'Non-critical'),
     )
 
     incident_type = forms.ChoiceField(widget=forms.Select(attrs={
