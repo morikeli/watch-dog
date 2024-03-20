@@ -9,7 +9,7 @@ def police_station_img_directory(instance, filename):
 
 def wanted_suspect_img_directory(instance, filename):
     """ Images will be uploaded to MEDIA_ROOT/suspect_{suspect_name}/imgs/filename. """
-    return f'suspect_{instance.name}/imgs/{filename}'
+    return f'suspect_{str(instance.id)[10:16]}/imgs/{filename}'
 
 
 def reported_incidents_media_directory(instance, filename):
