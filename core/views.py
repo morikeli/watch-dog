@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
 from .forms import AddWantedSuspectsForm
-from .models import Incident, Location, RoadAccident, ReportedCrime
+from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
 from folium.plugins import MarkerCluster, HeatMap
 from sklearn.cluster import KMeans
 import pandas as pd
