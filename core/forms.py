@@ -358,7 +358,7 @@ class AddWantedSuspectsForm(forms.ModelForm):
 
     class Meta:
         model = WantedSuspect
-        fields = '__all__'
+        fields = ('name', 'nickname', 'gender', 'crime', 'bounty', 'last_seen_location', 'status', 'suspect_description', 'suspect_img')
 
 
 class EditWantedSuspectsDetailsForm(forms.ModelForm):
@@ -433,4 +433,4 @@ class EditWantedSuspectsDetailsForm(forms.ModelForm):
 
     class Meta:
         model = WantedSuspect
-        fields = '__all__'
+        fields = ('name', 'nickname', 'gender', 'crime', 'bounty', 'last_seen_location', 'status', 'suspect_description', 'suspect_img')
