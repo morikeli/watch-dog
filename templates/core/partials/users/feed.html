@@ -1,0 +1,47 @@
+{% load filters %}
+    {% for incident in incidents_feed %}
+    <div class="card">
+        <div class="card-body py-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5 class="text-dark">
+                        {{ incident.incident_id.incident_type }}
+                        <span class="small text-muted">|
+                            {% if incident.incident_id.severity_level < '2' or incident.incident_id.severity_level == 'Low' %}
+                            <small class="text-secondary badge rounded">
+                                <i class='bi bi-exclamation-triangle-fill text-secondary align-self-start'></i> Low
+                            </small>
+                            {% elif incident.incident_id.severity_level == '2' or incident.incident_id.severity_level == 'Moderate' %}
+                            <small class="text-primary badge rounded">
+                                <i class='bi bi-exclamation-triangle-fill text-primary align-self-start'></i> Moderate
+                            </small>
+                            {% elif incident.incident_id.severity_level == '3' or incident.incident_id.severity_level == 'High' %}
+                            <small class="text-warning badge rounded">
+                                <i class='bi bi-exclamation-triangle-fill text-warning align-self-start'></i> High
+                            </small>
+                            {% else %}
+                            <small class="text-danger badge rounded">
+                                <i class='bi bi-exclamation-triangle-fill text-danger align-self-start'></i> Critical
+                            </small>
+                            {% endif %}
+                        </span>
+                    </h5>
+                    <p class="small text-muted">
+                        {% if incident.county != 'nan' or incident.sub_county != 'nan'  %}{{ incident.sub_county|title }}, {{ incident.county|title }}{% endif %}
+                        &centerdot; {{ incident.place|title }}
+                    </p>
+                    <p>
+                        {% if incident.incident_id.description == 'nan' %}
+                        <i>No description provided</i>
+                        {% else %}
+                        {{ incident.incident_id.description }}
+                        {% endif %}
+                    </p>
+                    <p class="small text-muted">
+                        Occured on {{ incident.incident_id.incident_date|default:"<b>Unknown date</b>" }} at {{ incident.incident_id.incident_time|default:"<b>Unknown time</b>" }} &centerdot; Reported {{ incident.incident_id.date_reported|datereported }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
