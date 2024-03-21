@@ -28,6 +28,6 @@ class FireIncidentsTable(admin.ModelAdmin):
 
 @admin.register(ReportedCrime)
 class ReportedCrimesTable(admin.ModelAdmin):
-    list_display = ['crime_type', 'reported_by', 'investigation_status']
-    readonly_fields = ['crime_type', 'reported_by', 'investigation_status']
+    list_display = ['crime_type', 'investigation_status']
+    readonly_fields = ['crime_type', 'investigation_status']
 
