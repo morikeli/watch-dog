@@ -51,7 +51,7 @@
                                     </table>
                                     <hr>
                                     <h5 class="text-center text-danger">Bounty: Kshs.{{ suspect.bounty }}/=</h5>
-                                    <a href="" class="btn btn-outline-primary btn-sm text-end"><i class="bi-pencil-fill"></i> Edit</a>
+                                    <a href="{% url 'update_suspect' suspect.id %}" class="btn btn-outline-primary btn-sm text-end"><i class="bi-pencil-fill"></i> Edit</a>
                                 </div>
                             </div>
                         </div>
