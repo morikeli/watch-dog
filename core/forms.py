@@ -355,3 +355,74 @@ class AddWantedSuspectsForm(forms.ModelForm):
     class Meta:
         model = WantedSuspect
         fields = '__all__'
+
+
+class EditWantedSuspectsDetailsForm(forms.ModelForm):
+    SELECT_CRIME = (
+        (None, '-- Select crime committed --'),
+        ('Child trafficking', 'Child trafficking'),
+        ('Drug trafficking', 'Drug trafficking'),
+        ('Fraud', 'Fraud'),
+        ('Murder', 'Murder'),
+        ('Robbery', 'Robbery'),
+        ('Sexual assault', 'Sexual assault'),
+    )
+    SELECT_GENDER = (
+        (None, "-- Select suspect's gender --"),
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+    SELECT_STATUS = (
+        (None, '-- Select suspect status --'),
+        ('Hiding', 'Hiding'),
+        ('Apprehended', 'Apprehended'),
+    )
+
+    name = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text', 
+        }),
+        help_text='Enter the name of the suspect',
+    )
+    nickname = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text', 
+        }),
+        help_text='Enter the nickname of the suspect',
+        required=False,
+    )
+    gender = forms.ChoiceField(widget=forms.Select(attrs={
+            'type': 'select',
+        }),
+        choices=SELECT_GENDER,
+    )
+    crime = forms.ChoiceField(widget=forms.Select(attrs={
+            'type': 'select',
+        }),
+        choices=SELECT_CRIME,
+    )
+    bounty = forms.CharField(widget=forms.NumberInput(attrs={
+            'max': 100_000_000,
+            'min': 0,
+        }),
+        help_text='Enter bounty in Kshs.',
+    )
+    last_seen_location = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text', 
+        }),
+        help_text='Enter last seen location of the suspect',
+    )
+    status = forms.ChoiceField(widget=forms.Select(attrs={
+            'type': 'select',
+        }),
+        choices=SELECT_STATUS,
+    )
+    suspect_img = forms.FileField(
+        widget=forms.FileInput(attrs={
+            'type': 'file', 'class': 'form-control', 'accept': '.jpg, .jpeg, .png',
+        }),
+        required=False,
+        validators=[is_valid_media_file],
+    )
+
+    class Meta:
+        model = WantedSuspect
+        fields = '__all__'
