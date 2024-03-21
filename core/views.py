@@ -1,5 +1,6 @@
 from .forms import ReportIncidentForm, SubmitLocationForm, ReportRoadAccidentForm, ReportFireIncidentForm, ReportCrimesForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib import messages
