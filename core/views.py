@@ -4,7 +4,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.views import View
-from .forms import AddWantedSuspectsForm
+from .forms import AddWantedSuspectsForm, EditWantedSuspectsDetailsForm
 from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
 from folium.plugins import MarkerCluster, HeatMap
 from sklearn.cluster import KMeans
