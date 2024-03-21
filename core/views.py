@@ -22,6 +22,7 @@ class HomepageView(View):
         total_crimes = Incident.objects.filter(incident_type='Crime').count()
         incidents_qs = Incident.objects.all()[:15]
         suspect_qs = WantedSuspect.objects.all()
+        location_qs = Location.objects.all().order_by('-incident_id__date_reported')
 
 
         context = {
@@ -29,6 +30,7 @@ class HomepageView(View):
             'TotalReportedCrimes': total_crimes,
             'reported_incidents': incidents_qs,
             'wanted_suspects': suspect_qs,
+            'incidents_feed': location_qs
         }
         return render(request, self.template_name, context)
 
