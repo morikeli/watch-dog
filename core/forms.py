@@ -41,6 +41,12 @@ class ReportIncidentForm(forms.ModelForm):
     )
     description = forms.CharField(widget=forms.Textarea())
     additional_details = forms.CharField(widget=forms.Textarea())
+    reported_by = forms.ChoiceField(widget=forms.Select(attrs={
+            'type': 'select', 'class': 'mb-2',
+        }),
+        label='Who is reporting the incident?',
+        choices=REPORTER,
+    )
     media_file = forms.FileField(
         widget=forms.FileInput(attrs={
             'type': 'file', 'class': 'form-control mb-2', 'accept': '.3gpp, .jpg, .jpeg, .mp4, .mpeg, .ogg, .opus, .png, .wav',
@@ -51,7 +57,7 @@ class ReportIncidentForm(forms.ModelForm):
 
     class Meta:
         model = Incident
-        fields = ('incident_type', 'incident_date', 'incident_time', 'description', 'additional_details', 'media_file')
+        fields = ('incident_type', 'incident_date', 'incident_time', 'description', 'additional_details', 'reported_by', 'media_file')
 
 
 class SubmitLocationForm(forms.ModelForm):
