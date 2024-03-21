@@ -10,7 +10,11 @@ class ReportIncidentForm(forms.ModelForm):
         ('Fire incident', 'Fire incident'),
         ('Road accident', 'Road accident'),
     )
-
+    REPORTER = (
+        (None, '-- Who is reporting this crime --'),
+        ('Witness', 'Witness'),
+        ('Victim', 'Victim')
+    )
     SEVERITY_LEVEL = (
         (None, '-- Select severity level --'),
         ('Low', 'Low'),
