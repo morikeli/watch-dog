@@ -25,13 +25,28 @@ class HomepageView(View):
         suspect_qs = WantedSuspect.objects.all()
         location_qs = Location.objects.all().order_by('-incident_id__date_reported')
 
+        p = Paginator(location_qs, 8)
+        page_number = request.GET.get('page')
+
+        try:
+            page_obj = p.get_page(page_number)
+
+        except PageNotAnInteger:
+            # if page_number is not an integer then assign the first page
+            page_obj = p.page(1)
+        except EmptyPage:
+            # if page is empty then return last page
+            page_obj = p.page(p.num_pages)
+
 
         context = {
             'TotalRoadAccidents': total_accidents,
             'TotalReportedCrimes': total_crimes,
             'reported_incidents': incidents_qs,
             'wanted_suspects': suspect_qs,
-            'incidents_feed': location_qs
+            'incidents_feed': page_obj,
+            'page_obj': page_obj,
+            'page': page_obj,
         }
         return render(request, self.template_name, context)
 
