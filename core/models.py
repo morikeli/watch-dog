@@ -138,7 +138,6 @@ class ReportedCrime(models.Model):
     location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
     crime_type = models.CharField(max_length=30, blank=False)
     suspect_description = models.TextField()
-    reported_by = models.CharField(max_length=30, blank=False)
     investigation_status = models.CharField(max_length=20, blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
