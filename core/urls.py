@@ -9,4 +9,5 @@ urlpatterns = [
     path('report-incident/', views.ReportIncidentsView.as_view(), name='report_incident'),
     
     path('wanted-suspects/', views.WantedSuspectsCreateView.as_view(), name='wanted_suspects'),
+    path('suspect/<str:suspect_id>/update/', views.WantedSuspectsUpdateView.as_view(), name='update_suspect'),
 ]
