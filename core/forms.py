@@ -86,7 +86,7 @@ class SubmitLocationForm(forms.ModelForm):
 
     class Meta:
         model = Location
-        fields = ('county', 'sub_county', 'city', 'landmark')
+        fields = ('county', 'sub_county', 'place', 'landmark')
 
 
 class ReportRoadAccidentForm(forms.ModelForm):

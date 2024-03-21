@@ -10,8 +10,8 @@ class IncidentsTable(admin.ModelAdmin):
 
 @admin.register(Location)
 class IncidentsLocationTable(admin.ModelAdmin):
-    list_display = ['county', 'sub_county', 'city', 'longitude', 'latitude', 'landmark']
-    readonly_fields = ['county', 'sub_county', 'city', 'longitude', 'latitude', 'landmark']
+    list_display = ['county', 'sub_county', 'place', 'longitude', 'latitude', 'landmark']
+    readonly_fields = ['county', 'sub_county', 'place', 'longitude', 'latitude', 'landmark']
 
 
 @admin.register(RoadAccident)
