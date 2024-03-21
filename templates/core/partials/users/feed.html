@@ -26,7 +26,7 @@
                             {% endif %}
                         </span>
                     </h5>
-                    <p class="small text-muted">
+                    <p class="small text-muted" style="margin-top: -1.4vh;">
                         {% if incident.county != 'nan' or incident.sub_county != 'nan'  %}{{ incident.sub_county|title }}, {{ incident.county|title }}{% endif %}
                         &centerdot; {{ incident.place|title }}
                     </p>
