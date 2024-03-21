@@ -261,13 +261,6 @@ class ReportCrimesForm(forms.ModelForm):
         ('Theft', 'Theft'),
         ('Vandalism', 'Vandalism'),
     )
-    REPORTER = (
-        (None, '-- Who is reporting this crime --'),
-        ('Witness', 'Witness'),
-        ('Law enforcement', 'Law enforcement'),
-        ('Victim', 'Victim')
-    )
-
 
     crime_type = forms.ChoiceField(widget=forms.Select(attrs={
             'type': 'select', 'class': 'mb-2',
@@ -276,16 +269,11 @@ class ReportCrimesForm(forms.ModelForm):
         label='Type of crime',
     )
     suspect_description = forms.CharField(widget=forms.Textarea())
-    reported_by = forms.ChoiceField(widget=forms.Select(attrs={
-            'type': 'select', 'class': 'mb-2',
-        }),
-        label='User',
-        choices=REPORTER,
-    )
+
 
     class Meta:
         model = ReportedCrime
-        fields = ('crime_type', 'suspect_description', 'reported_by')
+        fields = ('crime_type', 'suspect_description')
 
 
 class AddWantedSuspectsForm(forms.ModelForm):
