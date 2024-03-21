@@ -70,11 +70,11 @@ class SubmitLocationForm(forms.ModelForm):
             'type': 'text', 'class': 'mb-2',
         }),
     )
-    city = forms.CharField(widget=forms.TextInput(attrs={
+    place = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text', 'class': 'mb-2',
         }),
-        label='City/Estate/Village',
-        help_text='Enter the city/estate/village where the incident occured'
+        label='Place of occurence',
+        help_text='Enter the name of the place where the incident occured'
     )
     landmark = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text',
