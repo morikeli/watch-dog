@@ -347,6 +347,7 @@ class AddWantedSuspectsForm(forms.ModelForm):
     suspect_description = forms.CharField(
         widget=forms.Textarea(),
         help_text='Provide suspect description: age, height, facial hair, skin complexion, any scars or wounds, etc.',
+        required=False,
     )
     suspect_img = forms.FileField(
         widget=forms.FileInput(attrs={
@@ -422,6 +423,7 @@ class EditWantedSuspectsDetailsForm(forms.ModelForm):
     suspect_description = forms.CharField(
         widget=forms.Textarea(),
         help_text='Provide suspect description: age, height, facial hair, skin complexion, any scars or wounds, etc.',
+        required=False,
     )
     suspect_img = forms.FileField(
         widget=forms.FileInput(attrs={
