@@ -151,3 +151,27 @@ class WantedSuspectsCreateView(View):
         context = {'WantedSuspectsForm': form}
         return render(request, self.template_name, context)
 
+
+class WantedSuspectsUpdateView(View):
+    form_class = EditWantedSuspectsDetailsForm
+    template_name = 'core/edit-suspect.html'
+
+    def get(self, request, suspect_id, *args, **kwargs):
+        suspect_obj = WantedSuspect.objects.get(id=suspect_id)
+        form = EditWantedSuspectsDetailsForm(instance=suspect_obj)
+
+        context = {'EditSuspectDetailsForm': form, 'suspect': suspect_obj}
+        return render(request, self.template_name, context)
+    
+
+    def post(self, request, suspect_id, *args, **kwargs):
+        suspect_obj = WantedSuspect.objects.get(id=suspect_id)
+        form = EditWantedSuspectsDetailsForm(request.POST, request.FILES, instance=suspect_obj)
+
+        if form.is_valid():
+            form.save()
+            messages.warning(request, f"You updated suspect {suspect_obj.name}'s info!")
+            return redirect('update_suspect', suspect_id)
+
+        context = {'EditSuspectDetailsForm': form, 'suspect': suspect_obj}
+        return render(request, self.template_name, context)
