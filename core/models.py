@@ -160,6 +160,7 @@ class WantedSuspect(models.Model):
     bounty = models.PositiveIntegerField(default=0)
     crime = models.CharField(max_length=30, blank=False)
     status = models.CharField(max_length=30, blank=False)
+    suspect_description = models.TextField(blank=True)
     suspect_img = models.ImageField(upload_to=wanted_suspect_img_directory, default='default.png')
     last_seen_location = models.CharField(max_length=30, blank=False)
     date_created = models.DateTimeField(auto_now_add=True)
