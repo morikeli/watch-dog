@@ -436,3 +436,33 @@ class EditWantedSuspectsDetailsForm(forms.ModelForm):
     class Meta:
         model = WantedSuspect
         fields = ('name', 'nickname', 'gender', 'crime', 'bounty', 'last_seen_location', 'status', 'suspect_description', 'suspect_img')
+
+
+class ReportWantedSuspectForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={
+            'placeholder': 'Provide suspect description ...',
+        }),
+        help_text='Clothes, facial hair (beard, moustache), haircut, hairstyle, height or skin complexion.',
+    )
+    location = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text',
+        })
+    )
+    last_seen_date = forms.DateField(widget=forms.DateInput(attrs={
+            'type': 'date'
+        }),
+        label='Last seen (date)',
+        help_text='Provide the date you saw the suspect.',
+        required=False,
+    )
+    last_seen_time = forms.TimeField(widget=forms.TimeInput(attrs={
+            'type': 'time'
+        }),
+        label='Last seen (time)',
+        help_text='Provide the time you saw the suspect.',
+        required=False,
+    )
+
+    class Meta:
+        model = ReportSuspect
+        fields = ('description', 'location', 'last_seen_date', 'last_seen_time')
