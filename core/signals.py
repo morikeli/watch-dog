@@ -44,3 +44,9 @@ def generate_police_stationID(sender, instance, **kwargs):
 def generate_wanted_suspectID(sender, instance, **kwargs):
     if instance.id == '':
         instance.id = str(uuid.uuid4().hex)[:30]
+
+
+@receiver(pre_save, sender=ReportSuspect)
+def generate_reported_suspectID(sender, instance, **kwargs):
+    if instance.id == '':
+        instance.id = str(uuid.uuid4().hex)[:30]
