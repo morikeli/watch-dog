@@ -31,3 +31,8 @@ class ReportedCrimesTable(admin.ModelAdmin):
     list_display = ['crime_type', 'investigation_status']
     readonly_fields = ['crime_type', 'investigation_status']
 
+
+@admin.register(ReportSuspect)
+class ReportedSuspectsTable(admin.ModelAdmin):
+    list_display = ['description', 'location', 'last_seen_date', 'last_seen_time', 'date_reported']
+    readonly_fields = ['description', 'location', 'last_seen_date', 'last_seen_time']
