@@ -1,4 +1,4 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, WantedSuspect
+from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, WantedSuspect, ReportSuspect
 from django import forms
 from .utils import is_valid_media_file
 
