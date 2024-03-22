@@ -173,3 +173,22 @@ class WantedSuspect(models.Model):
     
     def __str__(self):
         return self.name
+
+
+class ReportSuspect(models.Model):
+    id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
+    suspect = models.ForeignKey(WantedSuspect, on_delete=models.CASCADE, editable=False)
+    description = models.TextField()
+    location = models.CharField(max_length=50, blank=True)
+    last_seen_date = models.DateField()
+    last_seen_time = models.TimeField()
+    date_reported = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
+
+
+    class Meta:
+        ordering = ['-date_reported']
+    
+
+    def __str__(self):
+        return f'{self.suspect}'
