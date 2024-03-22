@@ -1,4 +1,4 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime
+from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, ReportSuspect
 from django.contrib import admin
 
 
