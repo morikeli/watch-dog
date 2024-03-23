@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}{% block title %}Report suspect{% endblock %}
+{% load static %}
+{% load crispy_forms_tags %}{% load widget_tweaks %}
+	{% block content %}
+	<main id="main" class="main">
+		<section class="section profile">
+			<div class="row">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="{% url 'homepage' %}" class="btn btn-sm btn-primary mb-3"><i class="bi bi-arrow-left-circle-fill"></i> Go back</a>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+					<div class="card">
+						<div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+							<img src="{{ suspect.suspect_img.url }}" alt="Profile" class="rounded-circle mb-2">
+							<div class="table-responsive">
+                                <table class="table table-sm table-striped table-bordered">
+                                    <tbody>
+                                        <tr><td class="fw-bold">Name:</td><td class="text-end">{{ suspect.name }}</td></tr>
+                                        <tr><td class="fw-bold">Nickname:</td><td class="text-end">{{ suspect.nickname }}</td></tr>
+                                        <tr><td class="fw-bold">Gender:</td><td class="text-end">{{ suspect.gender }}</td></tr>
+                                        <tr><td class="fw-bold">Wanted for:</td><td class="text-end">{{ suspect.crime }}</td></tr>
+                                        <tr><td class="fw-bold">Last seen location:</td><td class="text-end">{{ suspect.last_seen_location }}</td></tr>
+                                        <tr><td class="fw-bold">Suspect status:</td><td class="text-end">{{ suspect.status }}</td></tr>
+                                    </tbody>
+                                </table>
+                                <hr>
+                                <h5 class="text-center text-danger">Bounty: Kshs.{{ suspect.bounty|floatformat:'g' }}/=</h5>
+                            </div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-8">
+					{% include 'toasts.html' %}
+					<div class="card">
+						<div class="card-body pt-3">
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row mb-3">
+                                    <label for="image" class="col-md-4 col-lg-3 col-form-label">Suspect image</label>
+                                    <div class="col-md-8 col-lg-9">
+                                        <img src="{{ suspect.suspect_img.url }}" height="100px" width="100px" alt="suspect-img">
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-xl-12 col-lg-12">
+                                        {{ ReportSuspectForm|crispy }}
+                                        <hr>
+                                    </div>
+                                </div>
+                                <div class="text-center d-grid gap-2">
+                                    <button type="submit" class="btn btn-outline-primary">Submit</button>
+                                </div>
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+	{% endblock %}
