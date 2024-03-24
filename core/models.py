@@ -179,9 +179,9 @@ class ReportSuspect(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     suspect = models.ForeignKey(WantedSuspect, on_delete=models.CASCADE, editable=False)
     description = models.TextField()
-    location = models.CharField(max_length=50, blank=True)
-    last_seen_date = models.DateField()
-    last_seen_time = models.TimeField()
+    location = models.CharField(max_length=50, blank=False)
+    last_seen_date = models.DateField(null=True)
+    last_seen_time = models.TimeField(null=True)
     date_reported = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
 
