@@ -7,6 +7,7 @@ urlpatterns = [
     path('map/', views.GeoMapView.as_view(), name='geo_map'),
     path('incidents/', views.IncidentsDetailView.as_view(), name='reported_incidents'),
     path('report-incident/', views.ReportIncidentsView.as_view(), name='report_incident'),
+    path('suspect/<str:suspect_id>/report/', views.ReportWantedSuspectsCreateView.as_view(), name='report_suspect'),
     
     path('wanted-suspects/', views.WantedSuspectsCreateView.as_view(), name='wanted_suspects'),
     path('suspect/<str:suspect_id>/update/', views.WantedSuspectsUpdateView.as_view(), name='update_suspect'),
