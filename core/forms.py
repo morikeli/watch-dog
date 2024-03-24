@@ -446,7 +446,8 @@ class ReportWantedSuspectForm(forms.ModelForm):
     )
     location = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text',
-        })
+        }),
+        help_text='Enter the sub county/city/estate and county you saw the suspect, e.g. <b>Embakasi, Nairobi</b>'
     )
     last_seen_date = forms.DateField(widget=forms.DateInput(attrs={
             'type': 'date'
