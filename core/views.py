@@ -60,6 +60,36 @@ class HomepageView(View):
 
 @method_decorator(login_required(login_url='login'), name='get')
 @method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
+class ReportWantedSuspectsCreateView(View):
+    form_class = ReportWantedSuspectForm
+    template_name = 'core/report-suspect.html'
+
+    def get(self, request, suspect_id, *args, **kwargs):
+        suspect_obj = WantedSuspect.objects.get(id=suspect_id)
+        form = self.form_class()
+
+        context = {'ReportSuspectForm': form, 'suspect': suspect_obj}
+        return render(request, self.template_name, context)
+    
+
+    def post(self, request, suspect_id, *args, **kwargs):
+        suspect_obj = WantedSuspect.objects.get(id=suspect_id)
+        form = self.form_class(request.POST, request.FILES)
+
+        if form.is_valid():
+            create_suspect = form.save(commit=False)
+            create_suspect.suspect = suspect_obj
+            create_suspect.save()
+
+            messages.success(request, 'Suspect details successfully submitted!')
+            return redirect('homepage')
+
+        context = {'ReportSuspectForm': form}
+        return render(request, self.template_name, context)
+
+
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
 class GeoMapView(View):
     template_name = 'core/map.html'
 
