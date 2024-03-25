@@ -13,3 +13,10 @@ urlpatterns = [
     path('wanted-suspects/', views.WantedSuspectsCreateView.as_view(), name='wanted_suspects'),
     path('suspect/<str:suspect_id>/update/', views.WantedSuspectsUpdateView.as_view(), name='update_suspect'),
 ]
+
+htmx_urlpatterns = [
+    path('validate-date/', validators.validate_last_seen_date),
+    path('validate-time/', validators.validate_last_seen_time),
+]
+
+urlpatterns += htmx_urlpatterns
