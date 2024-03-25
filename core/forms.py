@@ -68,16 +68,16 @@ class ReportIncidentForm(forms.ModelForm):
 
 class SubmitLocationForm(forms.ModelForm):
     county = forms.CharField(widget=forms.TextInput(attrs={
-            'type': 'text', 'class': 'mb-2',
+            'type': 'text',
         }),
         help_text='Enter the county where the incident occured'
     )
     sub_county = forms.CharField(widget=forms.TextInput(attrs={
-            'type': 'text', 'class': 'mb-2',
+            'type': 'text',
         }),
     )
     place = forms.CharField(widget=forms.TextInput(attrs={
-            'type': 'text', 'class': 'mb-2',
+            'type': 'text',
         }),
         label='Place of occurence',
         help_text='Enter the name of the place where the incident occured'
