@@ -57,7 +57,7 @@ class ReportIncidentForm(forms.ModelForm):
 
     class Meta:
         model = Incident
-        fields = ('incident_type', 'incident_date', 'incident_time', 'description', 'additional_details', 'reported_by', 'media_file')
+        fields = ('incident_type', 'incident_date', 'incident_time', 'description', 'reported_by', 'media_file')
 
 
 class SubmitLocationForm(forms.ModelForm):

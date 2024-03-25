@@ -5,7 +5,7 @@ from django.contrib import admin
 @admin.register(Incident)
 class IncidentsTable(admin.ModelAdmin):
     list_display = ['incident_type', 'incident_date', 'incident_time', 'severity_level', 'reported_by', 'date_reported']
-    readonly_fields = ['incident_type', 'incident_date', 'incident_time', 'description', 'additional_details', 'media_file', 'severity_level']
+    readonly_fields = ['incident_type', 'incident_date', 'incident_time', 'description', 'media_file', 'severity_level']
 
 
 @admin.register(Location)
