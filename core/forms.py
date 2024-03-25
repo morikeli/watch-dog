@@ -23,17 +23,18 @@ class ReportIncidentForm(forms.ModelForm):
     )
 
     incident_type = forms.ChoiceField(widget=forms.Select(attrs={
-            'type': 'select', 'class': 'mb-2',
+            'type': 'select',
         }),
-        choices=INCIDENT_CHOICES
+        choices=INCIDENT_CHOICES,
+        label='What type of incident are you reporting?',
     )
     incident_date = forms.DateField(widget=forms.DateInput(attrs={
-            'type': 'date', 'class': 'mb-1'
+            'type': 'date',
         }),
         help_text='Enter the date of the incident',
     )
     incident_time = forms.TimeField(widget=forms.TimeInput(attrs={
-            'type': 'time', 'class': 'mb-1'
+            'type': 'time',
         }),
         help_text='Enter the time of the incident',
         required=False,
