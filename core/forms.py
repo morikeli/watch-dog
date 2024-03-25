@@ -5,9 +5,8 @@ from .utils import is_valid_media_file
 
 class ReportIncidentForm(forms.ModelForm):
     INCIDENT_CHOICES = (
-        (None, '-- Select type of incident'),
+        (None, '-- Select type of incident --'),
         ('Crime', 'Crime'),
-        ('Fire incident', 'Fire incident'),
         ('Road accident', 'Road accident'),
     )
     REPORTER = (
