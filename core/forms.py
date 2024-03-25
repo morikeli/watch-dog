@@ -39,8 +39,12 @@ class ReportIncidentForm(forms.ModelForm):
         help_text='Enter the time of the incident',
         required=False,
     )
-    description = forms.CharField(widget=forms.Textarea())
-    additional_details = forms.CharField(widget=forms.Textarea())
+    description = forms.CharField(widget=forms.Textarea(attrs={
+            'type': 'text',
+            'placeholder': 'Provide more info. about the incident ...'
+        }),
+        help_text='How did the incident occur, who are the victims, was anyone injured?',
+    )
     reported_by = forms.ChoiceField(widget=forms.Select(attrs={
             'type': 'select', 'class': 'mb-2',
         }),
