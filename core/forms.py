@@ -147,8 +147,8 @@ class ReportRoadAccidentForm(forms.ModelForm):
         ('Windy', 'Windy')
     )
 
-    road = forms.ChoiceField(widget=forms.Select(attrs={
-            'type': 'select',
+    road = forms.CharField(widget=forms.TextInput(attrs={
+            'type': 'text',
         }),
         help_text='Enter highway/road where the accident occurred',
         label='Road/Highway'
