@@ -93,6 +93,28 @@ class ReportWantedSuspectsCreateView(View):
         return render(request, self.template_name, context)
 
 
+class ReportIncidentsCreateView(SessionWizardView):
+    file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'media'))
+    form_list = [ReportIncidentForm, SubmitLocationForm]
+    template_name = 'core/report-incident.html'
+
+
+    def done(self, form_list, **kwargs):
+        form = form_list[0]
+
+        if form.is_valid():
+            reported_incident = form.save()
+            location_form = form_list[1].save(commit=False)
+            location_form.incident_id = reported_incident
+            location_form.save()
+
+            messages.success(self.request, 'Incident reported successfully!')
+            return redirect('report_incident')
+        
+        messages.error(self.request, 'ERROR!! The form could not be submitted!')
+        return redirect('report_incident')
+
+
 @method_decorator(login_required(login_url='login'), name='get')
 @method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
 class GeoMapView(View):
