@@ -11,7 +11,7 @@ class ReportIncidentForm(forms.ModelForm):
         ('Road accident', 'Road accident'),
     )
     REPORTER = (
-        (None, '-- Who is reporting this crime --'),
+        (None, '-- Who is reporting this incident --'),
         ('Witness', 'Witness'),
         ('Victim', 'Victim')
     )
