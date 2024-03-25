@@ -1,0 +1,104 @@
+{% load filters %}
+<main id="main" class="main">
+	<section class="section dashboard">
+		<div class="row">
+			<div class="col-lg-7">
+				<div class="row">
+					<div class="col-md-9 offset-sm-3">
+					{% include 'core/partials/users/feed.html' %}
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-lg-5">
+				<div class="card">
+					<div class="filter">
+						<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+							<li class="dropdown-header text-start"><h6>Filter</h6></li>
+							<li><a class="dropdown-item" href="">Today</a></li>
+							<li><a class="dropdown-item" href="">This Month</a></li>
+							<li><a class="dropdown-item" href="">This Year</a></li>
+						</ul>
+					</div>
+		
+					<div class="card-body">
+						<h5 class="card-title">Reported incidents <span>| Today</span></h5>
+						<div class="activity">
+							{% for incident in reported_incidents %}
+							<div class="activity-item d-flex">
+								<div class="activity-label small">{{ incident.date_reported|datereported }}</div>
+								{% if incident.severity_level < '2' or incident.severity_level == 'Low' %}
+								<i class='bi bi-circle-fill activity-badge text-secondary align-self-start'></i>
+								{% elif incident.severity_level == '2' or incident.severity_level == 'Moderate' %}
+								<i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+								{% elif incident.severity_level == '3' or incident.severity_level == 'High' %}
+								<i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+								{% else %}
+								<i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+								{% endif %}
+								<div class="activity-content">
+									<a href="" class="text-dark">
+										{% if incident.description == 'nan' %}
+										<p class="small fst-italic">No description provided</p>
+										{% else %}
+										{{ incident.description|truncatewords:15 }}
+										{% endif %}
+									</a>
+								</div>
+							</div>
+							{% empty %}
+							<div class="activity-item text-center">
+								<div class="activity-content">
+									<p class="small text-muted fst-italic">No records available</p>
+								</div>
+							</div>
+							{% endfor %}				
+						</div>
+			
+					</div>
+				</div>
+				<div class="row ms-2">
+					<h5 class="card-title text-muted ms-3">Wanted suspects</h5>
+					{% for suspect in wanted_suspects %}
+					<div class="row">
+						<div class="col-md-2">
+							<img class="rounded-circle" src="{{ suspect.suspect_img.url }}" height="50px" width="50px" alt="img">
+						</div>
+						<div class="col-md-7">
+							<p class="small fw-bold">{{ suspect.name }}</p>
+							<p class="small text-muted" style="margin-top: -2.7vh;">{{ suspect.nickname|default:"" }}</p>
+							<p class="small text-muted" style="margin-top: -3vh;">Reward: Kshs.{{ suspect.bounty|floatformat:"g" }}/=</p>
+						</div>
+						<div class="col-md-2">
+							<a hx-get="{% url 'report_suspect' suspect.id %}" hx-trigger="click" hx-push-url="{% url 'report_suspect' suspect.id %}" hx-swap="outerHTML" hx-target="#wrapper" class="btn btn-sm btn-outline-danger mb-2">Report</a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-sm-12 mt-4">
+				<nav aria-label="pages">
+					<ul class="pagination pagination-md justify-content-center">
+						{% if page.has_previous %}
+							<li class="page-item"><a href="{% url 'homepage' %}" class="page-link">First</a></li>
+							<li class="page-item"><a hx-get="{% url 'homepage' %}?page={{ page.previous_page_number }}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="page-link">&laquo;</a></li>
+						{% endif %}
+						{% for num in page.paginator.page_range %}
+							{% if page.number == num %}
+								<li class="page-item active" aria-current="page"><a class="page-link" hx-get="{% url 'homepage' %}?page={{ num }}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper">{{ num }}</a></li>
+							{% elif num > page.number|add:"-5" and num < page.number|add:"5" %}
+								<li class="page-item"><a class="page-link" hx-get="{% url 'homepage' %}?page={{ num }}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper">{{ num }}</a></li>
+							{% endif %}
+						{% endfor %}
+						{% if page.has_next %}
+							<li class="page-item"><a hx-get="{% url 'homepage' %}?page={{ page.next_page_number }}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="page-link">&raquo;</a></li>
+							<li class="page-item"><a hx-get="{% url 'homepage' %}?page={{ page.paginator.num_pages }}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="page-link">Last</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</section>	
+	{% include 'footer.html' %}
+</main>
