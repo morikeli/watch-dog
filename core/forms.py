@@ -53,8 +53,10 @@ class ReportIncidentForm(forms.ModelForm):
     )
     media_file = forms.FileField(
         widget=forms.FileInput(attrs={
-            'type': 'file', 'class': 'form-control mb-2', 'accept': '.3gpp, .jpg, .jpeg, .mp4, .mpeg, .ogg, .opus, .png, .wav',
+            'type': 'file', 'class': 'form-control', 'accept': '.3gpp, .jpg, .jpeg, .mp4, .mpeg, .ogg, .opus, .png, .wav',
         }),
+        label='Media file (optional)',
+        help_text='Upload video, image or audio file that can be used as an evidence.',
         required=False,
         validators=[is_valid_media_file],
     )
