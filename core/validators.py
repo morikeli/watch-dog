@@ -19,7 +19,7 @@ def validate_last_seen_date(request):
 
 def validate_last_seen_time(request):
     """ 
-    This function is used to validate time provided in `last_seen_timee` input field in `ReportWantedSuspectsForm`.
+    This function is used to validate time provided in `last_seen_time` input field in `ReportWantedSuspectsForm`.
     The function validates if the user has provided time that is greater than the current time. 
     """
 
