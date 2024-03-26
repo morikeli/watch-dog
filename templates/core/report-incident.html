@@ -14,15 +14,59 @@
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-12">
-
+                                    <div class="col-12">
+                                        <div class="form-wizard text-center">
+                                            <p class="small fst-italic">
+                                                {% if wizard.steps.step1 == 1 %}
+                                                Fill all form field to go next step
+                                                {% else %}
+                                                One final step!
+                                                {% endif %}
+                                            </p>
+                                            <ul class="list-unstyled form-wizard-steps clearfix">
+                                                {% if wizard.steps.step1 == 1 %}
+                                                <li class="active">
+                                                    <span>{% if wizard.steps.step1 == 1 %}{{ wizard.steps.step1 }}{% else %} <i class="bi-check-circle-fill" style="font-size: 32px;"></i> {% endif %}</span>
+                                                </li>
+                                                <li>
+                                                    <span>{% if wizard.steps.step1 == 2 %}{{ wizard.steps.step1 }}{% else %}{{ wizard.steps.count }}{% endif %}</span>
+                                                </li>
+                                                {% else %}
+                                                <li class="active">
+                                                    <span>{% if wizard.steps.step1 == 1 %}{{ wizard.steps.step1 }}{% else %} <i class="bi-check-circle-fill" style="font-size: 32px;"></i> {% endif %}</span>
+                                                </li>
+                                                <li class="active">
+                                                    <span>{% if wizard.steps.step1 == 2 %}{{ wizard.steps.step1 }}{% else %}{{ wizard.steps.count }}{% endif %}</span>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                        {{ wizard.management_form }}
+                                        {% if wizard.form.forms %}
+                                            {{ wizard.form.management_form }}
+                                            {% for form in wizard.form.forms %}
+                                                {{ form|crispy }}
+                                            {% endfor %}
+                                        {% else %}
+                                            {{ wizard.form|crispy }}
+                                        {% endif %}
+                                        <hr>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            {% if wizard.steps.prev %}
+                                                    <button class="btn btn-sm btn-outline-secondary" name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}">Back</button>
+                                            {% endif %}
+                                            {% if wizard.steps.next %}
+                                            <button type="submit" class="btn btn-outline-success">Next</button>
+                                            {% else %}
+                                            <button type="submit" class="btn btn-outline-success w-25">Submit</button>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <span id="indicator" class="htmx-indicator text-end mb-4">
                                 <img src="{% static 'img/spinners/rounded-blocks.gif' %}" height="28px" alt="" id="indicator">
                             </span>
-                            <div class="d-grid gap-2 mt-2">
-                                <button type="submit" class="btn btn-outline-primary">Report incident</button>
-                            </div>
                         </form>
                     </div>
                 </div>
