@@ -51,7 +51,7 @@
                                         <p class="small text-muted">{{ ReportSuspectForm.description.help_text }}</p>
                                         <label class="mt-0">{{ ReportSuspectForm.location.label }}&ast;</label>
                                         {% render_field ReportSuspectForm.location class="form-control mt-1" %}
-                                        <p class="small text-muted">{{ ReportSuspectForm.location.help_text }}, e.g. <b>Embakasi, Nairobi</b></p>
+                                        <p class="small text-muted">{{ ReportSuspectForm.location.help_text }}, e.g. <b>Embakasi, Nairobi</b> or <b>Kitere, Rongo</b></p>
                                         <label class="mt-0">{{ ReportSuspectForm.last_seen_date.label }}&ast;</label>
                                         {% render_field ReportSuspectForm.last_seen_date class="form-control mt-1" hx-post="/validate-date/" hx-trigger="change delay:.5s" hx-target="#last-seen-date-error" %}
                                         <p class="small text-muted">{{ ReportSuspectForm.last_seen_date.help_text }}</p>
