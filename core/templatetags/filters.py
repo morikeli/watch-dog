@@ -21,7 +21,7 @@ def incident_datetime_reported_filter(value):
     (time_diff := time_diff.split(',')[0])  # split time and access the first value.
     
     if 'minute' in time_diff:
-        if int(time_diff[:1]) == 0:
+        if int(time_diff[:1]) == 0:     # if time elapsed is less than a minute, return "Just now"
             time_elapsed = f"Just now"
             return time_elapsed
         
