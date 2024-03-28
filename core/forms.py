@@ -154,18 +154,20 @@ class ReportRoadAccidentForm(forms.ModelForm):
         label='Road/Highway'
     )
 
-    road_user = forms.ChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
+    road_user = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
             'type': 'select',
-        }, choices=ROAD_USER),
-        help_text='Enter highway/road where the accident occurred',
-        label='Road/Highway',
+        }),
+        choices=ROAD_USER,
+        help_text='Select road users involved in the accident',
+        label='Type of road user',
     )
 
-    vehicle_type = forms.ChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
+    vehicle_type = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={
             'type': 'select',
-        }, choices=VEHICLE_TYPE),
-        help_text='Enter highway/road where the accident occurred',
-        label='Road/Highway'
+        }),
+        choices=VEHICLE_TYPE,
+        help_text='Select vehicle type involved in the road accident',
+        label='Type of vehicle'
     )
     
     vehicles_count = forms.CharField(widget=forms.NumberInput(attrs={
