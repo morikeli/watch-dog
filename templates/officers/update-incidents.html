@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}{% block title %}Reported incident - provide additional info{% endblock %}
+{% load static %}{% load filters %}{% load crispy_forms_tags %}
+{% block content %}
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-8 col-lg-8">
+                {% include 'toasts.html' %}
+                <div class="card info-card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi-mic-fill"></i> Report incident</h5>
+                        <form hx-post="{% url 'provide_incident_info' incident_obj.id %}" hx-indicator="#indicator" hx-trigger="submit" hx-target="#wrapper" hx-swap="outerHTML">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {{ IncidentForm|crispy }}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-lg-4">
+                <div class="card">
+					<div class="filter">
+						<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+							<li class="dropdown-header text-start"><h6>Filter</h6></li>
+							<li><a class="dropdown-item" href="">Today</a></li>
+							<li><a class="dropdown-item" href="">This Month</a></li>
+							<li><a class="dropdown-item" href="">This Year</a></li>
+						</ul>
+					</div>
+		
+					<div class="card-body">
+						<h5 class="card-title">Reported incidents <span>| Today</span></h5>
+						<div class="activity">
+							{% for incident in reported_incidents %}
+							<div class="activity-item d-flex">
+								<div class="activity-label small">{{ incident.date_reported|datereported }}</div>
+								{% if incident.severity_level < '2' or incident.severity_level == 'Low' %}
+								<i class='bi bi-circle-fill activity-badge text-secondary align-self-start'></i>
+								{% elif incident.severity_level == '2' or incident.severity_level == 'Moderate' %}
+								<i class='bi bi-circle-fill activity-badge text-primary align-self-start'></i>
+								{% elif incident.severity_level == '3' or incident.severity_level == 'High' %}
+								<i class='bi bi-circle-fill activity-badge text-warning align-self-start'></i>
+								{% else %}
+								<i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
+								{% endif %}
+								<div class="activity-content">
+									<a hx-get="{% url 'provide_incident_info' incident.id %}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="text-dark">
+										{% if incident.description == 'nan' %}
+										<p class="small fst-italic">No description provided</p>
+										{% else %}
+										{{ incident.description|truncatewords:15 }}
+										{% endif %}
+									</a>
+								</div>
+							</div>
+							{% empty %}
+							<div class="activity-item text-center">
+								<div class="activity-content">
+									<p class="small text-muted fst-italic">No records available</p>
+								</div>
+							</div>
+							{% endfor %}				
+						</div>
+			
+					</div>
+				</div>
+            </div>
+        </div>
+    </section>
+    {% include 'footer.html' %}
+</main>
+{% endblock %}
