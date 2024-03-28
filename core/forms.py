@@ -111,7 +111,6 @@ class ReportRoadAccidentForm(forms.ModelForm):
     )
     
     ROAD_USER = (
-        (None, '-- Select road user'),
         ('Cyclist', 'Cyclist'),
         ('Driver', 'Driver'),
         ('Motorcyclist', 'Motorcyclist'),
@@ -120,7 +119,6 @@ class ReportRoadAccidentForm(forms.ModelForm):
     )
 
     VEHICLE_TYPE = (
-        (None, '-- Select type of vehicle --'),
         ('Bicycle', 'Bicycle'),
         ('Bus', 'Bus'),
         ('Lorry', 'Lorry/Truck'),
