@@ -191,6 +191,48 @@ class IncidentsDetailView(View):
 # officers views
 @method_decorator(login_required(login_url='login'), name='get')
 @method_decorator(user_passes_test(lambda user: user.is_officer is True and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
+class ReportedIncidentsAdditionalInfoCreateView(View):
+    form_class = {'AccidentsForm': ReportRoadAccidentForm, 'CrimesForm': ReportCrimesForm}
+    template_name = 'officers/update-incidents.html'
+
+    
+    def get(self, request, incident_id, *args, **kwargs):
+        incident_obj = Incident.objects.get(id=incident_id)
+        form = self.form_class["AccidentsForm"]() if incident_obj.incident_type == 'Road accident' else self.form_class["CrimesForm"]()
+        incident_qs = Incident.objects.all()[:15]
+        print(f'Incident obj: {incident_obj}')
+        context = {
+            'IncidentForm': form, 
+            'incident_obj': incident_obj, 
+            'reported_incidents': incident_qs,
+        }
+        return render(request, self.template_name, context)
+    
+
+    def post(self, request, incident_id, *args, **kwargs):
+        incident_obj = Incident.objects.get(id=incident_id)
+        form = self.form_class["AccidentsForm"](request.POST) if incident_obj.incident_type == 'Road accident' else self.form_class["CrimesForm"](request.POST)
+        location_obj = Location.objects.get(incident_id_id=incident_id)
+        incident_qs = Incident.objects.all()[:15]
+
+        
+        if form.is_valid():
+            new_record = form.save(commit=False)
+            new_record.location_id = location_obj
+            new_record.save()
+
+            messages.success(request, 'Details submitted successfully!')
+
+        context = {
+            'IncidentForm': form, 
+            'incident_obj': incident_obj,
+            'reported_incidents': incident_qs,
+        }
+        return render(request, self.template_name, context)
+
+
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_officer is True and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
 class WantedSuspectsCreateView(View):
     form_class = AddWantedSuspectsForm
     template_name = 'core/wanted-suspects.html'
