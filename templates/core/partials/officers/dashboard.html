@@ -208,7 +208,7 @@
 								<i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
 								{% endif %}
 								<div class="activity-content">
-									<a href="" class="text-dark">
+									<a hx-get="{% url 'provide_incident_info' incident.id %}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="text-dark">
 										{% if incident.description == 'nan' %}
 										<p class="small fst-italic">No description provided</p>
 										{% else %}
