@@ -25,19 +25,19 @@ def incident_datetime_reported_filter(value):
             time_elapsed = f"Just now"
             return time_elapsed
         
-        return f'{time_diff[:2]} mins ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]} min ago'
+        return f'{time_diff[:2]}mins ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}min ago'
     
     elif 'hour' in time_diff:
-        return f'{time_diff[:2]} hrs ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]} hr ago'
+        return f'{time_diff[:2]}hrs ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}hr ago'
     
     elif 'day' in time_diff:
-        return f'{time_diff[:2]} days ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]} day ago'
+        return f'{time_diff[:2]}days ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}day ago'
     
     elif 'week' in time_diff:
-        return f'{time_diff[:2]} wks ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]} week ago'
+        return f'{time_diff[:2]}wks ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}week ago'
     
     elif 'month' in time_diff:
-        return f'{time_diff[:2]} months ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}month ago'
+        return f'{time_diff[:2]}mnths ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}mnth ago'
     
     elif 'year' in time_diff:
-        return f'{time_diff[:2]} yrs ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]} yr ago'
+        return f'{time_diff[:2]}yrs ago' if int(time_diff[:2]) > 1 else f'{time_diff[:2]}yr ago'
