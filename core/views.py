@@ -219,7 +219,7 @@ class WantedSuspectsCreateView(View):
 @method_decorator(user_passes_test(lambda user: user.is_officer is True and user.is_roadsafetystaff is False and user.is_staff is False and user.is_superuser is False), name='get')
 class WantedSuspectsUpdateView(View):
     form_class = EditWantedSuspectsDetailsForm
-    template_name = 'core/edit-suspect.html'
+    template_name = 'officers/edit-suspect.html'
 
     def get(self, request, suspect_id, *args, **kwargs):
         suspect_obj = WantedSuspect.objects.get(id=suspect_id)
