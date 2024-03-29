@@ -32,7 +32,12 @@ class SignupView(APIView):
 
 
 class IncidentsAPIListView(APIView):
+    pagination_class = PageNumberPagination
+    
+
     def get(self, request, *args, **kwargs):
         incidents = Incident.objects.all()
-        serializer = IncidentSerializer(incidents, many=True)
-        return Response(serializer.data)
+        paginator = self.pagination_class()
+        result_page = paginator.paginate_queryset(incidents, request)
+        serializer = IncidentSerializer(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
