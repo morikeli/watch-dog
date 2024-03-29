@@ -3,7 +3,6 @@
 
 # files
 *env
-*txt
 
 # dataset file
 *.csv
@@ -13,4 +12,3 @@
 
 *migrations
 
-*.sqlite3
