@@ -15,6 +15,7 @@ from django.utils.decorators import method_decorator
 from formtools.wizard.views import SessionWizardView
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db.models import Count
 from django.conf import settings
 from django.views import View
 from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
@@ -23,6 +24,7 @@ from sklearn.cluster import KMeans
 import pandas as pd
 import folium
 import os
+from django.http import JsonResponse
 
 
 @method_decorator(login_required(login_url='login'), name='get')
@@ -60,6 +62,25 @@ class HomepageView(View):
             'page_obj': page_obj,
             'page': page_obj,
         }
+        return render(request, self.template_name, context)
+
+
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
+class IncidentsStatisticsListView(View):
+    template_name = 'core/statistics.html'
+
+
+    def get(self, request, *args, **kwargs):
+        vehicle_count = RoadAccident.objects.values('vehicle_type').annotate(count=Count('vehicle_type')).order_by('-date_created')
+        # print(vehicle_count)
+        chart_data = []
+        for item in vehicle_count:
+            chart_data.append({'name': item['vehicle_type'], 'value': item['count']})
+
+        data = JsonResponse(chart_data, safe=False)
+        print(chart_data[0])
+        context = {'VehicleType': chart_data}
         return render(request, self.template_name, context)
 
 

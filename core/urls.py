@@ -10,6 +10,7 @@ urlpatterns = [
     path('report-incident/', views.ReportIncidentsCreateView.as_view(), name='report_incident'),
     path('suspect/<str:suspect_id>/report/', views.ReportWantedSuspectsCreateView.as_view(), name='report_suspect'),
     path('incident/<str:incident_id>/details/', views.ReportedIncidentsAdditionalInfoCreateView.as_view(), name='provide_incident_info'),
+    path('incidents/statistics/', views.IncidentsStatisticsListView.as_view(), name='incidents_stats'),
     path('wanted-suspects/', views.WantedSuspectsCreateView.as_view(), name='wanted_suspects'),
     path('suspect/<str:suspect_id>/update/', views.WantedSuspectsUpdateView.as_view(), name='update_suspect'),
 ]
