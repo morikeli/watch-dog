@@ -43,7 +43,7 @@ class Command(BaseCommand):
 
 
     def import_excel(self, file_path):
-        df = pd.read_excel(file_path, skiprows=2)
+        df = pd.read_excel(file_path)
         self.process_data(df)
     
 
