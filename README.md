@@ -1,4 +1,4 @@
-![image](https://github.com/morikeli/watch-dog/assets/78599959/6248ef63-bee3-4708-baae-89595f34a7dc)# Project Watchdog
+# Project Watchdog
 
 # Demo
   1. Homepage
