@@ -1,4 +1,4 @@
-# Project Watchdog
+![image](https://github.com/morikeli/watch-dog/assets/78599959/6248ef63-bee3-4708-baae-89595f34a7dc)# Project Watchdog
 
 # Demo
   1. Homepage
@@ -22,6 +22,8 @@ The users of the website include:
   - Citizens report accidents or crimes anonymously whether he/she has created an account or not. A citizen can choose to create an account or not.
   - Reported incidents are forwarded to and can only be viewed by the respective authorities and users. Law enforcement can view both reported accidents and crimes. Road safety agency cannot view reported crimes.
   - Users mentioned above get a real time location of all reported incidents. This is displayed on a geographical map that pin points the exact location of a map.
+
+To access the website click [website link](https://watch-dog-website.onrender.com/auth/login/)
 
 ## Developer instructions
 Installation guide to run the project remotely.
