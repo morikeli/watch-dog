@@ -2,10 +2,12 @@
 
 # Demo
   1. Homepage
-    ![Screenshot from 2024-03-31 12-22-02](https://github.com/morikeli/watch-dog/assets/78599959/d26349fe-0d3c-4b81-923c-52237a67d1b2)
+     
+  ![Screenshot from 2024-03-31 12-22-02](https://github.com/morikeli/watch-dog/assets/78599959/d26349fe-0d3c-4b81-923c-52237a67d1b2)
 
   2. Geolocation of reported incidents
-     ![Screenshot from 2024-03-31 12-24-25](https://github.com/morikeli/watch-dog/assets/78599959/600658bd-9f88-4d45-8da3-eb6e497de70b)
+  
+  ![Screenshot from 2024-03-31 12-24-25](https://github.com/morikeli/watch-dog/assets/78599959/600658bd-9f88-4d45-8da3-eb6e497de70b)
 
       
 
