@@ -69,12 +69,6 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a hx-get="{% url 'incidents_stats' %}" hx-trigger="click" hx-push-url="{% url 'incidents_stats' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Statistics" class="sidebar-link">
-                        <i class="bi-bar-chart-fill"></i>
-                        <span>Incident statistics</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a hx-get="{% url 'user_profile' %}" hx-trigger="click" hx-push-url="{% url 'user_profile' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile" class="sidebar-link">
                         <img src="{{ request.user.profile_pic.url }}" height="30px" width="30px" alt="profile" class="rounded-circle">
                         <span>Profile</span>
