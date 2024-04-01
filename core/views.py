@@ -67,25 +67,6 @@ class HomepageView(View):
 
 @method_decorator(login_required(login_url='login'), name='get')
 @method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
-class IncidentsStatisticsListView(View):
-    template_name = 'core/statistics.html'
-
-
-    def get(self, request, *args, **kwargs):
-        vehicle_count = RoadAccident.objects.values('vehicle_type').annotate(count=Count('vehicle_type')).order_by('-date_created')
-        # print(vehicle_count)
-        chart_data = []
-        for item in vehicle_count:
-            chart_data.append({'name': item['vehicle_type'], 'value': item['count']})
-
-        data = JsonResponse(chart_data, safe=False)
-        print(chart_data[0])
-        context = {'VehicleType': chart_data}
-        return render(request, self.template_name, context)
-
-
-@method_decorator(login_required(login_url='login'), name='get')
-@method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
 class ReportWantedSuspectsCreateView(View):
     form_class = ReportWantedSuspectForm
     template_name = 'core/report-suspect.html'
