@@ -1,5 +1,14 @@
 # Project Watchdog
 
+## Demo
+  1. Homepage
+     
+  ![Screenshot from 2024-03-31 12-22-02](https://github.com/morikeli/watch-dog/assets/78599959/d26349fe-0d3c-4b81-923c-52237a67d1b2)
+
+  2. Geolocation of reported incidents
+  
+  ![Screenshot from 2024-03-31 12-24-25](https://github.com/morikeli/watch-dog/assets/78599959/600658bd-9f88-4d45-8da3-eb6e497de70b)
+
 ## Overview
 Project watchdog is a web based platform that allows users to report road accidents and crimes in his/her county of residence.  This platform will serve as a vital tool in the collective effort to enhance community safety and security. By leveraging technology, the project seeks to empower individuals to report accidents and crimes promptly, thereby facilitating quicker response times from relevant authorities. This initiative aligns with broader goals to utilize technology for the betterment of society, bridging the gap between technological innovation and community welfare.
 
@@ -13,6 +22,8 @@ The users of the website include:
   - Citizens report accidents or crimes anonymously whether he/she has created an account or not. A citizen can choose to create an account or not.
   - Reported incidents are forwarded to and can only be viewed by the respective authorities and users. Law enforcement can view both reported accidents and crimes. Road safety agency cannot view reported crimes.
   - Users mentioned above get a real time location of all reported incidents. This is displayed on a geographical map that pin points the exact location of a map.
+
+To access the website click [website link](https://watch-dog-website.onrender.com/auth/login/)
 
 ## Developer instructions
 Installation guide to run the project remotely.
