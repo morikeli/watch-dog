@@ -183,7 +183,7 @@ class ReportRoadAccidentForm(forms.ModelForm):
     fatalities_count = forms.CharField(widget=forms.NumberInput(attrs={
             'type': 'number', 'min': 0,
         }),
-        help_text='Enter the fatalities count of the accident',
+        help_text='How many victims have lost their lives due to the accident?',
         label='Fatalities'
     )
     road_conditions = forms.ChoiceField(widget=forms.Select(attrs={
