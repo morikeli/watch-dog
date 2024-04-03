@@ -35,6 +35,8 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class RoadAccidentSpotSerializer(serializers.ModelSerializer):
+    location_id = LocationSerializer(instance='location_id', read_only=True)
+
     class Meta:
         model = RoadAccident
         fields = (
@@ -44,6 +46,8 @@ class RoadAccidentSpotSerializer(serializers.ModelSerializer):
 
 
 class ReportedCrimesSerializer(serializers.ModelSerializer):
+    location_id = LocationSerializer(instance='location_id', read_only=True)
+
     class Meta:
         model = ReportedCrime
         fields = ('crime_type', 'suspect_description')
