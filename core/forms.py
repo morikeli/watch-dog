@@ -148,7 +148,7 @@ class ReportRoadAccidentForm(forms.ModelForm):
     road = forms.CharField(widget=forms.TextInput(attrs={
             'type': 'text',
         }),
-        help_text='Enter highway/road where the accident occurred',
+        help_text='Enter highway/road where the accident occured',
         label='Road/Highway'
     )
 
