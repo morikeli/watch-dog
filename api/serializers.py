@@ -28,6 +28,12 @@ class IncidentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = ('longitude', 'latitude', 'county', 'sub_county', 'place', 'landmark')
+
+
 class RoadAccidentSpotSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoadAccident
