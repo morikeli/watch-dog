@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Incident
+from core.models import Incident, RoadAccident, ReportedCrime
 from accounts.models import User
 
 
