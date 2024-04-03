@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 from django.contrib import auth
-from .serializers import IncidentSerializer, UserSignupSerializer
-from core.models import Incident
+from .serializers import IncidentSerializer, UserSignupSerializer, RoadAccidentSpotSerializer, ReportedCrimesSerializer
+from core.models import Incident, RoadAccident, ReportedCrime
 
 
 class LoginView(APIView):
