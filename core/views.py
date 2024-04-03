@@ -3,7 +3,6 @@ from .forms import (
     EditWantedSuspectsDetailsForm,
     ReportIncidentForm, 
     ReportRoadAccidentForm, 
-    ReportFireIncidentForm, 
     ReportCrimesForm, 
     ReportWantedSuspectForm,
     SubmitLocationForm, 
@@ -15,16 +14,12 @@ from django.utils.decorators import method_decorator
 from formtools.wizard.views import SessionWizardView
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.db.models import Count
 from django.conf import settings
 from django.views import View
 from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
 from folium.plugins import MarkerCluster, HeatMap
-from sklearn.cluster import KMeans
-import pandas as pd
 import folium
 import os
-from django.http import JsonResponse
 
 
 @method_decorator(login_required(login_url='login'), name='get')
