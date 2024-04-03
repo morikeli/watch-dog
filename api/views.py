@@ -41,3 +41,25 @@ class IncidentsAPIListView(APIView):
         result_page = paginator.paginate_queryset(incidents, request)
         serializer = IncidentSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
+
+
+class RoadAccidentsDetailView(APIView):
+    pagination_class = PageNumberPagination
+
+
+    def get(self, request, *args, **kwargs):
+        accidents_qs = RoadAccident.objects.all()
+        paginator = self.pagination_class()
+        results_page = paginator.paginate_queryset(accidents_qs, request)
+        serializer = RoadAccidentSpotSerializer(results_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+
+
+class ReportedCrimesDetailView(APIView):
+    pagination_class = PageNumberPagination
+
+
+    def get(self, request, *args, **kwargs):
+        crimes_qs = ReportedCrime.objects.all()
+        serializer = ReportedCrimesSerializer(crimes_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
