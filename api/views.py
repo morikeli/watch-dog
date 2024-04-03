@@ -1,5 +1,6 @@
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.pagination import PageNumberPagination
+from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -18,8 +19,12 @@ class LoginView(APIView):
         if user is None:
             raise AuthenticationFailed('INVALID CREDENTIALS!! Please try again later.')
         
-
-        return Response({"message": "Welcome back"}, status=status.HTTP_200_OK)
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'data': {"email": email, "username": user.username},
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }, status=status.HTTP_200_OK)
 
 
 class SignupView(APIView):
