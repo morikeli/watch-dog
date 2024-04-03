@@ -8,7 +8,8 @@
                 {% include 'toasts.html' %}
                 <div class="card info-card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class="bi-mic-fill"></i> Report incident</h5>
+                        <h5 class="card-title mb-0"><i class="bi-mic-fill"></i> Provide more incident info.</h5>
+						<hr class="my-0">
                         <form hx-post="{% url 'provide_incident_info' incident_obj.id %}" hx-indicator="#indicator" hx-trigger="submit" hx-target="#wrapper" hx-swap="outerHTML">
                             {% csrf_token %}
                             <div class="row">
