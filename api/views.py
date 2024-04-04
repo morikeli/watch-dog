@@ -75,3 +75,14 @@ class ReportedCrimesDetailView(APIView):
         crimes_qs = ReportedCrime.objects.all()
         serializer = ReportedCrimesSerializer(crimes_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class WantedSuspectsDetailView(APIView):
+    pagination_class = PageNumberPagination
+
+    def get(self, request, *args, **kwargs):
+        suspects_qs = WantedSuspect.objects.all()
+        paginator = self.pagination_class()
+        results_page = paginator.paginate_queryset(suspects_qs, request)
+        serializer = WantedSuspectsSerializer(results_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
