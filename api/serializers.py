@@ -51,3 +51,9 @@ class ReportedCrimesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReportedCrime
         fields = ('crime_type', 'suspect_description')
+
+
+class WantedSuspectsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = WantedSuspect
+        fields = '__all__'
