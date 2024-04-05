@@ -17,18 +17,20 @@ from core.models import Incident, RoadAccident, ReportedCrime, WantedSuspect
 
 
 class LoginView(APIView):
+    authentication_classes = [BasicAuthentication]
+    
     def post(self, request, *args, **kwargs):
-        email = request.data['email']
-        password = request.data['password']
+        username = request.data.get('username')
+        password = request.data.get('password')
 
-        user = auth.authenticate(email=email, password=password)
+        user = auth.authenticate(username=username, password=password)
         
         if user is None:
             raise AuthenticationFailed('INVALID CREDENTIALS!! Please try again later.')
         
         refresh = RefreshToken.for_user(user)
         return Response({
-            'data': {"email": email, "username": user.username},
+            'data': {"username": username, "username": user.username},
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         }, status=status.HTTP_200_OK)
