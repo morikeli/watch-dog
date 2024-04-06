@@ -19,8 +19,8 @@
 							<img class="rounded-circle" src="{{ suspect.suspect_img.url }}" height="50px" width="50px" alt="img">
 						</div>
 						<div class="col-md-7">
-							<p class="small fw-bold">{{ suspect.name }}</p>
-							<p class="small text-muted" style="margin-top: -2.7vh;">{{ suspect.nickname|default:"" }}</p>
+							<p class="small text-muted"><b class="text-dark">{{ suspect.name }}</b> {% if suspect.nickname %}alias {{ suspect.nickname }}</p>{% endif %}
+							<p class="small text-muted" style="margin-top: -3vh;">Crime: {{ suspect.crime }}</p>
 							<p class="small text-muted" style="margin-top: -3vh;">Reward: Kshs.{{ suspect.bounty|floatformat:"g" }}/=</p>
 						</div>
 						<div class="col-md-2">
