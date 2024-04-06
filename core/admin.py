@@ -36,3 +36,9 @@ class ReportedCrimesTable(admin.ModelAdmin):
 class ReportedSuspectsTable(admin.ModelAdmin):
     list_display = ['description', 'location', 'last_seen_date', 'last_seen_time', 'date_reported']
     readonly_fields = ['description', 'location', 'last_seen_date', 'last_seen_time']
+
+
+@admin.register(WantedSuspect)
+class WantedSuspectsTable(admin.ModelAdmin):
+    list_display = ['name', 'nickname', 'gender', 'crime', 'suspect_description', 'status', 'bounty', 'suspect_img']
+    readonly_fields = ['name', 'nickname', 'gender', 'crime', 'suspect_description', 'status', 'bounty', 'suspect_img']
