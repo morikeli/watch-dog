@@ -9,7 +9,7 @@ from .models import (
     ReportSuspect, 
     Notification
 )
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 import uuid
 
@@ -66,3 +66,33 @@ def generate_reported_suspectID(sender, instance, **kwargs):
 def generate_notificationID(sender, instance, **kwargs):
     if instance.id == '':
         instance.id = str(uuid.uuid4().hex)[:30]
+
+
+@receiver(post_save, sender=Location)
+def send_reported_incident_notification(sender, instance, created, **kwargs):
+    if created:
+        notify = Notification.objects.create(
+            incident_location=instance,
+            notification_type=1,
+        )
+        notify.save()
+
+
+@receiver(post_save, sender=WantedSuspect)
+def send_wanted_suspect_notification(sender, instance, created, **kwargs):
+    if created:
+        notify = Notification.objects.create(
+            wanted_suspect=instance,
+            notification_type=2,
+        )
+        notify.save()
+
+
+@receiver(post_save, sender=ReportSuspect)
+def send_notification_for_wanted_suspect(sender, instance, created, **kwargs):
+    if created:
+        notify = Notification.objects.create(
+            suspect=instance,
+            notification_type=3,
+        )
+        notify.save()
