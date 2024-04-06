@@ -50,7 +50,7 @@ class Incident(models.Model):
     incident_date = models.DateField(null=True, blank=False)
     incident_time = models.TimeField(null=True, blank=False)
     description = models.TextField()
-    media_file = models.FileField(upload_to=reported_incidents_media_directory, blank=True)
+    media_file = models.FileField(upload_to=reported_incidents_media_directory, null=True, blank=True)
     severity_level = models.CharField(max_length=20, blank=False)
     reported_by = models.CharField(max_length=30, blank=False)
     date_reported = models.DateTimeField(auto_now_add=True)
@@ -191,3 +191,20 @@ class ReportSuspect(models.Model):
 
     def __str__(self):
         return f'{self.suspect}'
+
+
+class Notification(models.Model):
+    id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
+    wanted_suspect = models.ForeignKey(WantedSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='wanted_suspect')
+    suspect = models.ForeignKey(ReportSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='reported_suspect')
+    incident_location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, editable=False)
+    message = models.TextField(null=False)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+
+    class Meta:
+        ordering = ['-date_created']
+
+
+    def __str__(self):
+        return self.message[:20]
