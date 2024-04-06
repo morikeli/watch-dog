@@ -15,8 +15,9 @@ from formtools.wizard.views import SessionWizardView
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.conf import settings
+from django.db.models import Q
 from django.views import View
-from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
+from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect, Notification
 from folium.plugins import MarkerCluster, HeatMap
 import folium
 import os
