@@ -1,4 +1,14 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, PoliceStation, WantedSuspect, ReportSuspect, Notification
+from .models import (
+    Incident, 
+    Location, 
+    RoadAccident, 
+    FireIncident, 
+    ReportedCrime, 
+    PoliceStation, 
+    WantedSuspect, 
+    ReportSuspect, 
+    Notification
+)
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 import uuid
