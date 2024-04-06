@@ -1,0 +1,54 @@
+{% extends 'core/base.html' %}{% block title %}Notifications{% endblock %}
+{% block content %}
+<main id="main" class="main">
+    <section class="section dashboard">
+        <div class="row">
+            <div class="col-md-6 offset-sm-3">
+                <ul class="list-group">
+                    {% for alert in notifications %}
+                    {% if alert.notification_type == 1 and alert.incident_location.incident_id.incident_type == 'Crime' %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                        <i class="bi bi-shield-fill-exclamation my-2" style="font-size: 30px; color: #ffc107"></i>
+                        <div class="ms-3 me-auto my-2">
+                            A <b>crime</b> was reported in {{ alert.incident_location.county }}, {{ alert.incident_location.sub_county }}.
+                            <p class="small text-muted">{{ alert.date_created }}</p>
+                        </div>
+                    </li>
+                    {% elif alert.notification_type == 1 and alert.incident_location.incident_id.incident_type == 'Road accident' %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5">
+                        <i class="bi bi-car-front-fill my-2" style="font-size: 30px; color: #d60808"></i>
+                        <div class="ms-3 me-auto my-2">
+                            A <b>road accident</b> was reported in {{ alert.incident_location.county }}, {{ alert.incident_location.sub_county }}.
+                            <p class="small text-muted">{{ alert.date_created }}</p>
+                        </div>
+                    </li>
+                    {% elif alert.notification_type == 2 %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                        <i class="bi bi-person-fill-exclamation my-2" style="font-size: 30px; color: #c70f0f"></i>
+                        <div class="ms-3 me-auto my-2">
+                            Suspect <b>{{ alert.wanted_suspect.name }}</b> 
+                            {% if alert.wanted_suspect.nickname %}
+                            aka <small class="text-muted fw-bold fs-6">{{ alert.wanted_suspect.nickname }}</small>{% endif %}
+                            who is wanted for <b>{{ alert.wanted_suspect.crime }}</b> was last seen in {{ alert.wanted_suspect.last_seen_location }}. 
+                            {% if request.user.is_officer is False and request.user.is_roadsafetystaff is False %}
+                            If spotted, please report him to your nearest police station or via this <a href="{% url 'report_suspect' alert.wanted_suspect.id %}">link</a>.
+                            {% endif %}
+                            <p class="small text-muted">{{ alert.date_created }}</p>
+                        </div>
+                    </li>
+                    {% elif alert.notification_type == 3 %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                        <i class="bi bi-person-fill-check my-2" style="font-size: 30px; color: #0d9134"></i>
+                        <div class="ms-3 me-auto my-2">
+                            Suspect <b>{{ alert.suspect.name }}</b> {% if alert.suspect.nickname %}aka <p class="text-muted">{{ alert.suspect.nickname }}</p>{% endif %} was reported by anonymous user.
+                            <p class="small text-muted">{{ alert.date_created }}</p>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
