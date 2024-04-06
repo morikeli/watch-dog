@@ -63,8 +63,8 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Notifications" class="sidebar-link">
-                        <i class="bi-bell-fill"><span class="badge">12</span></i>
+                    <a hx-get="{% url 'notifications' %}" hx-trigger="click" hx-push-url="{% url 'notifications' %}" hx-target="#wrapper" hx-swap="outerHTML" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Notifications" class="sidebar-link">
+                        <i class="bi-bell-fill"><span class="badge">{{ TotalNotifications }}</span></i>
                         <span>Notifications</span>
                     </a>
                 </li>
