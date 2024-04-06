@@ -194,11 +194,18 @@ class ReportSuspect(models.Model):
 
 
 class Notification(models.Model):
+    NOTIFICATION_TYPE = (
+        (1, 'Incident'),
+        (2, 'Wanted suspect'),
+        (3, 'Report wanted suspect'),
+    )
+
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     wanted_suspect = models.ForeignKey(WantedSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='wanted_suspect')
     suspect = models.ForeignKey(ReportSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='reported_suspect')
     incident_location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, editable=False)
-    message = models.TextField(null=False)
+    notification_type = models.IntegerField(choices=NOTIFICATION_TYPE, editable=False)
+    is_read = models.BooleanField(default=False, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)
 
 
