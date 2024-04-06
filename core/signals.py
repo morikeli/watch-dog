@@ -50,3 +50,9 @@ def generate_wanted_suspectID(sender, instance, **kwargs):
 def generate_reported_suspectID(sender, instance, **kwargs):
     if instance.id == '':
         instance.id = str(uuid.uuid4().hex)[:30]
+
+
+@receiver(pre_save, sender=Notification)
+def generate_notificationID(sender, instance, **kwargs):
+    if instance.id == '':
+        instance.id = str(uuid.uuid4().hex)[:30]
