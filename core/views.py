@@ -63,6 +63,17 @@ class HomepageView(View):
 
 @method_decorator(login_required(login_url='login'), name='get')
 @method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
+class NotificationsDetailView(View):
+    template_name = 'core/notifications.html'
+
+    def get(self, request, *args, **kwargs):
+        notifications_qs = Notification.objects.all()
+        context = {'notifications': notifications_qs}
+        return render(request, self.template_name, context)
+
+
+@method_decorator(login_required(login_url='login'), name='get')
+@method_decorator(user_passes_test(lambda user: user.is_staff is False and user.is_superuser is False), name='get')
 class ReportWantedSuspectsCreateView(View):
     form_class = ReportWantedSuspectForm
     template_name = 'core/report-suspect.html'
