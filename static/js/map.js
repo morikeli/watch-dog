@@ -111,60 +111,21 @@ navigator.geolocation.getCurrentPosition(function(position) {
         latitude_coord = spot.latitude < 0 ? '&deg;S' : '&deg;N'
         var marker = L.marker([spot.latitude, spot.longitude])
         var popupContent = (
-            "<h5>Road accident</h5>" +
+            "<h5>" + spot.incident_type + "</h5>" +
             '<table class="table table-sm table-condensed table-striped table-bordered">' + "<tbody>" +
-            "<tr><td><b>Latitude:</b></td><td>" + spot.latitude + "<b>" + latitude_coord +  "</b>" + "</td>" +
-            "<tr><td><b>Longitude:</b></td><td>" + spot.longitude + "<b>&deg;E</b>" + "</td>" +
-            "<tr><td><b>County:</b></td><td>" + spot.county + "</td>" +
-            "<tr><td><b>Subcounty:</b></td><td>" + spot.sub_county + "</td>" +
-            "<tr><td><b>Road/Highway:</b></td><td>" + spot.road + "</td>" +
-            "<tr><td><b>Vehicle(s) involved:</b></td><td>" + spot.vehicles_count + "</td>" +
-            "<tr><td><b>Victim(s):</b></td><td>" + spot.road_user + "</td>" +
-            "<tr><td><b>Injuries:</b></td><td>" + spot.injuries_count + "</td>" +
-            "<tr><td><b>Fatalities:</b></td><td>" + spot.fatalities + "</td>" +
+            "<tr><td><b>Latitude</b></td><td>" + spot.latitude + "<b>" + latitude_coord +  "</b>" + "</td>" +
+            "<tr><td><b>Longitude</b></td><td>" + spot.longitude + "<b>&deg;E</b>" + "</td>" +
+            "<tr><td><b>County</b></td><td>" + spot.county + "</td>" +
+            "<tr><td><b>Subcounty</b></td><td>" + spot.sub_county + "</td>" +
+            "<tr><td><b>Place</b></td><td>" + spot.place + "</td>" +
+            "<tr><td><b>Incident date</b></td><td>" + spot.incident_date + "</td>" +
+            "<tr><td><b>Incident time</b></td><td>" + spot.incident_time + "</td>" +
+            "<tr><td><b>Reported by</b></td><td>" + spot.reported_by + "</td>" +
             "</tbody>" + "</table>"
         )
         marker.bindPopup(popupContent)
         marker.bindTooltip(tooltipContent).openTooltip()
-        accidentsClusterGroup.addLayer(marker)
-    })
-
-}, function(error) {
-    alert("Error: ", error);
-})
-
-
-// Get user's current position and calculate distance from the crime scene
-navigator.geolocation.getCurrentPosition(function(position) {
-    // Retrieve latitude and longitude from the position object
-    var userLatitude = position.coords.latitude;
-    var userLongitude = position.coords.longitude;
-
-    // Add markers for crimes
-    crime_scenes.forEach(scene => {
-        var distance = calculateDistance(userLatitude, userLongitude, scene.latitude, scene.longitude)
-        var distanceKilometers = (distance / 1000).toFixed(2); // Convert meters to kilometers
-        var distanceMiles = (distance * 0.000621371).toFixed(2); // Convert meters to miles
-    
-        var tooltipContent = "Distance to your location:<br>" +
-            "Meters: " + distance.toFixed(2) + " <b>metres</b><br>" +
-            "Kilometers: " + distanceKilometers + " <b>km</b><br>" +
-            "Miles: " + distanceMiles + " <b>mi</b>"
-    
-        latitude_coord = 'S' ? scene.latitude < 0 : 'N'
-        var marker = L.marker([scene.latitude, scene.longitude])
-        var popupContent = (
-            "<h5>Crime</h5>" +
-            '<table class="table table-sm table-condensed table-striped table-bordered">' + "<tbody>" +
-            "<tr><td><b>Latitude:</b></td><td>" + scene.latitude +  "<b>" + latitude_coord +  "</b>" + "</td>" +
-            "<tr><td><b>Longitude:</b></td><td>" + scene.longitude + "</td>" +
-            "<tr><td><b>County:</b></td><td>" + scene.county + "</td>" +
-            "<tr><td><b>Subcounty:</b></td><td>" + scene.sub_county + "</td>" +
-            "</tbody>" + "</table>"
-        )
-        marker.bindPopup(popupContent)
-        marker.bindTooltip(tooltipContent, {permanent: true}).openTooltip()
-        crimesClusterGroup.addLayer(marker)
+        incidentsClusterGroup.addLayer(marker)
     })
 
 }, function(error) {
