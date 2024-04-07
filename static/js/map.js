@@ -133,5 +133,4 @@ navigator.geolocation.getCurrentPosition(function(position) {
 })
 
 // Add cluster groups to the map
-map.addLayer(accidentsClusterGroup)
-map.addLayer(crimesClusterGroup)
+map.addLayer(incidentsClusterGroup)
