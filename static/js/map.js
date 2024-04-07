@@ -98,7 +98,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     var userLatitude = position.coords.latitude;
     var userLongitude = position.coords.longitude;
 
-    accident_spots.forEach(spot => {
+    incident_spots.forEach(spot => {
         var distance = calculateDistance(userLatitude, userLongitude, spot.latitude, spot.longitude)
         var distanceKilometers = (distance / 1000).toFixed(2); // Convert meters to kilometers
         var distanceMiles = (distance * 0.000621371).toFixed(2); // Convert meters to miles
