@@ -138,7 +138,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
 })
 
 
-// Get user's current position and calculate distance from the accident spot
+// Get user's current position and calculate distance from the crime scene
 navigator.geolocation.getCurrentPosition(function(position) {
     // Retrieve latitude and longitude from the position object
     var userLatitude = position.coords.latitude;
