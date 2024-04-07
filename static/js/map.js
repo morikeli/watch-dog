@@ -2,8 +2,8 @@ var accident_spots = JSON.parse(document.getElementById('black-spots').textConte
 var crime_scenes = JSON.parse(document.getElementById('crime-scenes').textContent)
 
 var map = L.map('geo-map', {
-    minZoom: 5,
-    maxZoom: 14,
+    minZoom: 13,
+    maxZoom: 16,
     timeout: 10000,
 })
 
