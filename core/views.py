@@ -157,47 +157,39 @@ class GeoMapView(View):
     template_name = 'core/map.html'
 
     def get(self, request, *args, **kwargs):
+        current_dt = timezone.now()
+        start_dt = current_dt - timezone.timedelta(hours=24)    # set filter datetime to the last 24hrs from the current datetime
         # get coordinates for reportted crimes and accidents
-        accidents_qs = RoadAccident.objects.values(
-            'location_id__longitude', 
-            'location_id__latitude', 
-            'location_id__county', 
-            'location_id__sub_county', 
-            'road', 
-            'road_user',
-            'vehicles_count',
-            'injuries_count',
-            'fatalities_count',
+        incidents_qs = Location.objects.filter(date_created__gte=start_dt).values(
+            'longitude', 
+            'latitude', 
+            'county', 
+            'sub_county', 
+            'place',
+            'incident_id__incident_type',
+            'incident_id__incident_date',
+            'incident_id__incident_time',
+            'incident_id__reported_by',
         )
-        crimes_qs = ReportedCrime.objects.values('location_id__longitude', 'location_id__latitude')
         
         # Rename keys in the dictionaries from querysets - accidents_qs and crimes_qs
         # dictionariies generated using .values() have a key - 'location_id_longitude' or 'location_id_latitude'
         # updated these keys to 'longitude' and 'latitude' using list comprehension
-        accident_spots = [
+        incident_spots = [
             {
-                "latitude": round(location["location_id__latitude"], 4), 
-                "longitude": round(location["location_id__longitude"], 4),
-                "county": location["location_id__county"],
-                "sub_county": location["location_id__county"],
-                "road": location["road"],
-                "road_user": location["road_user"],
-                "vehicles_count": location["vehicles_count"],
-                "injuries_count": location["injuries_count"],
-                "fatalities": location["fatalities_count"],
-            } for location in accidents_qs
-        ]
-        crime_scenes = [
-            {
-                "latitude": round(location["location_id__latitude"], 4), 
-                "longitude": round(location["location_id__longitude"], 4)
-            } for location in crimes_qs
+                "latitude": round(location["latitude"], 4), 
+                "longitude": round(location["longitude"], 4),
+                "county": location["county"],
+                "sub_county": location["county"],
+                "place": location["place"],
+                "incident_type": location["incident_id__incident_type"],
+                "incident_date": location["incident_id__incident_date"],
+                "incident_time": location["incident_id__incident_time"],
+                "reported_by": location["incident_id__reported_by"],
+            } for location in incidents_qs
         ]
 
-        context = {
-            'accidents_spots': accident_spots,
-            'crime_scenes': crime_scenes,
-        }
+        context = {'incident_locations': incident_spots}
         return render(request, self.template_name, context)
     
 
