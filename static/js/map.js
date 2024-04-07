@@ -1,5 +1,4 @@
-var accident_spots = JSON.parse(document.getElementById('black-spots').textContent)
-var crime_scenes = JSON.parse(document.getElementById('crime-scenes').textContent)
+var incident_spots = JSON.parse(document.getElementById('incident-spots').textContent)
 
 var map = L.map('geo-map', {
     minZoom: 13,
