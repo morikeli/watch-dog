@@ -18,8 +18,6 @@ from django.conf import settings
 from django.db.models import Q
 from django.views import View
 from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect, Notification
-from folium.plugins import MarkerCluster, HeatMap
-import folium
 import environ
 import requests
 import os
