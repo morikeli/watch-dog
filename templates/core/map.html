@@ -16,8 +16,7 @@
         </div>
     </section>
     {% include 'footer.html' %}
-    {{ accidents_spots|json_script:"black-spots" }}
-    {{ crime_scenes|json_script:"crime-scenes" }}
+    {{ incident_locations|json_script:"incident-spots" }}
     <script src="{% static 'js/map.js' %}"></script>
 </main>
 {% endblock %}
