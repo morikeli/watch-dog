@@ -100,11 +100,12 @@ navigator.geolocation.getCurrentPosition(function(position) {
 
     incident_spots.forEach(spot => {
         var distance = calculateDistance(userLatitude, userLongitude, spot.latitude, spot.longitude)
-        var distanceKilometers = (distance / 1000).toFixed(2); // Convert meters to kilometers
-        var distanceMiles = (distance * 0.000621371).toFixed(2); // Convert meters to miles
+        var distanceMetres = (distance * 1000).toFixed(2)   // Convert kilometers to metres
+        var distanceKilometers = distance.toFixed(2)
+        var distanceMiles = (distance * 0.621371).toFixed(2)     // Convert kilometers to miles
     
         var tooltipContent = "Distance to your location:<br>" +
-            "Meters: " + distance.toFixed(2) + " <b>metres</b><br>" +
+            "Meters: " + distanceMetres + " <b>metres</b><br>" +
             "Kilometers: " + distanceKilometers + " <b>km</b><br>" +
             "Miles: " + distanceMiles + " <b>miles</b>"
     
