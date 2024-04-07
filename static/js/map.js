@@ -86,14 +86,11 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
         Math.sin(dLon / 2) * Math.sin(dLon / 2)
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     var d = R * c; // Distance in km
-    console.log(d)
     return d;
 }
 
 // Create FastMarkerCluster group for accident spots and crime scenes
-var accidentsClusterGroup = L.markerClusterGroup()
-var crimesClusterGroup = L.markerClusterGroup()
-
+var incidentsClusterGroup = L.markerClusterGroup()
 
 // Get user's current position and calculate distance from the accident spot
 navigator.geolocation.getCurrentPosition(function(position) {
