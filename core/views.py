@@ -121,6 +121,27 @@ class ReportIncidentsCreateView(SessionWizardView):
             reported_incident = form.save()
             location_form = form_list[1].save(commit=False)
             location_form.incident_id = reported_incident
+
+            # get county and sub county provided in the form
+            county = form_list[1].cleaned_data['county']
+            sub_county = form_list[1].cleaned_data['sub_county']
+
+            # geocode location
+            address = f"{str(sub_county).capitalize()}, {str(county).capitalize()} - Kenya"
+            BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
+            response = requests.get(BASE_URL)
+
+            # Check the response HTTP status code
+            if response.status_code == 200:
+                # Parse the JSON data from the response
+                data = response.json()
+
+                # get longitude and latitude of the generated data.
+                latitude = data[0]["lat"]
+                longitude = data[0]["lon"]
+            
+            location_form.longitude = longitude
+            location_form.latitude = latitude
             location_form.save()
 
             messages.success(self.request, 'Incident reported successfully!')
