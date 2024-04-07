@@ -217,7 +217,6 @@ class ReportedIncidentsAdditionalInfoCreateView(View):
         incident_obj = Incident.objects.get(id=incident_id)
         form = self.form_class["AccidentsForm"]() if incident_obj.incident_type == 'Road accident' else self.form_class["CrimesForm"]()
         incident_qs = Incident.objects.all()[:15]
-        print(f'Incident obj: {incident_obj}')
         context = {
             'IncidentForm': form, 
             'incident_obj': incident_obj, 
