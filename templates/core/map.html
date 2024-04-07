@@ -4,70 +4,20 @@
 <main id="main" class="main">
     <section class="section dashboard">
         <div class="row">
-            <div class="col-lg-9 col-md-9">
-                <div class="card info-card vehicles-card">
-                    <div class="filter">
-                        <a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start"><h6>Filter</h6></li>
-                            <li><a class="dropdown-item" href="">Today</a></li>
-                            <li><a class="dropdown-item" href="">This Month</a></li>
-                            <li><a class="dropdown-item" href="">This Year</a></li>
-                        </ul>
-                    </div>
-    
+            <div class="col-lg-12 col-md-12">
+                <div id="toast-container" aria-live="polite" aria-atomic="true" style="position: fixed; top: 1rem; right: 1rem; z-index: 9999;"></div>
+                <div class="card info-card">
                     <div id="map-info-card" class="card-body">
                         <h5 id="map-card-title" class="card-title"><i class="bi-geo-alt-fill"></i> Geographical map</h5>
-                        <div id="geo-map">
-                            <div class="map-container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        {{ Map|safe }}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-3">
-                <div class="card info-card vehicles-card">
-                    <div class="filter">
-                        <a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                            <li class="dropdown-header text-start"><h6>Filter</h6></li>
-                            <li><a class="dropdown-item" href="">Today</a></li>
-                            <li><a class="dropdown-item" href="">This Month</a></li>
-                            <li><a class="dropdown-item" href="">This Year</a></li>
-                        </ul>
-                    </div>
-    
-                    <div class="card-body">
-                        <h5 class="card-title">Incidents statistics <span>| Today</span></h5>
-                        <div class="d-flex align-items-center">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-bordered table-hover table-striped">
-                                            <thead>
-                                                <th>#</th>
-                                                <th>Data</th>
-                                            </thead>
-                                            <tbody>
-                                                <tr><td></td><td></td></tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
+                        <div id="geo-map"></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     {% include 'footer.html' %}
+    {{ accidents_spots|json_script:"black-spots" }}
+    {{ crime_scenes|json_script:"crime-scenes" }}
+    <script src="{% static 'js/map.js' %}"></script>
 </main>
 {% endblock %}
-<script src="{% static 'js/map.js' %}"></script>

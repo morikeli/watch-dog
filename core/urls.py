@@ -6,6 +6,7 @@ from . import validators
 urlpatterns = [
     path('homepage/', views.HomepageView.as_view(), name='homepage'),
     path('map/', views.GeoMapView.as_view(), name='geo_map'),
+    path('notifications', views.NotificationsDetailView.as_view(), name='notifications'),
     path('incidents/', views.IncidentsDetailView.as_view(), name='reported_incidents'),
     path('report-incident/', views.ReportIncidentsCreateView.as_view(), name='report_incident'),
     path('suspect/<str:suspect_id>/report/', views.ReportWantedSuspectsCreateView.as_view(), name='report_suspect'),
