@@ -21,7 +21,7 @@ function onLocationFound(loc) {
     // Set maxBounds for the map
     map.setMaxBounds(maxBounds)    // limit max map view to user's current location
     map.setView(loc.latlng, 14)     // zoom the map to user's current location. Zoom start - 14
-    L.marker(loc.latlng, {icon: userIcon}).addTo(map).bindPopup("You are here!").openPopup()
+    L.marker(loc.latlng, {icon: userIcon}).addTo(map).bindPopup("You are here!").openPopup()    // marker that shows user's current position
 }
 
 function onLocationError(e) {
