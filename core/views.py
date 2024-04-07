@@ -20,6 +20,8 @@ from django.views import View
 from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect, Notification
 from folium.plugins import MarkerCluster, HeatMap
 import folium
+import environ
+import requests
 import os
 
 
@@ -103,6 +105,10 @@ class ReportWantedSuspectsCreateView(View):
 
 
 class ReportIncidentsCreateView(SessionWizardView):
+    env = environ.Env()
+    environ.Env.read_env()
+    API_KEY = env('API_KEY')
+    API_DOMAIN = env('API_DOMAIN')
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'media'))
     form_list = [ReportIncidentForm, SubmitLocationForm]
     template_name = 'core/report-incident.html'
@@ -115,6 +121,27 @@ class ReportIncidentsCreateView(SessionWizardView):
             reported_incident = form.save()
             location_form = form_list[1].save(commit=False)
             location_form.incident_id = reported_incident
+
+            # get county and sub county provided in the form
+            county = form_list[1].cleaned_data['county']
+            sub_county = form_list[1].cleaned_data['sub_county']
+
+            # geocode location
+            address = f"{str(sub_county).capitalize()}, {str(county).capitalize()} - Kenya"
+            BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
+            response = requests.get(BASE_URL)
+
+            # Check the response HTTP status code
+            if response.status_code == 200:
+                # Parse the JSON data from the response
+                data = response.json()
+
+                # get longitude and latitude of the generated data.
+                latitude = data[0]["lat"]
+                longitude = data[0]["lon"]
+            
+            location_form.longitude = longitude
+            location_form.latitude = latitude
             location_form.save()
 
             messages.success(self.request, 'Incident reported successfully!')
@@ -130,57 +157,46 @@ class GeoMapView(View):
     template_name = 'core/map.html'
 
     def get(self, request, *args, **kwargs):
-        accident_spots = RoadAccident.objects.filter()
-
-        # map config.
-        map_figure = folium.Figure(height="800px")
-        geo_map = folium.Map(
-            location=[0.0236, 37.9062],     
-            tiles='https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png',
-            attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',
-            min_lat=0.0126,
-            max_lat=5.2,
-            zoom_start=7, 
-            min_zoom=7,
-            max_zoom=14,
-            control_scale=True,
-        ).add_to(map_figure)
-        marker_cluster = MarkerCluster(name='Blackspots clusters').add_to(geo_map)
-
-        for spot in accident_spots:     # get each record in the queryset
-            lat_coord = 'S' if spot.location_id.latitude < 0 else 'N'
-            popup_text = f"""
-                <div class="table-responsive mt-3">
-                    <table class="table table-sm table-hover table-striped table-condensed table-bordered">
-                        <tbody>
-                            <tr><td class="fw-bold">Coordinates</td><td>{ spot.location_id.latitude }&deg; {lat_coord}, { spot.location_id.longitude }&deg; E</td></tr>
-                            <tr><td class="fw-bold">County</td><td>{ spot.location_id.county }</td></tr>
-                            <tr><td class="fw-bold">Sub county</td><td>{ spot.location_id.sub_county }</td></tr>
-                            <tr><td class="fw-bold">City/Place</td><td>{ spot.location_id.place }</td></tr>
-                            <tr><td class="fw-bold">Road/Highway</td><td>{ spot.road }</td></tr>
-                            <tr><td class="fw-bold">Road user/Victim</td><td>{ spot.road_user }</td></tr>
-                            <tr><td class="fw-bold">Total injuries</td><td>{ spot.injuries_count }</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            """
-
-            # markers
-            folium.Marker(
-                location=[spot.location_id.latitude, spot.location_id.longitude],
-                tooltip='Click marker for more info.',
-                popup=popup_text,
-                icon=folium.Icon(icon='exclamation-triangle', color='red', prefix='fa', icon_color='#fffb00'),
-            ).add_to(marker_cluster)
+        # get coordinates for reportted crimes and accidents
+        accidents_qs = RoadAccident.objects.values(
+            'location_id__longitude', 
+            'location_id__latitude', 
+            'location_id__county', 
+            'location_id__sub_county', 
+            'road', 
+            'road_user',
+            'vehicles_count',
+            'injuries_count',
+            'fatalities_count',
+        )
+        crimes_qs = ReportedCrime.objects.values('location_id__longitude', 'location_id__latitude')
         
-        heatmap_data = [[spot.location_id.latitude, spot.location_id.longitude] for spot in accident_spots]
-        HeatMap(heatmap_data, name='Heat map', radius=20, show=False).add_to(geo_map)
-        folium.LayerControl().add_to(geo_map)
+        # Rename keys in the dictionaries from querysets - accidents_qs and crimes_qs
+        # dictionariies generated using .values() have a key - 'location_id_longitude' or 'location_id_latitude'
+        # updated these keys to 'longitude' and 'latitude' using list comprehension
+        accident_spots = [
+            {
+                "latitude": round(location["location_id__latitude"], 4), 
+                "longitude": round(location["location_id__longitude"], 4),
+                "county": location["location_id__county"],
+                "sub_county": location["location_id__county"],
+                "road": location["road"],
+                "road_user": location["road_user"],
+                "vehicles_count": location["vehicles_count"],
+                "injuries_count": location["injuries_count"],
+                "fatalities": location["fatalities_count"],
+            } for location in accidents_qs
+        ]
+        crime_scenes = [
+            {
+                "latitude": round(location["location_id__latitude"], 4), 
+                "longitude": round(location["location_id__longitude"], 4)
+            } for location in crimes_qs
+        ]
 
-        
         context = {
-            'Map': geo_map._repr_html_,
-            
+            'accidents_spots': accident_spots,
+            'crime_scenes': crime_scenes,
         }
         return render(request, self.template_name, context)
     
