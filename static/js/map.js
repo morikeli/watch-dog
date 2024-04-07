@@ -78,15 +78,15 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // the Earth's surface given their latitude and longitude coordinates. 
 function calculateDistance(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km
-    var dLat = (lat2 - lat1) * Math.PI / 180;  // deg2rad below
-    var dLon = (lon2 - lon1) * Math.PI / 180;
+    var dLat = (lat2 - lat1) * Math.PI / 180  // deg2rad below
+    var dLon = (lon2 - lon1) * Math.PI / 180
     var a =
         Math.sin(dLat / 2) * Math.sin(dLat / 2) +
         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
         Math.sin(dLon / 2) * Math.sin(dLon / 2)
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
     var d = R * c; // Distance in km
-    return d;
+    return d
 }
 
 // Create FastMarkerCluster group for accident spots and crime scenes
@@ -95,8 +95,8 @@ var incidentsClusterGroup = L.markerClusterGroup()
 // Get user's current position and calculate distance from the accident spot
 navigator.geolocation.getCurrentPosition(function(position) {
     // Retrieve latitude and longitude from the position object
-    var userLatitude = position.coords.latitude;
-    var userLongitude = position.coords.longitude;
+    var userLatitude = position.coords.latitude
+    var userLongitude = position.coords.longitude
 
     incident_spots.forEach(spot => {
         var distance = calculateDistance(userLatitude, userLongitude, spot.latitude, spot.longitude)
@@ -130,7 +130,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     })
 
 }, function(error) {
-    alert("Error: ", error);
+    alert("Error: ", error)
 })
 
 // Add cluster groups to the map
