@@ -108,9 +108,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
         var distanceMiles = (distance * 0.000621371).toFixed(2); // Convert meters to miles
     
         var tooltipContent = "Distance to your location:<br>" +
-            "Meters: " + distance.toFixed(2) + " m<br>" +
-            "Kilometers: " + distanceKilometers + " km<br>" +
-            "Miles: " + distanceMiles + " mi"
+            "Meters: " + distance.toFixed(2) + " <b>metres</b><br>" +
+            "Kilometers: " + distanceKilometers + " <b>km</b><br>" +
+            "Miles: " + distanceMiles + " <b>miles</b>"
     
         latitude_coord = spot.latitude < 0 ? '&deg;S' : '&deg;N'
         var marker = L.marker([spot.latitude, spot.longitude])
@@ -151,9 +151,9 @@ navigator.geolocation.getCurrentPosition(function(position) {
         var distanceMiles = (distance * 0.000621371).toFixed(2); // Convert meters to miles
     
         var tooltipContent = "Distance to your location:<br>" +
-            "Meters: " + distance.toFixed(2) + " m<br>" +
-            "Kilometers: " + distanceKilometers + " km<br>" +
-            "Miles: " + distanceMiles + " mi"
+            "Meters: " + distance.toFixed(2) + " <b>metres</b><br>" +
+            "Kilometers: " + distanceKilometers + " <b>km</b><br>" +
+            "Miles: " + distanceMiles + " <b>mi</b>"
     
         latitude_coord = 'S' ? scene.latitude < 0 : 'N'
         var marker = L.marker([scene.latitude, scene.longitude])
