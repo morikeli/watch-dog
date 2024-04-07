@@ -105,6 +105,10 @@ class ReportWantedSuspectsCreateView(View):
 
 
 class ReportIncidentsCreateView(SessionWizardView):
+    env = environ.Env()
+    environ.Env.read_env()
+    API_KEY = env('API_KEY')
+    API_DOMAIN = env('API_DOMAIN')
     file_storage = FileSystemStorage(location=os.path.join(settings.MEDIA_ROOT, 'media'))
     form_list = [ReportIncidentForm, SubmitLocationForm]
     template_name = 'core/report-incident.html'
