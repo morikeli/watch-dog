@@ -107,7 +107,8 @@ navigator.geolocation.getCurrentPosition(function(position) {
         var tooltipContent = "Distance to your location:<br>" +
             "Meters: " + distanceMetres + " <b>metres</b><br>" +
             "Kilometers: " + distanceKilometers + " <b>km</b><br>" +
-            "Miles: " + distanceMiles + " <b>miles</b>"
+            "Miles: " + distanceMiles + " <b>miles</b><br>" +
+            '<hr class="my-1"><b>Click marker for more info.</b>'
     
         latitude_coord = spot.latitude < 0 ? '&deg;S' : '&deg;N'
         var marker = L.marker([spot.latitude, spot.longitude])
