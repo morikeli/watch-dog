@@ -25,7 +25,10 @@ class UserSignupSerializer(serializers.ModelSerializer):
 class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incident
-        fields = '__all__'
+        fields = (
+            'incident_type', 'incident_date', 'incident_time', 'description', 'severity_level', 
+            'reported_by', 'date_reported',
+        )
 
 
 class LocationSerializer(serializers.ModelSerializer):
