@@ -50,7 +50,7 @@ class ReportedCrimesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ReportedCrime
-        fields = ('crime_type', 'suspect_description')
+        fields = ('location_id', 'crime_type', 'suspect_description')
 
 
 class WantedSuspectsSerializer(serializers.ModelSerializer):
