@@ -38,12 +38,12 @@ class LocationSerializer(serializers.ModelSerializer):
 
 
 class RoadAccidentSpotSerializer(serializers.ModelSerializer):
-    location_id = LocationSerializer(instance='location_id', read_only=True)
+    location = LocationSerializer(instance='location', read_only=True)
 
     class Meta:
         model = RoadAccident
         fields = (
-            'location_id', 'road', 'road_user', 'vehicle_type', 'vehicles_count', 'injuries_count', 'fatalities_count', 
+            'location', 'road', 'road_user', 'vehicle_type', 'vehicles_count', 'injuries_count', 'fatalities_count', 
             'road_conditions',  'road_hazards', 'traffic_conditions', 'weather_conditions'
         )
 
