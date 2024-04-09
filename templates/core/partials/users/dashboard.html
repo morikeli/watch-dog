@@ -30,6 +30,7 @@
 					{% endfor %}
 				</div>
 			</div>
+			{% if pages %}
 			<div class="col-sm-12 mt-4">
 				<nav aria-label="pages">
 					<ul class="pagination pagination-md justify-content-center">
@@ -51,6 +52,7 @@
 					</ul>
 				</nav>
 			</div>
+			{% endif %}
 		</div>
 	</section>	
 	{% include 'footer.html' %}
