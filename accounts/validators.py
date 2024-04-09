@@ -118,10 +118,10 @@ def validate_password_with_django_validators(password):
 def password_match_and_length_validation(request):
     """ This function checks performs password validation on the passwords input by the user. """
 
-    _password1 = request.POST.get('password1', None)
-    _password2 = request.POST.get('password2', None)
-    new_password1 = request.POST.get('new_password1', None)
-    new_password2 = request.POST.get('new_password2', None)
+    _password1 = request.POST.get('password1')
+    _password2 = request.POST.get('password2')
+    new_password1 = request.POST.get('new_password1')
+    new_password2 = request.POST.get('new_password2')
 
     errors = validate_password_with_django_validators(_password1 if not _password1 is None else new_password1)
     
