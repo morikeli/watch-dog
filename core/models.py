@@ -65,7 +65,7 @@ class Incident(models.Model):
         return self.incident_type
     
 
-class Location(models.Model):
+class IncidentLocation(models.Model):
     """ Location of the reported incidents are stored here. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     incident_id = models.ForeignKey(Incident, on_delete=models.CASCADE, editable=False, db_column='incident_id')
