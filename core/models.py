@@ -69,8 +69,8 @@ class Location(models.Model):
     """ Location of the reported incidents are stored here. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     incident_id = models.ForeignKey(Incident, on_delete=models.CASCADE, editable=False, db_column='incident_id')
-    latitude = models.FloatField(default=0)
-    longitude = models.FloatField(default=0)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
     county = models.CharField(max_length=30, blank=False)
     sub_county = models.CharField(max_length=30, blank=False)
     place = models.CharField(max_length=30, blank=False, db_column='incident_spot')
