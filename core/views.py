@@ -18,7 +18,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.db.models import Q
 from django.views import View
-from .models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect, Notification
+from .models import Incident, IncidentLocation, RoadAccident, ReportedCrime, WantedSuspect, Notification
 import environ
 import requests
 import os
@@ -34,7 +34,7 @@ class HomepageView(View):
         total_crimes = Incident.objects.filter(incident_type='Crime').count()
         incidents_qs = Incident.objects.all()[:15]
         suspect_qs = WantedSuspect.objects.all()
-        location_qs = Location.objects.all().order_by('-incident_id__date_reported')
+        location_qs = IncidentLocation.objects.all().order_by('-incident_id__date_reported')
 
         p = Paginator(location_qs, 8)
         page_number = request.GET.get('page')
@@ -160,7 +160,7 @@ class GeoMapView(View):
         current_dt = timezone.now()
         start_dt = current_dt - timezone.timedelta(hours=24)    # set filter datetime to the last 24hrs from the current datetime
         # get coordinates for reportted crimes and accidents
-        incidents_qs = Location.objects.filter(date_created__gte=start_dt).values(
+        incidents_qs = IncidentLocation.objects.filter(date_created__gte=start_dt).values(
             'longitude', 
             'latitude', 
             'county', 
@@ -228,7 +228,7 @@ class ReportedIncidentsAdditionalInfoCreateView(View):
     def post(self, request, incident_id, *args, **kwargs):
         incident_obj = Incident.objects.get(id=incident_id)
         form = self.form_class["AccidentsForm"](request.POST) if incident_obj.incident_type == 'Road accident' else self.form_class["CrimesForm"](request.POST)
-        location_obj = Location.objects.get(incident_id_id=incident_id)
+        location_obj = IncidentLocation.objects.get(incident_id_id=incident_id)
         incident_qs = Incident.objects.all()[:15]
 
         

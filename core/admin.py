@@ -1,4 +1,4 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, ReportSuspect, WantedSuspect
+from .models import Incident, IncidentLocation, RoadAccident, FireIncident, ReportedCrime, ReportSuspect, WantedSuspect
 from django.contrib import admin
 
 
@@ -8,7 +8,7 @@ class IncidentsTable(admin.ModelAdmin):
     readonly_fields = ['incident_type', 'incident_date', 'incident_time', 'description', 'media_file', 'severity_level']
 
 
-@admin.register(Location)
+@admin.register(IncidentLocation)
 class IncidentsLocationTable(admin.ModelAdmin):
     list_display = ['county', 'sub_county', 'place', 'longitude', 'latitude', 'landmark']
     readonly_fields = ['county', 'sub_county', 'place', 'longitude', 'latitude', 'landmark']

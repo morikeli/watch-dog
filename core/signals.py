@@ -1,6 +1,6 @@
 from .models import (
     Incident, 
-    Location, 
+    IncidentLocation, 
     RoadAccident, 
     FireIncident, 
     ReportedCrime, 
@@ -20,7 +20,7 @@ def generate_incidentsID(sender, instance, **kwargs):
         instance.id = str(uuid.uuid4().hex)[:30]
 
 
-@receiver(pre_save, sender=Location)
+@receiver(pre_save, sender=IncidentLocation)
 def generate_locationID(sender, instance, **kwargs):
     if instance.id == '':
         instance.id = str(uuid.uuid4().hex)[:30]
@@ -68,7 +68,7 @@ def generate_notificationID(sender, instance, **kwargs):
         instance.id = str(uuid.uuid4().hex)[:30]
 
 
-@receiver(post_save, sender=Location)
+@receiver(post_save, sender=IncidentLocation)
 def send_reported_incident_notification(sender, instance, created, **kwargs):
     if created:
         notify = Notification.objects.create(

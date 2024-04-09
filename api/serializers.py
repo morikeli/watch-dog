@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Incident, Location, RoadAccident, ReportedCrime, WantedSuspect
+from core.models import Incident, IncidentLocation, RoadAccident, ReportedCrime, WantedSuspect
 from accounts.models import User
 
 
@@ -33,7 +33,7 @@ class IncidentSerializer(serializers.ModelSerializer):
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Location
+        model = IncidentLocation
         fields = ('longitude', 'latitude', 'county', 'sub_county', 'place', 'landmark')
 
 

@@ -90,7 +90,7 @@ class IncidentLocation(models.Model):
 class RoadAccident(models.Model):
     """ This table stores details of the reported road accidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
+    location = models.ForeignKey(IncidentLocation, on_delete=models.CASCADE, editable=False)
     road = models.CharField(max_length=30, blank=False)
     road_user = models.CharField(max_length=100, blank=False)
     vehicle_type = models.CharField(max_length=100, blank=False)
@@ -116,7 +116,7 @@ class RoadAccident(models.Model):
 class FireIncident(models.Model):
     """ This table stores details about reported fire incidents. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
+    location = models.ForeignKey(IncidentLocation, on_delete=models.CASCADE, editable=False)
     fire_type = models.CharField(max_length=20, blank=False)
     property_damage = models.CharField(max_length=20, blank=False)
     cause = models.CharField(max_length=20, blank=False)
@@ -135,7 +135,7 @@ class FireIncident(models.Model):
 class ReportedCrime(models.Model):
     """ This table stores details about reported crimes. """
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
-    location_id = models.ForeignKey(Location, on_delete=models.CASCADE, editable=False, db_column='location_id')
+    location = models.ForeignKey(IncidentLocation, on_delete=models.CASCADE, editable=False, db_column='location_id')
     crime_type = models.CharField(max_length=30, blank=False)
     suspect_description = models.TextField()
     investigation_status = models.CharField(max_length=20, blank=False)
@@ -203,7 +203,7 @@ class Notification(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     wanted_suspect = models.ForeignKey(WantedSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='wanted_suspect')
     reported_suspect = models.ForeignKey(ReportSuspect, on_delete=models.CASCADE, null=True, editable=False, related_name='reported_suspect')
-    incident_location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, editable=False)
+    incident_location = models.ForeignKey(IncidentLocation, on_delete=models.CASCADE, null=True, editable=False)
     notification_type = models.IntegerField(choices=NOTIFICATION_TYPE, editable=False)
     is_read = models.BooleanField(default=False, editable=False)
     date_created = models.DateTimeField(auto_now_add=True)

@@ -1,4 +1,4 @@
-from .models import Incident, Location, RoadAccident, FireIncident, ReportedCrime, WantedSuspect, ReportSuspect
+from .models import Incident, IncidentLocation, RoadAccident, FireIncident, ReportedCrime, WantedSuspect, ReportSuspect
 from django import forms
 from .utils import is_valid_media_file
 
@@ -91,7 +91,7 @@ class SubmitLocationForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Location
+        model = IncidentLocation
         fields = ('county', 'sub_county', 'place', 'landmark')
 
 
