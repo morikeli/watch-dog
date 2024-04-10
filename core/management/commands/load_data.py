@@ -2,7 +2,7 @@ from django.db.models.signals import post_save, pre_save
 from django.core.management.base import BaseCommand
 from django.dispatch import receiver
 from django.conf import settings
-from core.models import Incident, Location, RoadAccident
+from core.models import Incident, IncidentLocation, RoadAccident
 import pandas as pd
 import requests
 import environ
