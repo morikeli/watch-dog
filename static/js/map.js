@@ -117,7 +117,13 @@ navigator.geolocation.getCurrentPosition(function(position) {
             '<hr class="my-1"><b>Click marker for more info.</b>'
     
         latitude_coord = spot.latitude < 0 ? '&deg;S' : '&deg;N'
-        var marker = L.marker([spot.latitude, spot.longitude])
+        var marker = L.marker([spot.latitude, spot.longitude], {
+            icon: L.AwesomeMarkers.icon({
+                prefix: 'fas fa',
+                icon:  spot.incident_type === 'Road accident' ? 'car fa-2x' : 'exclamation-triangle',
+                markerColor: spot.incident_type === 'Road accident' ? 'red' : 'orange'
+            })
+        })
         var popupContent = (
             "<h5>" + spot.incident_type + "</h5>" +
             '<table class="table table-sm table-condensed table-striped table-bordered">' + "<tbody>" +
