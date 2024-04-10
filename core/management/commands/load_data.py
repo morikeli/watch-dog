@@ -55,7 +55,12 @@ class Command(BaseCommand):
                 severity_level=random.randint(1, 5)
             )
             
-            address = f"{str(row['BASE/SUB BASE']).capitalize()}, {str(row['COUNTY']).capitalize()} - Kenya"
+            # if 'COUNTY' or 'BASE/SUB BASE' is 'nan', the location is in Burkina Faso.
+            # use an if block to prevent this error.
+            if ('nan' or '') in (str(row['BASE/SUB BASE']) or str(row['COUNTY'])):
+                continue
+            
+            address = f"{str(row['BASE/SUB BASE']).capitalize()}, {str(row['COUNTY']).capitalize()} County - Kenya"
 
             # fetch coordinates of the location where an accident occured.
             BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
