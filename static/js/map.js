@@ -4,6 +4,10 @@ var map = L.map('geo-map', {
     minZoom: 13,
     maxZoom: 16,
     timeout: 10000,
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+        position: 'topleft'
+    }
 })
 
 function onLocationFound(loc) {
