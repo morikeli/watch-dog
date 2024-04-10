@@ -131,26 +131,30 @@ class ReportIncidentsCreateView(SessionWizardView):
             sub_county = form_list[1].cleaned_data['sub_county']
             place = location_form.place
 
-            # geocode location
-            address = f"{str(place).capitalize()}, {str(sub_county).capitalize()}, {str(county).capitalize()}, Kenya"
-            BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
-            response = requests.get(BASE_URL)
+            try:
+                # geocode location
+                address = f"{str(place).capitalize()}, {str(sub_county).capitalize()}, {str(county).capitalize()}, Kenya"
+                BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
+                response = requests.get(BASE_URL)
 
-            # Check the response HTTP status code
-            if response.status_code == 200:
-                # Parse the JSON data from the response
-                data = response.json()
+                # Check the response HTTP status code
+                if response.status_code == 200:
+                    # Parse the JSON data from the response
+                    data = response.json()
 
-                # get longitude and latitude of the generated data.
-                latitude = data[0]["lat"]
-                longitude = data[0]["lon"]
-            
-            location_form.longitude = longitude
-            location_form.latitude = latitude
-            location_form.save()
+                    # get longitude and latitude of the generated data.
+                    latitude = data[0]["lat"]
+                    longitude = data[0]["lon"]
+                
+                location_form.longitude = longitude
+                location_form.latitude = latitude
+                location_form.save()
 
-            messages.success(self.request, 'Incident reported successfully!')
-            return redirect('report_incident')
+                messages.success(self.request, 'Incident reported successfully!')
+                return redirect('report_incident')
+
+            except (requests.ConnectionError, requests.ConnectTimeout):
+                messages.error(self.request, 'ERROR! Location not found or no internet connection.')
         
         messages.error(self.request, 'ERROR!! The form could not be submitted!')
         return redirect('report_incident')
