@@ -127,7 +127,7 @@ class ReportIncidentsCreateView(SessionWizardView):
             place = location_form.place
 
             # geocode location
-            address = f"{str(sub_county).capitalize()}, {str(county).capitalize()} {str(place).capitalize()}, Kenya"
+            address = f"{str(place).capitalize()}, {str(sub_county).capitalize()}, {str(county).capitalize()}, Kenya"
             BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
             response = requests.get(BASE_URL)
 
