@@ -58,15 +58,15 @@
                                             {% if wizard.steps.next %}
                                             <button type="submit" class="btn btn-outline-success">Next</button>
                                             {% else %}
-                                            <button type="submit" class="btn btn-outline-success w-25">Submit</button>
+                                            <button type="submit" class="btn btn-outline-success w-25">
+                                                Submit
+                                                <span id="indicator" class="htmx-indicator spinner-border spinner-border-sm"></span>
+                                            </button>
                                             {% endif %}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <span id="indicator" class="htmx-indicator text-end mb-4">
-                                <img src="{% static 'img/spinners/rounded-blocks.gif' %}" height="28px" alt="" id="indicator">
-                            </span>
                         </form>
                     </div>
                 </div>
