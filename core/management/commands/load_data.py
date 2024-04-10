@@ -60,25 +60,29 @@ class Command(BaseCommand):
             if ('nan' or '') in (str(row['BASE/SUB BASE']) or str(row['COUNTY'])):
                 continue
             
-            address = f"{str(row['BASE/SUB BASE']).capitalize()}, {str(row['COUNTY']).capitalize()} County - Kenya"
+            try:
+                address = f"{str(row['BASE/SUB BASE']).capitalize()}, {str(row['COUNTY']).capitalize()} County - Kenya"
 
-            # fetch coordinates of the location where an accident occured.
-            BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
-            response = requests.get(BASE_URL)
+                # fetch coordinates of the location where an accident occured.
+                BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
+                response = requests.get(BASE_URL)
 
-            # Check the response HTTP status code
-            if response.status_code == 200:
-                # Parse the JSON data from the response
-                data = response.json()
+                # Check the response HTTP status code
+                if response.status_code == 200:
+                    # Parse the JSON data from the response
+                    data = response.json()
 
-                # get longitude and latitude of the generated data.
-                latitude = data[0]["lat"]
-                longitude = data[0]["lon"]
+                    # get longitude and latitude of the generated data.
+                    latitude = data[0]["lat"]
+                    longitude = data[0]["lon"]
 
-            elif response.status_code == 404:   # if HTTP_404 is generated 
-                self.stdout.write(self.style.ERROR('[HTTP_404] Longitude and latitude not found!'))
+                elif response.status_code == 404:   # if HTTP_404 is generated 
+                    self.stdout.write(self.style.ERROR('[HTTP_404] Longitude and latitude not found!'))
+                    continue
+            except (requests.ConnectionError, requests.ConnectTimeout):
+                self.stdout.write(self.style.WARNING('[CONNECTION_ERROR] Could not fetch location!'))
                 continue
-            
+
             self.stdout.write(self.style.HTTP_INFO(f'Row {index} | Latitude: {latitude} | Longitude: {longitude}'))
 
             _location, _ = IncidentLocation.objects.get_or_create(
