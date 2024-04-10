@@ -76,26 +76,26 @@ class Command(BaseCommand):
                 longitude = data[0]["lon"]
 
             elif response.status_code == 404:   # if HTTP_404 is generated 
-                latitude = latitude
-                longitude = longitude
+                self.stdout.write(self.style.ERROR('[HTTP_404] Longitude and latitude not found!'))
+                continue
             
             self.stdout.write(self.style.HTTP_INFO(f'Row {index} | Latitude: {latitude} | Longitude: {longitude}'))
 
-            location, _ = Location.objects.get_or_create(
+            _location, _ = IncidentLocation.objects.get_or_create(
                 incident_id=incident,
                 longitude=longitude,
                 latitude=latitude,
                 county=row['COUNTY'],
                 sub_county=row['BASE/SUB BASE'],
-                city=row['PLACE'],
+                place=row['PLACE'],
             )
 
             accident, _ = RoadAccident.objects.get_or_create(
-                location_id=location,
+                location=_location,
                 road=row['ROAD'],
                 road_user=row['VICTIM'],
                 vehicle_type=row['MV INVOLVED'],
                 injuries_count=0 if str(row['NO.']) == 'NaN' or  str(row['NO.']) == 'nan' else row['NO.']
             )
 
-        self.stdout.write(self.style.SUCCESS('Data imported successfully'))
+        self.stdout.write(self.style.SUCCESS('Data loaded and saved successfully!'))
