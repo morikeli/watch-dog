@@ -139,6 +139,62 @@ body {
 	}
 }
 
+/* form wizard */
+form .form-wizard .form-wizard-steps {
+	margin: 30px 0;
+}
+form .form-wizard .form-wizard-steps li {
+	width: 45%;
+	float: left;
+	position: relative;
+}
+form .form-wizard .form-wizard-steps li::after {
+	background-color: #f3f3f3;
+	content: "";
+	height: 5px;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+	border-bottom: 1px solid #dddddd;
+	border-top: 1px solid #dddddd;
+
+}
+form .form-wizard .form-wizard-steps li span {
+	background-color: #dddddd;
+	border-radius: 50%;
+	display: inline-block;
+	height: 40px;
+	line-height: 40px;
+	position: relative;
+	text-align: center;
+	width: 40px;
+	z-index: 1;
+}
+form .form-wizard .form-wizard-steps li:last-child::after {
+	width: 50%;
+
+}
+form .form-wizard .form-wizard-steps li.active span, .form-wizard .form-wizard-steps li.activated span {
+	background-color: #0e2238;
+	color: #ffffff;
+}
+form .form-wizard .form-wizard-steps li.active::after, .form-wizard .form-wizard-steps li.activated::after {
+	background-color: #073c74;
+	left: 50%;
+	width: 50%;
+	border-color: #073c74;
+}
+form .form-wizard .form-wizard-steps li.activated::after {
+	width: 100%;
+	border-color: #073c74;
+}
+form .form-wizard .form-wizard-steps li:last-child::after {
+	left: 0;
+}
+
 /* forms */
 form label {
     font-weight: 600;
