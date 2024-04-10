@@ -34,8 +34,13 @@ class HomepageView(View):
         total_crimes = Incident.objects.filter(incident_type='Crime').count()
         incidents_qs = Incident.objects.all()[:15]
         suspect_qs = WantedSuspect.objects.all()
-        location_qs = IncidentLocation.objects.all().order_by('-incident_id__date_reported')
 
+        # update user's feed based on his/her current location.
+        current_dt = timezone.now()
+        start_dt = current_dt - timezone.timedelta(hours=24)    # set filter datetime to the last 24hrs from the current datetime
+        location_qs = IncidentLocation.objects.filter(date_created__gte=start_dt).order_by('-incident_id__date_reported')
+
+        # pagination
         p = Paginator(location_qs, 8)
         page_number = request.GET.get('page')
 
