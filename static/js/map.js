@@ -6,11 +6,6 @@ var map = L.map('geo-map', {
     timeout: 10000,
 })
 
-var userIcon = L.divIcon({
-    className: 'custom-icon',
-    html: '<i class="fas fa-person fa-2x" style="color: #d60808;"></i>',
-})
-
 function onLocationFound(loc) {
     var maxBounds = L.latLngBounds(
         [loc.latlng.lat, loc.latlng.lng],
