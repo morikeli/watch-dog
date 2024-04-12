@@ -37,7 +37,7 @@ class HomepageView(View):
 
         # update user's feed based on his/her current location.
         current_dt = timezone.now()
-        start_dt = current_dt - timezone.timedelta(hours=24)    # set filter datetime to the last 24hrs from the current datetime
+        start_dt = current_dt - timezone.timedelta(days=3)    # set datetime to the last 3 days from the current datetime
         location_qs = IncidentLocation.objects.filter(date_created__gte=start_dt).order_by('-incident_id__date_reported')
 
         # pagination
