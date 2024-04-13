@@ -417,8 +417,15 @@ form label {
 }
 
 .sidebar-nav {
-    padding: 2rem 0;
+    padding: 3.5rem 0;
     flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+    .sidebar-nav {
+        padding: 5rem 0;
+        flex: 1 1 auto;
+    }   
 }
 
 a.sidebar-link {
