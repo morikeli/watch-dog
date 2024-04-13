@@ -96,5 +96,8 @@
 		  mirror: false
 		})
 	})
+
+	// initialize purecounter
+	new PureCounter()
 	
 })();
