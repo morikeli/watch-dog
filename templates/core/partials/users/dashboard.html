@@ -3,7 +3,7 @@
 	<section class="section dashboard">
 		<div class="row">
 			<div class="col-lg-7">
-				<div class="row">
+				<div class="row" data-aos="fade-up" data-aos-delay="100">
 					<div class="col-md-9 offset-sm-3">
 					{% include 'core/partials/users/feed.html' %}
 					</div>
@@ -11,19 +11,19 @@
 			</div>
 	
 			<div class="col-lg-5">
-				<div class="row ms-2">
+				<div class="row ms-2" data-aos="fade-up">
 					<h5 class="card-title text-muted ms-3">Wanted suspects</h5>
 					{% for suspect in wanted_suspects %}
 					<div class="row">
-						<div class="col-md-2">
+						<div class="col-md-2" data-aos="fade-left" data-aos-delay="100">
 							<img class="rounded-circle" src="{{ suspect.suspect_img.url }}" height="50px" width="50px" alt="img">
 						</div>
-						<div class="col-md-7">
+						<div class="col-md-7" data-aos="fade-right" data-aos-delay="100">
 							<p class="small text-muted"><b class="text-dark">{{ suspect.name }}</b> {% if suspect.nickname %}alias {{ suspect.nickname }}</p>{% endif %}
 							<p class="small text-muted" style="margin-top: -3vh;">Crime: {{ suspect.crime }}</p>
 							<p class="small text-muted" style="margin-top: -3vh;">Reward: Kshs.{{ suspect.bounty|floatformat:"g" }}/=</p>
 						</div>
-						<div class="col-md-2">
+						<div class="col-md-2" data-aos="fade-right" data-aos-delay="100">
 							<a hx-get="{% url 'report_suspect' suspect.id %}" hx-trigger="click" hx-push-url="{% url 'report_suspect' suspect.id %}" hx-swap="outerHTML" hx-target="#wrapper" class="btn btn-sm btn-outline-danger mb-2">Report</a>
 						</div>
 					</div>
