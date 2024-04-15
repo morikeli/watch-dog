@@ -8,12 +8,13 @@ from rest_framework import status
 from django.contrib import auth
 from .serializers import (
     IncidentSerializer,
+    LocationSerializer,
     UserSignupSerializer,
     RoadAccidentSpotSerializer,
     ReportedCrimesSerializer,
     WantedSuspectsSerializer,
 )
-from core.models import Incident, RoadAccident, ReportedCrime, WantedSuspect
+from core.models import Incident, IncidentLocation, RoadAccident, ReportedCrime, WantedSuspect
 
 
 class LoginView(APIView):
@@ -55,6 +56,13 @@ class IncidentsAPIListView(APIView):
         result_page = paginator.paginate_queryset(incidents, request)
         serializer = IncidentSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
+
+
+class IncidentLocationsListView(APIView):
+    def get(self, request, *args, **kwargs):
+        locations_qs = IncidentLocation.objects.all()
+        serializer = LocationSerializer(locations_qs, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class RoadAccidentsDetailView(APIView):
