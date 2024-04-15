@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.utils import timezone
 from django.core.exceptions import ValidationError
-from django.contrib import messages
 
 
 def validate_incident_date(value):
