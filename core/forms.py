@@ -1,7 +1,7 @@
 from .models import Incident, IncidentLocation, RoadAccident, FireIncident, ReportedCrime, WantedSuspect, ReportSuspect
 from django import forms
 from .utils import is_valid_media_file
-from .validators import validate_incident_date
+from .validators import validate_incident_date, validate_incident_time
 
 
 class ReportIncidentForm(forms.ModelForm):
