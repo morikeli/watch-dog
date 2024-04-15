@@ -31,7 +31,7 @@
                 <div class="row">
                     {% for suspect in wanted_suspects %}
                     <div class="col-md-4">
-                        <div class="card">
+                        <div class="card" data-aos="fade-up">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12 mt-3 text-center">
@@ -41,16 +41,16 @@
                                 <div class="table-responsive">
                                     <table class="table table-sm table-striped table-bordered">
                                         <tbody>
-                                            <tr><td class="fw-bold">Name:</td><td class="text-end">{{ suspect.name }}</td></tr>
-                                            <tr><td class="fw-bold">Nickname:</td><td class="text-end">{{ suspect.nickname }}</td></tr>
-                                            <tr><td class="fw-bold">Gender:</td><td class="text-end">{{ suspect.gender }}</td></tr>
-                                            <tr><td class="fw-bold">Wanted for:</td><td class="text-end">{{ suspect.crime }}</td></tr>
-                                            <tr><td class="fw-bold">Last seen location:</td><td class="text-end">{{ suspect.last_seen_location }}</td></tr>
-                                            <tr><td class="fw-bold">Suspect status:</td><td class="text-end">{{ suspect.status }}</td></tr>
+                                            <tr><td class="fw-bold">Name:</td><td class="text-end" data-aos="fade-right">{{ suspect.name }}</td></tr>
+                                            <tr><td class="fw-bold">Nickname:</td><td class="text-end" data-aos="fade-right">{{ suspect.nickname }}</td></tr>
+                                            <tr><td class="fw-bold">Gender:</td><td class="text-end" data-aos="fade-right">{{ suspect.gender }}</td></tr>
+                                            <tr><td class="fw-bold">Wanted for:</td><td class="text-end" data-aos="fade-right">{{ suspect.crime }}</td></tr>
+                                            <tr><td class="fw-bold">Last seen location:</td><td class="text-end" data-aos="fade-right">{{ suspect.last_seen_location }}</td></tr>
+                                            <tr><td class="fw-bold">Suspect status:</td><td class="text-end" data-aos="fade-right">{{ suspect.status }}</td></tr>
                                         </tbody>
                                     </table>
                                     <hr>
-                                    <h5 class="text-center text-danger">Bounty: Kshs.{{ suspect.bounty|floatformat:"g" }}/=</h5>
+                                    <h5 class="text-center text-danger" data-aos="zoom-in">Bounty: Kshs.{{ suspect.bounty|floatformat:"g" }}/=</h5>
                                     <a href="{% url 'update_suspect' suspect.id %}" class="btn btn-outline-primary btn-sm text-end"><i class="bi-pencil-fill"></i> Edit</a>
                                 </div>
                             </div>

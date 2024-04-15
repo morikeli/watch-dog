@@ -5,7 +5,7 @@
 			<div class="col-lg-8">
 				<div class="row">
 					<div class="col-xxl-4 col-md-6">
-						<div class="card info-card crimes-card">
+						<div class="card info-card crimes-card" data-aos="zoom-in" data-aos-delay="100">
 							<div class="filter">
 								<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -32,7 +32,7 @@
 					</div>
 		
 					<div class="col-xxl-4 col-md-6">
-						<div class="card info-card accidents-card">
+						<div class="card info-card accidents-card" data-aos="zoom-in" data-aos-delay="100">
 							<div class="filter">
 								<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -135,7 +135,7 @@
 					{% endcomment %}
 		
 					<div class="col-12">
-						<div class="card recent-sales overflow-auto">
+						<div class="card recent-sales overflow-auto" data-aos="fade-up" data-aos-delay="100">
 							<div class="filter">
 								<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
 								<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -182,7 +182,7 @@
 			</div>
 	
 			<div class="col-lg-4">
-				<div class="card">
+				<div class="card" data-aos="fade-right" data-aos-delay="100">
 					<div class="filter">
 						<a class="icon" href="" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
 						<ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
@@ -198,7 +198,7 @@
 						<div class="activity">
 							{% for incident in reported_incidents %}
 							<div class="activity-item d-flex">
-								<div class="activity-label small">{{ incident.date_reported|datereported }}</div>
+								<div class="activity-label small" data-aos="fade-left" data-aos-delay="100">{{ incident.date_reported|datereported }}</div>
 								{% if incident.severity_level < '2' or incident.severity_level == 'Low' %}
 								<i class='bi bi-circle-fill activity-badge text-secondary align-self-start'></i>
 								{% elif incident.severity_level == '2' or incident.severity_level == 'Moderate' %}
@@ -208,7 +208,7 @@
 								{% else %}
 								<i class='bi bi-circle-fill activity-badge text-danger align-self-start'></i>
 								{% endif %}
-								<div class="activity-content">
+								<div class="activity-content" data-aos="fade-right" data-aos-delay="100">
 									<a hx-get="{% url 'provide_incident_info' incident.id %}" hx-trigger="click" hx-swap="outerHTML" hx-target="#wrapper" class="text-dark">
 										{% if incident.description == 'nan' %}
 										<p class="small fst-italic">No description provided</p>

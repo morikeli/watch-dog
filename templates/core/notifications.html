@@ -4,10 +4,10 @@
     <section class="section dashboard">
         <div class="row">
             <div class="col-md-6 offset-sm-3">
-                <ul class="list-group">
+                <ul class="list-group" data-aos="fade-up">
                     {% for alert in notifications %}
                     {% if alert.notification_type == 1 and alert.incident_location.incident_id.incident_type == 'Crime' %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5" data-aos="zoom-in"> 
                         <i class="bi bi-shield-fill-exclamation my-2" style="font-size: 30px; color: #ffc107"></i>
                         <div class="ms-3 me-auto my-2">
                             A <b>crime</b> was reported in {{ alert.incident_location.county }}, {{ alert.incident_location.sub_county }}.
@@ -15,7 +15,7 @@
                         </div>
                     </li>
                     {% elif alert.notification_type == 1 and alert.incident_location.incident_id.incident_type == 'Road accident' %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5">
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5" data-aos="zoom-in">
                         <i class="bi bi-car-front-fill my-2" style="font-size: 30px; color: #d60808"></i>
                         <div class="ms-3 me-auto my-2">
                             A <b>road accident</b> was reported in {{ alert.incident_location.county }}, {{ alert.incident_location.sub_county }}.
@@ -23,7 +23,7 @@
                         </div>
                     </li>
                     {% elif alert.notification_type == 2 %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5" data-aos="zoom-in"> 
                         <i class="bi bi-person-fill-exclamation my-2" style="font-size: 30px; color: #c70f0f"></i>
                         <div class="ms-3 me-auto my-2">
                             Suspect <b>{{ alert.wanted_suspect.name }}</b> 
@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     {% elif alert.notification_type == 3 %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5"> 
+                    <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5" data-aos="zoom-in"> 
                         <i class="bi bi-person-fill-check my-2" style="font-size: 30px; color: #0d9134"></i>
                         <div class="ms-3 me-auto my-2">
                             Suspect <b>{{ alert.reported_suspect.suspect.name }}</b> 
