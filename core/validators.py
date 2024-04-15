@@ -18,6 +18,20 @@ def validate_incident_date(value):
     if days_elapsed.days > 7:
         raise ValidationError("You can't report an incident that is past 1 week! Report the incident to the nearest police station.")
 
+
+def validate_incident_time(value):
+    """
+    This function validates time provided in the input field `incident_time` in `ReportIncidentForm`.
+    Users cannot provide timestamp when reporting incidents that is greater than the current time.
+    """
+
+    current_time = timezone.now() + timezone.timedelta(hours=3)
+    current_time_str = timezone.now().time().strftime("%H:%M:%S")
+
+    if value > current_time.time():
+        raise ValidationError(f'Invalid time provided! Current time is "{current_time_str}"')
+
+
 def validate_last_seen_date(request):
     """ 
     This function is used to validate date provided in `last_seen_date` input field in `ReportWantedSuspectsForm`.
