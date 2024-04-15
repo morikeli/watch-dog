@@ -33,6 +33,7 @@ class ReportIncidentForm(forms.ModelForm):
             'type': 'date',
         }),
         help_text='Enter the date of the incident',
+        validators=[validate_incident_date],
     )
     incident_time = forms.TimeField(widget=forms.TimeInput(attrs={
             'type': 'time',
