@@ -40,6 +40,7 @@ class ReportIncidentForm(forms.ModelForm):
         }),
         help_text='Enter the time of the incident',
         required=False,
+        validators=[validate_incident_time]
     )
     description = forms.CharField(widget=forms.Textarea(attrs={
             'type': 'text',
