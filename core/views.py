@@ -36,9 +36,9 @@ class HomepageView(View):
         suspect_qs = WantedSuspect.objects.all()
 
         # update user's feed based on his/her current location.
-        current_dt = timezone.now()
-        start_dt = current_dt - timezone.timedelta(days=3)    # set datetime to the last 3 days from the current datetime
-        location_qs = IncidentLocation.objects.filter(date_created__gte=start_dt).order_by('-incident_id__date_reported')
+        # current_dt = timezone.now()
+        # start_dt = current_dt - timezone.timedelta(days=7)    # set datetime to the last 3 days from the current datetime
+        location_qs = IncidentLocation.objects.order_by('-incident_id__date_reported')
 
         # pagination
         p = Paginator(location_qs, 8)
@@ -166,10 +166,10 @@ class GeoMapView(View):
     template_name = 'core/map.html'
 
     def get(self, request, *args, **kwargs):
-        current_dt = timezone.now()
-        start_dt = current_dt - timezone.timedelta(hours=24)    # set filter datetime to the last 24hrs from the current datetime
+        # current_dt = timezone.now()
+        # start_dt = current_dt - timezone.timedelta(days=4)    # set filter datetime to the last 24hrs from the current datetime
         # get coordinates for reportted crimes and accidents
-        incidents_qs = IncidentLocation.objects.filter(date_created__gte=start_dt).values(
+        incidents_qs = IncidentLocation.objects.values(
             'longitude', 
             'latitude', 
             'county', 
