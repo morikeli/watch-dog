@@ -168,7 +168,7 @@ class GeoMapView(View):
     def get(self, request, *args, **kwargs):
         # current_dt = timezone.now()
         # start_dt = current_dt - timezone.timedelta(days=4)    # set filter datetime to the last 24hrs from the current datetime
-        # get coordinates for reportted crimes and accidents
+        # get coordinates for reported incidents
         incidents_qs = IncidentLocation.objects.values(
             'longitude', 
             'latitude', 
