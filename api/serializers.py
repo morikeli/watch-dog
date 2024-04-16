@@ -26,7 +26,7 @@ class IncidentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Incident
         fields = (
-            'incident_type', 'incident_date', 'incident_time', 'description', 'severity_level', 
+            'incident_type', 'incident_date', 'incident_time', 'description', 
             'reported_by', 'date_reported',
         )
 
