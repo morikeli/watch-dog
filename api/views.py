@@ -59,7 +59,6 @@ class IncidentsAPIListView(APIView):
         return paginator.get_paginated_response(serializer.data)
     
     authentication_classes = [BasicAuthentication]
-    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = IncidentSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
