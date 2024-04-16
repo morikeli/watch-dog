@@ -57,6 +57,14 @@ class IncidentsAPIListView(APIView):
         result_page = paginator.paginate_queryset(incidents, request)
         serializer = IncidentSerializer(result_page, many=True)
         return paginator.get_paginated_response(serializer.data)
+    
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self, request, *args, **kwargs):
+        serializer = IncidentSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 class IncidentLocationsListView(APIView):
