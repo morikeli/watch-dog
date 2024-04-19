@@ -55,6 +55,7 @@ class UserLayout(UserAdmin):
 
 admin.site.register(User, UserLayout)
 
+
 @admin.register(Officer)
 class OfficersTable(admin.ModelAdmin):
     list_display = ['name', 'station', 'rank']
