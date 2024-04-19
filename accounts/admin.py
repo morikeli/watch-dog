@@ -24,6 +24,7 @@ class UserLayout(UserAdmin):
         ('Personal Info', {
             'fields': ('first_name', 'last_name', 'username', 'email', 'gender', 'dob', 'mobile_no', 'national_id', 'county', 'sub_county', 'profile_pic')
         }),
+        ('User category', {'fields': ('is_officer', 'is_roadsafetystaff')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
     )
