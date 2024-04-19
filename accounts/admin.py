@@ -13,7 +13,7 @@ class UserLayout(UserAdmin):
             None,
             {
                 "classes": ("wide"),
-                "fields": ("username", "email", "mobile_no", "gender", "dob", "password1", "password2")
+                "fields": ("username", "email", "mobile_no", "gender", "dob", "password1", "password2", "is_officer", "is_roadsafetystaff")
             }
         ),
     )
