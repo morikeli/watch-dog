@@ -13,7 +13,7 @@ def validate_user_age(value):
     current_dt = timezone.now().date()
     age = current_dt - value
     
-    if (age.days/365.25) < 18:
+    if int(age.days/365.25) < 18:
         raise ValidationError('User is below 18 years!')
 
 
