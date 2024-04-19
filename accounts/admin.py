@@ -8,6 +8,15 @@ from .forms import SignupForm
 class UserLayout(UserAdmin):
     model = User
     add_form = SignupForm
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide"),
+                "fields": ("username", "email", "mobile_no", "gender", "dob", "password1", "password2")
+            }
+        ),
+    )
     list_display = ['username', 'email', 'gender', 'national_id', 'county', 'sub_county', 'date_joined']
     readonly_fields = ['last_login', 'date_joined']
 
