@@ -2,6 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import User
 from .utils import is_image_file
+from .validators import validate_user_age
 
 
 class SignupForm(UserCreationForm):
