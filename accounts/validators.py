@@ -7,6 +7,16 @@ from django.http import HttpResponse
 from django.utils import timezone
 
 
+def validate_user_age(value):
+    """ This function validates if the user is above 18 years (an adult). """
+
+    current_dt = timezone.now().date()
+    age = current_dt - value
+    
+    if (age.days/365.25) < 18:
+        raise ValidationError('User is below 18 years!')
+
+
 def check_username_exists(request):
     """ This function validates if the typed username exists. """
 
