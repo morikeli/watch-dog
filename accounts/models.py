@@ -50,11 +50,6 @@ class User(AbstractUser):
             img.save(self.profile_pic.path)
 
 
-    def delete(self, *args, **kwargs):
-        self.profile_pic.delete()
-        super(User, self).delete(*args, **kwargs)
-
-
 class Officer(models.Model):
     id = models.CharField(max_length=30, primary_key=True, unique=True, editable=False)
     name = models.OneToOneField(User, on_delete=models.CASCADE, editable=True)
