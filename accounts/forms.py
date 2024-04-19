@@ -37,6 +37,7 @@ class SignupForm(UserCreationForm):
             'type': 'date', 'class': 'mb-2',
         }),
         required=True,
+        validators=[validate_user_age]
     )
     
     class Meta:
