@@ -18,7 +18,21 @@ class UserLayout(UserAdmin):
         ),
     )
     list_display = ['username', 'email', 'gender', 'national_id', 'county', 'sub_county', 'date_joined']
-    readonly_fields = ['last_login', 'date_joined']
+    readonly_fields = [
+        'first_name', 
+        'last_name', 
+        'username', 
+        'email', 
+        'gender', 
+        'dob', 
+        'mobile_no', 
+        'national_id', 
+        'county', 
+        'sub_county', 
+        'profile_pic', 
+        'last_login', 
+        'date_joined'
+    ]
 
     fieldsets = (
         ('Personal Info', {
