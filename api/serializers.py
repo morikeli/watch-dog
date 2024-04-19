@@ -3,7 +3,7 @@ from core.models import Incident, IncidentLocation, RoadAccident, ReportedCrime,
 from accounts.models import User
 
 
-class UserSignupSerializer(serializers.ModelSerializer):
+class SignupSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['username', 'email', 'gender', 'mobile_no', 'dob', 'password']

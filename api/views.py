@@ -10,7 +10,7 @@ from django.contrib import auth
 from .serializers import (
     IncidentSerializer,
     LocationSerializer,
-    UserSignupSerializer,
+    SignupSerializer,
     RoadAccidentSpotSerializer,
     ReportedCrimesSerializer,
     WantedSuspectsSerializer,
@@ -40,7 +40,7 @@ class LoginView(APIView):
 
 class SignupView(APIView):
     def post(self, request, *args, **kwargs):
-        serializer = UserSignupSerializer(data=request.data)
+        serializer = SignupSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
 
