@@ -73,10 +73,53 @@ class IncidentsAPIListView(APIView):
 
 
 class IncidentLocationsListView(APIView):
+    API_KEY = env('API_KEY')
+    API_DOMAIN = env('API_DOMAIN')
+
+
     def get(self, request, *args, **kwargs):
         locations_qs = IncidentLocation.objects.all()
         serializer = LocationSerializer(locations_qs, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    def post(self, request, *args, **kwargs):
+        latest_incident = Incident.objects.first()
+        
+        try:
+            # geocode location
+            address = f"{str(request.data['place']).capitalize()}, {str(request.data['sub_county']).capitalize()}, {str(request.data['county']).capitalize()}, Kenya"
+            BASE_URL = f"{self.API_DOMAIN}?q={address}&key={self.API_KEY}&format=json"
+            response = requests.get(BASE_URL)
+
+            # Check the response HTTP status code
+            if response.status_code == 200:
+                # Parse the JSON data from the response
+                data = response.json()
+
+                # get longitude and latitude of the generated data.
+                latitude = data[0]["lat"]
+                longitude = data[0]["lon"]
+            
+            location_data = {
+                'county': request.data['county'],
+                'sub_county': request.data['sub_county'],
+                'longitude': longitude,
+                'latitude': latitude,
+                'place': request.data['place'],
+                'landmark': request.data['landmark'],
+            }
+
+            serializer = LocationSerializer(data=location_data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save(incident_id=latest_incident)
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+                
+
+        except (requests.ConnectionError, requests.ConnectTimeout):
+            return Response({"message": "Please check your internet connection!"}, status=status.HTTP_408_REQUEST_TIMEOUT)
+        
 
 
 class RoadAccidentsDetailView(APIView):
