@@ -59,4 +59,4 @@ class ReportedCrimesSerializer(serializers.ModelSerializer):
 class WantedSuspectsSerializer(serializers.ModelSerializer):
     class Meta:
         model = WantedSuspect
-        fields = '__all__'
+        exclude = ('id', 'date_created', 'date_updated')
