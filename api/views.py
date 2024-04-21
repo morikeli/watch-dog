@@ -16,6 +16,12 @@ from .serializers import (
     WantedSuspectsSerializer,
 )
 from core.models import Incident, IncidentLocation, RoadAccident, ReportedCrime, WantedSuspect
+import requests
+import environ
+
+
+env = environ.Env()
+environ.Env.read_env()
 
 
 class LoginView(APIView):
