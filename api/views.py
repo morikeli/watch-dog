@@ -104,3 +104,12 @@ class WantedSuspectsDetailView(APIView):
         results_page = paginator.paginate_queryset(suspects_qs, request)
         serializer = WantedSuspectsSerializer(results_page, many=True)
         return paginator.get_paginated_response(serializer.data)
+
+
+class LogoutUserView(APIView):
+    def post(self, request, *args, **kwargs):
+        response = Response()
+        response.delete_cookie('jwt')
+        response.data = {"message": "User logged out ..."}
+
+        return response
