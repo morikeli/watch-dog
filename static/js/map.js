@@ -136,10 +136,10 @@ navigator.geolocation.getCurrentPosition(function(position) {
             "<tr><td><b>Longitude</b></td><td>" + spot.longitude + "<b>&deg;E</b>" + "</td>" +
             "<tr><td><b>County</b></td><td>" + spot.county + "</td>" +
             "<tr><td><b>Subcounty</b></td><td>" + spot.sub_county + "</td>" +
-            "<tr><td><b>Place</b></td><td>" + spot.place == null ? '--' : spot.place + "</td>" +
-            "<tr><td><b>Incident date</b></td><td>" + spot.incident_date == null ? '--' : spot.incident_date + "</td>" +
-            "<tr><td><b>Incident time</b></td><td>" + spot.incident_time == null ? '--' : spot.incident_time + "</td>" +
-            "<tr><td><b>Reported by</b></td><td>" + spot.reported_by == null ? '--': spot.reported_by + "</td>" +
+            "<tr><td><b>Place</b></td><td>" + spot.place + "</td>" +
+            "<tr><td><b>Incident date</b></td><td>" + incidentDate + "</td>" +
+            "<tr><td><b>Incident time</b></td><td>" + incidentTime + "</td>" +
+            "<tr><td><b>Reported by</b></td><td>" + incidentReportedBy + "</td>" +
             "</tbody>" + "</table>"
         )
         marker.bindPopup(popupContent)
