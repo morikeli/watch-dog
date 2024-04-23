@@ -189,7 +189,7 @@ class GeoMapView(View):
                 "latitude": round(location["latitude"], 4), 
                 "longitude": round(location["longitude"], 4),
                 "county": location["county"],
-                "sub_county": location["county"],
+                "sub_county": location["sub_county"],
                 "place": location["place"],
                 "incident_type": location["incident_id__incident_type"],
                 "incident_date": location["incident_id__incident_date"],
