@@ -36,7 +36,7 @@
                             <p class="small text-muted">{{ alert.date_created }}</p>
                         </div>
                     </li>
-                    {% elif alert.notification_type == 3 %}
+                    {% elif alert.notification_type == 3 and request.user.is_officer is True %}
                     <li class="list-group-item d-flex justify-content-between align-items-start py-2 ms-5" data-aos="zoom-in"> 
                         <i class="bi bi-person-fill-check my-2" style="font-size: 30px; color: #0d9134"></i>
                         <div class="ms-3 me-auto my-2">
