@@ -123,6 +123,12 @@ navigator.geolocation.getCurrentPosition(function(position) {
                 markerColor: spot.incident_type === 'Road accident' ? 'red' : 'orange'
             })
         })
+        
+        
+        var incidentDate = spot.incident_date === null ? '--' : spot.incident_date
+        var incidentTime = spot.incident_time == null ? '--' : spot.incident_time
+        var incidentReportedBy = spot.reported_by === '' ? '--' : spot.reported_by
+
         var popupContent = (
             "<h5>" + spot.incident_type + "</h5>" +
             '<table class="table table-sm table-condensed table-striped table-bordered">' + "<tbody>" +
