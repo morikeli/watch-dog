@@ -26,7 +26,9 @@ environ.Env.read_env()
 
 class LoginView(APIView):
     authentication_classes = [BasicAuthentication]
+    permission_classes = []
     
+    # @user_passes_test(lambda user: user.is_officer is False or user.is_roadsafetystaff is False)
     def post(self, request, *args, **kwargs):
         username = request.data.get('username')
         password = request.data.get('password')
@@ -36,12 +38,21 @@ class LoginView(APIView):
         if user is None:
             raise AuthenticationFailed('INVALID CREDENTIALS!! Please try again later.')
         
-        refresh = RefreshToken.for_user(user)
-        return Response({
-            'data': {"username": username},
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
-        }, status=status.HTTP_200_OK)
+        elif (user.is_officer is True) or (user.is_roadsafetystaff is True):
+            return Response(
+                data={
+                    "message": "You are unauthorized! You are not allowed to access this endpoint."
+                }, 
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+        
+        else:
+            refresh = RefreshToken.for_user(user)
+            return Response({
+                'data': {"username": username},
+                'refresh': str(refresh),
+                'access': str(refresh.access_token),
+            }, status=status.HTTP_200_OK)
 
 
 class SignupView(APIView):
