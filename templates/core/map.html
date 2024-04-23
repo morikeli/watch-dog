@@ -21,6 +21,7 @@
     {{ incident_locations|json_script:"incident-spots" }}
     <script src="{% static 'vendor/leaflet/plugins/leaflet.fullscreen/Control.FullScreen.js' %}"></script>
     <script type="text/javascript" src="{% static 'vendor/leaflet/plugins/awesome-markers/leaflet.awesome-markers.js' %}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/hosuaby/Leaflet.SmoothMarkerBouncing@v3.0.3/dist/bundle.js" crossorigin="anonymous"></script>
     <script src="{% static 'js/map.js' %}"></script>
 </main>
 {% endblock %}
