@@ -35,6 +35,13 @@ Installation guide to run the project remotely.
   $ pip install -r requirements.txt
 ```
 
+Once the installations are done, start the development server using this command:
+```bash
+  $ python manage.py runserver
+```
+
+On your default browser navigate to url `127.0.0.1:8000/auth/login/` to display the login page.
+
 ## Contributor expectations
 Incase of a bug or you wish to make an update create a new branch using git command `git checkout -b <name of your branch>` and create a pull request. Wait for review.
 
