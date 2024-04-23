@@ -25,7 +25,7 @@ function onLocationFound(loc) {
             icon: 'person fa-2x',
             markerColor: 'darkpurple'
         })
-    }).addTo(map).bindPopup("You are here!").openPopup()    // marker that shows user's current position
+    }).addTo(map).bounce(10).bindPopup("You are here!").openPopup()    // marker that shows user's current position, the marker bounces 10 times on every page load/reload
 }
 
 function onLocationError(e) {
