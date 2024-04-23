@@ -92,7 +92,7 @@ def send_wanted_suspect_notification(sender, instance, created, **kwargs):
 def send_notification_for_wanted_suspect(sender, instance, created, **kwargs):
     if created:
         notify = Notification.objects.create(
-            suspect=instance,
+            reported_suspect=instance,
             notification_type=3,
         )
         notify.save()
