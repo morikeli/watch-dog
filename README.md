@@ -39,3 +39,15 @@ Installation guide to run the project remotely.
 Incase of a bug or you wish to make an update create a new branch using git command `git checkout -b <name of your branch>` and create a pull request. Wait for review.
 
 Don't forget to star the repo 🌟😉
+
+---
+# DISCLAIMER
+The images used on this website are for website UI and visualization. These images are sourced from various sources on the internet, including web templates and stock photo repositories. While I have made efforts to ensure that the images used do not infringe upon any copyrights, I acknowledge that some images may depict individuals who are not explicitly identified or may be recognizable to viewers.
+
+We want to clarify that:
+
+1. The individuals depicted in these images are models and are not necessarily associated with or endorsing the products or services featured on this website.
+2. Any resemblance to real persons, living or deceased, is purely coincidental.
+3. If you believe that any image used on this website infringes upon your rights or is not properly attributed, please contact me immediately, and I will take appropriate action to address your concerns.
+
+I respect the rights of photographers and individuals depicted in the images used on this website. If you have any questions or concerns regarding the use of images, please don't hesitate to reach out to me.
