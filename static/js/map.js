@@ -148,7 +148,7 @@ navigator.geolocation.getCurrentPosition(function(position) {
     })
 
 }, function(error) {
-    alert("Error: ", error)
+    alert("ERROR! Allow website to access your location to view reported incidents")
 })
 
 // Add cluster groups to the map
