@@ -1,4 +1,4 @@
-# Project Watchdog
+# Watchdog
 
 ## Demo
   1. Homepage
@@ -10,7 +10,7 @@
   ![Screenshot from 2024-03-31 12-24-25](https://github.com/morikeli/watch-dog/assets/78599959/600658bd-9f88-4d45-8da3-eb6e497de70b)
 
 ## Overview
-Project watchdog is a web based platform that allows users to report road accidents and crimes in his/her county of residence.  This platform will serve as a vital tool in the collective effort to enhance community safety and security. By leveraging technology, the project seeks to empower individuals to report accidents and crimes promptly, thereby facilitating quicker response times from relevant authorities. This initiative aligns with broader goals to utilize technology for the betterment of society, bridging the gap between technological innovation and community welfare.
+Watchdog is a web based platform that allows users to report road accidents and crimes in his/her county of residence.  This platform will serve as a vital tool in the collective effort to enhance community safety and security. By leveraging technology, the project seeks to empower individuals to report accidents and crimes promptly, thereby facilitating quicker response times from relevant authorities. This initiative aligns with broader goals to utilize technology for the betterment of society, bridging the gap between technological innovation and community welfare.
 
 ## User instructions
 The users of the website include:
